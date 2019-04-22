@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=CommunityOS Theme
+Description=Raspberry Pi simple static loading theme
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/communityos
+ScriptFile=/usr/share/plymouth/themes/communityos/communityos.script

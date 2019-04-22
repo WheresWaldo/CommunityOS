@@ -1,0 +1,38 @@
+###############################################################################
+# All our config settings must start with COMMUNITYOS_
+# COMMUNITYOS_VAR="This is a module variable"
+
+# OctoPrint archive
+[ -n "$COMMUNITYOS_INCLUDE_OCTOPRINT" ] || COMMUNITYOS_INCLUDE_OCTOPRINT=yes
+[ -n "$COMMUNITYOS_OCTOPRINT_ARCHIVE" ] || COMMUNITYOS_OCTOPRINT_ARCHIVE=$(wget -q -O - https://api.github.com/repos/foosel/OctoPrint/releases/latest | grep "zipball_url" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
+[ -n "$COMMUNITYOS_OCTOPRINT_REPO_SHIP" ] || COMMUNITYOS_OCTOPRINT_REPO_SHIP=https://github.com/foosel/OctoPrint.git
+
+# PyBonjour archive
+[ -n "$COMMUNITYOS_PYBONJOUR_ARCHIVE" ] || COMMUNITYOS_PYBONJOUR_ARCHIVE=https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/pybonjour/pybonjour-1.1.1.tar.gz
+
+# CuraEngine archive & version
+[ -n "$COMMUNITYOS_INCLUDE_CURAENGINE" ] || COMMUNITYOS_INCLUDE_CURAENGINE=yes
+[ -n "$COMMUNITYOS_CURAENGINE_VERSION" ] || COMMUNITYOS_CURAENGINE_VERSION=15.04.6
+[ -n "$COMMUNITYOS_CURAENGINE_ARCHIVE" ] || COMMUNITYOS_CURAENGINE_ARCHIVE=https://github.com/Ultimaker/CuraEngine/archive/$COMMUNITYOS_CURAENGINE_VERSION.zip
+
+# mjpg streamer
+[ -n "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" ] || COMMUNITYOS_INCLUDE_MJPGSTREAMER=yes
+[ -n "$COMMUNITYOS_MJPGSTREAMER_REPO_SHIP" ] || COMMUNITYOS_MJPGSTREAMER_REPO_SHIP=https://github.com/jacksonliam/mjpg-streamer.git
+[ -n "$COMMUNITYOS_MJPGSTREAMER_REPO_BUILD" ] || COMMUNITYOS_MJPGSTREAMER_REPO_BUILD=
+[ -n "$COMMUNITYOS_MJPGSTREAMER_REPO_BRANCH" ] || COMMUNITYOS_MJPGSTREAMER_REPO_BRANCH=master
+[ -n "$COMMUNITYOS_MJPGSTREAMER_REPO_DEPTH" ] || COMMUNITYOS_MJPGSTREAMER_REPO_DEPTH=1
+
+# HAProxy
+[ -n "$COMMUNITYOS_INCLUDE_HAPROXY" ] || COMMUNITYOS_INCLUDE_HAPROXY=yes
+
+# WiringPi
+[ -n "$COMMUNITYOS_INCLUDE_WIRINGPI" ] || COMMUNITYOS_INCLUDE_WIRINGPI=yes
+
+# Plymouth theme
+[ -n "$COMMUNITYOS_INCLUDE_THEME" ] || COMMUNITYOS_INCLUDE_THEME=yes
+
+# yq
+[ -n "$COMMUNITYOS_YQ_DOWNLOAD" ] || COMMUNITYOS_YQ_DOWNLOAD=$(wget -q -O - https://api.github.com/repos/mikefarah/yq/releases/latest | grep "browser_download_url" | grep "yq_linux_arm" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
+
+[ -n "$COMMUNITYOS_COMMIT" ] || COMMUNITYOS_COMMIT=`pushd "${DIST_PATH}" > /dev/null ; git rev-parse HEAD ; popd > /dev/null`
+

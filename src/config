@@ -1,0 +1,3 @@
+export DIST_NAME=CommunityOS
+export DIST_VERSION=0.1.0
+export MODULES="base(raspicam,network,communityos,password-for-sudo)"

@@ -1,0 +1,10 @@
+/var/log/webcam.log
+{
+    rotate 4
+    weekly
+    missingok
+    notifempty
+    compress
+    delaycompress
+    sharedscripts
+}
