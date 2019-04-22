@@ -61,14 +61,6 @@ Build requires about 6.3 GB of free space available. You can build it by issuing
     ../../CustomPiOS/src/update-custompios-paths
     sudo bash -x ./build_dist
 
-    
-Usage
-~~~~~
-
-#. If needed, override existing config settings by creating a new file ``src/config.local``. You can override all settings found in ``src/modules/octoprint/config``. If you need to override the path to the Raspbian image to use for building CommunityOS, override the path to be used in ``ZIP_IMG``. By default the most recent file matching ``*-raspbian.zip`` found in ``src/image`` will be used.
-#. Run ``src/build_dist`` as root.
-#. The final image will be created at the ``src/workspace``
-
 Code contribution would be appreciated!
 
 How an enduser will use the image?
