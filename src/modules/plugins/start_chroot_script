@@ -45,6 +45,17 @@ then
   echo "--- Installing Firmware Updater Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $PLUGINS_FIRMWAREUPDATER_ARCHIVE
   apt-get -y install avrdude
+  # check to see if set up correctly
+  pushd /home/pi/.octoprint
+  if grep -Fq 'firmwareupdater:' config.yaml
+  then
+    sed -i 's|avrdud_path:.*|avrdude_path: /usr/bin/avrdude|g' config.yaml
+  else
+    cat <<EOT >> config.yaml
+firmwareupdater:
+  avrdude_path: /usr/bin/avrdude
+EOT
+  fi
   echo "--- Firmware Updater installation complete"
 fi
 
