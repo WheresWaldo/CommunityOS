@@ -1,3 +1,61 @@
 ###############################################################################
-# All our config settings must start with PLUGINS_
+# All our configuration settings must start with PLUGINS_
 # PLUGINS_VAR="This is a module variable"
+
+###############################################################################
+# Please note the following Plugins are listed within the Robo3D Github
+# repository, but have been directed at the original source and not the
+# Robo3D forks.
+
+# Active Filters Extended
+[ -n "$PLUGINS_INCLUDE_ACTIVEFILTERS" ] || PLUGINS_INCLUDE_ACTIVEFILTERS=no 
+[ -n "$PLUGINS_ACTIVEFILTERS_ARCHIVE" ] || PLUGINS_ACTIVEFILTERS_ARCHIVE=https://github.com/jneilliii/OctoPrint-ActiveFiltersExtended/archive/master.zip
+
+# Filament Sensor Reloaded
+[ -n "$PLUGINS_INCLUDE_FILAMENTSENSOR" ] || PLUGINS_INCLUDE_FILAMENTSENSOR=no 
+[ -n "$PLUGINS_FILAMENTSENSOR_ARCHIVE" ] || PLUGINS_FILAMENTSENSOR_ARCHIVE=https://github.com/kontakt/Octoprint-Filament-Reloaded/archive/master.zip
+
+# Firmware Updater
+[ -n "$PLUGINS_INCLUDE_FIRMWAREUPDATER" ] || PLUGINS_INCLUDE_FIRMWAREUPDATER=no 
+[ -n "$PLUGINS_FIRMWAREUPDATER_ARCHIVE" ] || PLUGINS_FIRMWAREUPDATER_ARCHIVE=https://github.com/OctoPrint/OctoPrint-FirmwareUpdater/archive/master.zip
+
+# Alexa Skill
+[ -n "$PLUGINS_INCLUDE_ALEXASKILL" ] || PLUGINS_INCLUDE_ALEXASKILL=no 
+[ -n "$PLUGINS_ALEXASKILL_ARCHIVE" ] || PLUGINS_ALEXASKILL_ARCHIVE=https://github.com/Robo3D/Alexa-OctoPrint-Skill/archive/master.zip
+
+# Marlin EEPROM Editor
+[ -n "$PLUGINS_INCLUDE_EEPROMEDITOR" ] || PLUGINS_INCLUDE_EEPROMEDITOR=no 
+[ -n "$PLUGINS_EEPROMEDITOR_ARCHIVE" ] || PLUGINS_EEPROMEDITOR_ARCHIVE=https://github.com/amsbr/OctoPrint-EEprom-Marlin/archive/master.zip
+
+# Polar Cloud
+[ -n "$PLUGINS_INCLUDE_POLARCLOUD" ] || PLUGINS_INCLUDE_POLARCLOUD=no 
+[ -n "$PLUGINS_POLARCLOUD_ARCHIVE" ] || PLUGINS_POLARCLOUD_ARCHIVE=https://github.com/markwal/OctoPrint-PolarCloud/archive/master.zip
+
+# 3DPrinterOS
+[ -n "$PLUGINS_INCLUDE_3DPRINTEROS" ] || PLUGINS_INCLUDE_3DPRINTEROS=no 
+[ -n "$PLUGINS_3DPRINTEROS_ARCHIVE" ] || PLUGINS_3DPRINTEROS_ARCHIVE=https://github.com/3dprinteros/OctoPrint-3DPrinterOS/archive/master.zip
+
+# AstroPrint Cloud
+[ -n "$PLUGINS_INCLUDE_ASTROPRINT" ] || PLUGINS_INCLUDE_ASTROPRINT=no 
+[ -n "$PLUGINS_ASTROPRINT_ARCHIVE" ] || PLUGINS_ASTROPRINT_ARCHIVE=https://github.com/AstroPrint/OctoPrint-AstroPrint/archive/master.zip
+
+# Screen Squish
+[ -n "$PLUGINS_INCLUDE_SCREENSQUISH" ] || PLUGINS_INCLUDE_SCREENSQUISH=no 
+[ -n "$PLUGINS_SCREENSQUISH_ARCHIVE" ] || PLUGINS_SCREENSQUISH_ARCHIVE=https://github.com/markwal/OctoPrint-ScreenSquish/archive/master.zip
+
+# Request Spinner
+[ -n "$PLUGINS_INCLUDE_REQUESTSPINNER" ] || PLUGINS_INCLUDE_REQUESTSPINNER=no 
+[ -n "$PLUGINS_REQUESTSPINNER_ARCHIVE" ] || PLUGINS_REQUESTSPINNER_ARCHIVE=https://github.com/OctoPrint/OctoPrint-RequestSpinner/archive/master.zip
+
+# Custom Control Editor
+[ -n "$PLUGINS_INCLUDE_CUSTOMCONTROL" ] || PLUGINS_INCLUDE_CUSTOMCONTROL=no 
+[ -n "$PLUGINS_CUSTOMCONTROL_ARCHIVE" ] || PLUGINS_CUSTOMCONTROL_ARCHIVE=https://github.com/Salandora/octoprint-customControl/archive/master.zip
+
+# STL Viewer
+[ -n "$PLUGINS_INCLUDE_STLVIEWER" ] || PLUGINS_INCLUDE_STLVIEWER=no 
+[ -n "$PLUGINS_STLVIEWER_ARCHIVE" ] || PLUGINS_STLVIEWER_ARCHIVE=https://github.com/jneilliii/Octoprint-STLViewer/archive/master.zip
+
+###############################################################################
+# Additional useful OctoPrint Plugins
+
+
