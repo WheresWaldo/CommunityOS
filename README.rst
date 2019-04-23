@@ -1,5 +1,5 @@
-CommunityOS
-===========
+Robo CommunityOS
+================
 
 .. image:: https://raw.githubusercontent.com/WheresWaldo/CommunityOS/master/media/communityos.png
 .. :scale: 50 %
