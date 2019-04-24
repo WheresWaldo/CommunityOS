@@ -164,6 +164,8 @@ unpack /filesystem/root /
 systemctl_if_exists disable lightdm.service || true
 
 ### Change default password and hostname (if available)
+chmod +x /etc/init.d/change_password
+chmod +x /etc/init.d/change_hostname
 update-rc.d change_password defaults
 update-rc.d change_hostname defaults
 
@@ -171,6 +173,7 @@ update-rc.d change_hostname defaults
 if [ "$COMMUNITYOS_INCLUDE_OCTOPRINT" == "yes" ]
 then
   echo "--- Enabling OctoPrint service"
+  chmod +x /etc/init.d/octoprint
   update-rc.d octoprint defaults 95
 else
   # let's remove the configs for system services we don't need
@@ -206,6 +209,7 @@ if [ "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" == "yes" ]
 then
   # make webcamd autostart
   echo "--- Enabling webcam service"
+  chmod +x /etc/init.d/webcamd
   update-rc.d webcamd defaults
 else
   echo "--- Removing webcam service"

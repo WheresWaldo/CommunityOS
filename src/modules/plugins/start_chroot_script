@@ -47,10 +47,7 @@ then
   then
     sed -i 's|avrdud_path:.*|avrdude_path: /usr/bin/avrdude|g' config.yaml
   else
-    cat <<EOT >> config.yaml
-firmwareupdater:
-  avrdude_path: /usr/bin/avrdude
-EOT
+    sed -i '|plugins:|a   firmwareupdater:\n    avrdude_path: /usr/bin/avrdude' config.yaml
   fi
   echo "--- Firmware Updater installation complete"
 fi
