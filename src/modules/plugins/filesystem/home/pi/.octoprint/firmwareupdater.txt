@@ -1,2 +1,6 @@
   firmwareupdater:
+    avrdude_avrmcu: m2560
+    avrdude_baudrate: ''
     avrdude_path: /usr/bin/avrdude
+    avrdude_programmer: arduino
+    flash_method: avrdude
