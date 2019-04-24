@@ -1,0 +1,5 @@
+  filamentreload:
+    mode: '0'
+	pin: '40'
+	bounce: '400'
+	switch: '0'

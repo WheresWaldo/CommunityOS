@@ -1,0 +1,2 @@
+  firmwareupdater:
+    avrdude_path: /usr/bin/avrdude
