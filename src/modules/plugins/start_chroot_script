@@ -55,7 +55,7 @@ then
   fi
     echo "--- Filament Sensor Reloaded installation complete"
 fi
-rm /home/pi/.octoprint/firmwarereload.txt
+rm /home/pi/.octoprint/filamentreload.txt
 
 # Firmware Updater
 if [ "$PLUGINS_INCLUDE_FIRMWAREUPDATER" == "yes" ]
