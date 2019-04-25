@@ -117,6 +117,7 @@ EOT
   then
     echo "--- Installing HAProxy"
     apt-get -y --allow-change-held-packages install ssl-cert haproxy
+	chmod +x  /etc/systemd/system/gencert.service
     rm /etc/ssl/private/ssl-cert-snakeoil.key /etc/ssl/certs/ssl-cert-snakeoil.pem
     echo "--- HAProxy installation complete"
   fi
@@ -186,7 +187,6 @@ fi
 if [ "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]
 then
   echo "--- Enabling haproxy"
-  chmod +x  /etc/systemd/system/gencert.service
   systemctl_if_exists enable gencert.service
 else
   # let's remove the configs for system services we don't need
