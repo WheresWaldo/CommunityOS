@@ -24,7 +24,7 @@
 [ -n "$PLUGINS_ALEXASKILL_ARCHIVE" ] || PLUGINS_ALEXASKILL_ARCHIVE=https://github.com/Robo3D/Alexa-OctoPrint-Skill/archive/master.zip
 
 # Marlin EEPROM Editor
-[ -n "$PLUGINS_INCLUDE_EEPROMEDITOR" ] || PLUGINS_INCLUDE_EEPROMEDITOR=no 
+[ -n "$PLUGINS_INCLUDE_EEPROMEDITOR" ] || PLUGINS_INCLUDE_EEPROMEDITOR=yes 
 [ -n "$PLUGINS_EEPROMEDITOR_ARCHIVE" ] || PLUGINS_EEPROMEDITOR_ARCHIVE=https://github.com/amsbr/OctoPrint-EEprom-Marlin/archive/master.zip
 
 # Polar Cloud
@@ -44,7 +44,7 @@
 [ -n "$PLUGINS_SCREENSQUISH_ARCHIVE" ] || PLUGINS_SCREENSQUISH_ARCHIVE=https://github.com/markwal/OctoPrint-ScreenSquish/archive/master.zip
 
 # Request Spinner
-[ -n "$PLUGINS_INCLUDE_REQUESTSPINNER" ] || PLUGINS_INCLUDE_REQUESTSPINNER=no 
+[ -n "$PLUGINS_INCLUDE_REQUESTSPINNER" ] || PLUGINS_INCLUDE_REQUESTSPINNER=yes 
 [ -n "$PLUGINS_REQUESTSPINNER_ARCHIVE" ] || PLUGINS_REQUESTSPINNER_ARCHIVE=https://github.com/OctoPrint/OctoPrint-RequestSpinner/archive/master.zip
 
 # Custom Control Editor
@@ -58,4 +58,14 @@
 ###############################################################################
 # Additional useful OctoPrint Plugins
 
+# Autoscroll
+[ -n "$PLUGINS_INCLUDE_AUTOSCROLL" ] || PLUGINS_INCLUDE_AUTOSCROLL=yes 
+[ -n "$PLUGINS_AUTOSCROLL_ARCHIVE" ] || PLUGINS_AUTOSCROLL_ARCHIVE=https://github.com/MoonshineSG/OctoPrint-Autoscroll/archive/master.zip
 
+# The Spaghetti Detective (Beta)
+[ -n "$PLUGINS_INCLUDE_SPAGHETTI" ] || PLUGINS_INCLUDE_SPAGHETTI=no 
+[ -n "$PLUGINS_SPAGHETTI_ARCHIVE" ] || PLUGINS_SPAGHETTI_ARCHIVE=https://github.com/TheSpaghettiDetective/OctoPrint-TheSpaghettiDetective/archive/beta.zip
+
+# Emergency Stop
+[ -n "$PLUGINS_INCLUDE_EMERGENCY" ] || PLUGINS_INCLUDE_EMERGENCY=no 
+[ -n "$PLUGINS_EMERGENCY_ARCHIVE" ] || PLUGINS_EMERGENCY_ARCHIVE=https://github.com/ntoff/OctoPrint-Estop/archive/master.zip
