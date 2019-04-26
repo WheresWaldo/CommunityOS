@@ -118,6 +118,7 @@ EOT
     echo "--- Installing HAProxy"
     apt-get -y --allow-change-held-packages install ssl-cert haproxy
 	sudo usermod -a -G ssl-cert pi
+	sudo chmod 710 /etc/ssl/private
 	rm /etc/ssl/private/ssl-cert-snakeoil.key /etc/ssl/certs/ssl-cert-snakeoil.pem
     echo "--- HAProxy installation complete"
   fi
