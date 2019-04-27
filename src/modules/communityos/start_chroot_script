@@ -117,9 +117,9 @@ EOT
   then
     echo "--- Installing HAProxy"
     apt-get -y --allow-change-held-packages install ssl-cert haproxy
-	sudo usermod -a -G ssl-cert pi
-	sudo chmod 710 /etc/ssl/private
-	rm /etc/ssl/private/ssl-cert-snakeoil.key /etc/ssl/certs/ssl-cert-snakeoil.pem
+	# sudo usermod -a -G ssl-cert pi
+	# sudo chmod -R 760 /etc/ssl
+	# rm /etc/ssl/private/ssl-cert-snakeoil.key /etc/ssl/certs/ssl-cert-snakeoil.pem
     echo "--- HAProxy installation complete"
   fi
 
@@ -189,7 +189,7 @@ if [ "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]
 then
   echo "--- Enabling haproxy"
   chmod +x /root/bin/gencert
-  systemctl_if_exists enable gencert.service
+  # systemctl_if_exists enable gencert.service
 else
   # let's remove the configs for system services we don't need
   echo "--- Removing haproxy service"
@@ -213,6 +213,7 @@ then
   # make webcamd autostart
   echo "--- Enabling webcam service"
   chmod +x /etc/init.d/webcamd
+  chmod +x /root/bin/webcamd
   update-rc.d webcamd defaults
 else
   echo "--- Removing webcam service"
