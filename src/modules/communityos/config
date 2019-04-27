@@ -1,5 +1,5 @@
 ###############################################################################
-# All our config settings must start with COMMUNITYOS_
+# All our configuration settings must start with COMMUNITYOS_
 # COMMUNITYOS_VAR="This is a module variable"
 
 # OctoPrint archive

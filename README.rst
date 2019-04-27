@@ -1,5 +1,5 @@
-CommunityOS
-===========
+Robo CommunityOS
+================
 
 .. image:: https://raw.githubusercontent.com/WheresWaldo/CommunityOS/master/media/communityos.png
 .. :scale: 50 %
@@ -40,7 +40,7 @@ Build requires about 6.1 GB of free space available. You can build it by issuing
 
     sudo apt-get install gawk util-linux realpath qemu-user-static git p7zip-full python3
     git clone https://github.com/guysoft/CustomPiOS.git
-    git clone https://github.com/WheresWaldo/CommunityOS.git
+    git clone -b devel --single-branch https://github.com/WheresWaldo/CommunityOS.git
     cd CommunityOS/src/image
     wget -c --trust-server-names 'https://downloads.raspberrypi.org/raspbian_lite_latest'
     cd ..
@@ -54,20 +54,12 @@ Build requires about 6.3 GB of free space available. You can build it by issuing
 
     sudo apt-get install gawk util-linux qemu-user-static git p7zip-full python3
     git clone https://github.com/guysoft/CustomPiOS.git
-    git clone https://github.com/WheresWaldo/CommunityOS.git
+    git clone -b devel --single-branch https://github.com/WheresWaldo/CommunityOS.git
     cd CommunityOS/src/image
     wget -c --trust-server-names 'https://downloads.raspberrypi.org/raspbian_lite_latest'
     cd ..
     ../../CustomPiOS/src/update-custompios-paths
     sudo bash -x ./build_dist
-
-    
-Usage
-~~~~~
-
-#. If needed, override existing config settings by creating a new file ``src/config.local``. You can override all settings found in ``src/modules/octoprint/config``. If you need to override the path to the Raspbian image to use for building CommunityOS, override the path to be used in ``ZIP_IMG``. By default the most recent file matching ``*-raspbian.zip`` found in ``src/image`` will be used.
-#. Run ``src/build_dist`` as root.
-#. The final image will be created at the ``src/workspace``
 
 Code contribution would be appreciated!
 
