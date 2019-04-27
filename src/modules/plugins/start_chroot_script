@@ -17,6 +17,10 @@ source /common.sh
 install_cleanup_trap
 
 ##############################
+### Staging
+unpack /filesystem/home/pi /home/pi pi 
+
+##############################
 ### Robo3D listed Plugins
 
 # Active Filters
@@ -24,16 +28,34 @@ if [ "$PLUGINS_INCLUDE_ACTIVEFILTERS" == "yes" ]
 then
   echo "--- Installing Active Filters Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $PLUGINS_ACTIVEFILTERS_ARCHIVE
+  pushd /home/pi/.octoprint
+  # check to see if set up correctly
+  if grep -Fq 'terminalfilters:' config.yaml
+  then
+    popd
+  else
+    cat activefilters.txt >> config.yaml
+  fi
   echo "--- Active Filter installation complete"
 fi
+rm /home/pi/.octoprint/activefilters.txt
 
 # Filament Sensor Reloaded
 if [ "$PLUGINS_INCLUDE_FILAMENTSENSOR" == "yes" ]
 then
   echo "--- Installing Filament Sensor Reloaded Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $PLUGINS_FILAMENTSENSOR_ARCHIVE
-  echo "--- Filament Sensor Reloaded installation complete"
+  pushd /home/pi/.octoprint
+  # check to see if set up correctly
+  if grep -Fq 'filamentreload:' config.yaml
+  then
+	popd
+  else
+	sed -i '/plugins:/rfilamentreload.txt' config.yaml
+  fi
+    echo "--- Filament Sensor Reloaded installation complete"
 fi
+rm /home/pi/.octoprint/filamentreload.txt
 
 # Firmware Updater
 if [ "$PLUGINS_INCLUDE_FIRMWAREUPDATER" == "yes" ]
@@ -47,9 +69,13 @@ then
   then
     sed -i 's|avrdud_path:.*|avrdude_path: /usr/bin/avrdude|g' config.yaml
   else
-    sed -i 's|plugins:|a   firmwareupdater:\n    avrdude_path: /usr/bin/avrdude' config.yaml
+    sed -i '/plugins:/rfirmwareupdater.txt' config.yaml
   fi
+  popd
+  rm /home/pi/.octoprint/firmwareupdater.txt
   echo "--- Firmware Updater installation complete"
+else
+  rm /home/pi/.octoprint/firmwareupdater.txt
 fi
 
 # Alexa Skill
