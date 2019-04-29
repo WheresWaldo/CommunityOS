@@ -1,3 +1,23 @@
 ###############################################################################
 # All our config settings must start with UI_
 # UI_VAR="This is a module variable"
+
+###############################################################################
+# There will be code included to prevent a user from selecting more than one
+# UI, it will by default only install the first UI that is selected.
+
+# Robo CommunityOS LCD
+[ -n "$UI_INCLUDE_RCOSLCD" ] || UI_INCLUDE_RCOSLCD=no
+[ -n "$UI_RCOSLCD_ARCHIVE" ] || UI_RCOSLCD_ARCHIVE=
+
+# OctoPrint-TFT
+[ -n "$UI_INCLUDE_TFT" ] || UI_INCLUDE_TFT=no
+[ -n "$UI_TFT_BUILD" ] || UI_TFT_BUILD=no
+[ -n "$UI_TFT_ARCHIVE" ] || UI_TFT_ARCHIVE=https://github.com/darksid3r/OctoPrint-TFT.git
+[ -n "$UI_TFT_LATEST" ] || UI_TFT_LATEST=https://github.com/darksid3r/OctoPrint-TFT/releases/latest
+[ -n "$UI_TFT_RELEASE" ] || UI_TFT_RELEASE=https://github.com/darksid3r/OctoPrint-TFT/releases/download/1.2/octoprint-tft_stretch_1.2.git2669d90-1_armhf.deb
+
+# TouchUI
+[ -n "$UI_INCLUDE_TOUCHUI" ] || UI_INCLUDE_TOUCHUI=no 
+[ -n "$UI_TOUCHUI_ARCHIVE" ] || UI_TOUCHUI_ARCHIVE=https://github.com/BillyBlaze/OctoPrint-TouchUI/archive/master.zip
+[ -n "$UI_TOUCHUI_BOOTARCHIVE" ] || UI_TOUCHUI_BOOTARCHIVE=https://github/BillyBlaze/OctoPrint-TouchUI-autostart.git

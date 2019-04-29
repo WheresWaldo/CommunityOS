@@ -16,16 +16,73 @@ export LC_ALL=C
 source /common.sh
 install_cleanup_trap
 
-unpack /filesystem/home/pi /home/pi pi
-unpack /filesystem/home/root /root root
-unpack /filesystem/boot /boot
+##############################
+### A sort of GOTO replacement
+
+function jumpto
+{
+    label=$1
+    cmd=$(sed -n "/$label:/{:a;n;p;ba};" $0 | grep -v ':$')
+    eval "$cmd"
+    exit
+}
+start=${1:-"start"}
+jumpto $start
 
 ##############################
-### Put required touchscreen code here
+### Add required UI code here
+
+start:
+
+rcoslcd:
+# Robo CommunityOS LCD
+if [ "$UI_INCLUDE_RCOSLCD" == "yes" ]
+then
+  echo "--- Installing Robo CommunityOS LCD"
+  sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev pkg-config libgl1-mesa-dev libgles2-mesa-dev python-setuptools libgstreamer1.0-dev git-core gstreamer1.0-plugins-{bad,base,good,ugly} gstreamer1.0-{omx,alsa} python-dev libmtdev-dev xclip xsel
+  sudo pip install -U Cython==0.28.2
+  sudo pip install git+https://github.com/kivy/kivy.git@master
+  echo "--- nothing else to see here"
+  jumpto finish
+ fi
+ 
+octoprint-tft:
+# OctoPrint-TFT
+if [ "$UI_INCLUDE_TFT" == "yes" ]
+then
+  echo"--- Installing OctoPrint-TFT"
+  sudo /home/pi/scripts/install-desktop
+  sudo dpkg -r --force-depends lightdm
+  sudo apt-get install libgtk-3-0 xserver-xorg xinit x11-xserver-utils
+  if [ ! "$UI_TFT_BUILD" == "yes" ]
+  then
+    wget $UI_TFT_RELEASE
+	sudo dpkg -i octoprint-tft_stretch_1.2.git2669d90-1_armhf.deb
+  else
+    echo "--- Not currently implemented"
+  fi
+  echo "OctoPrint-TFT installation complete"
+  jumpto finish
+fi
+
+touchui:  
+# OctoPrint-TouchUI
+if [ "$UI_INCLUDE_TOUCHUI" == "yes" ]
+then
+  echo "--- Installing OctoPrint-TouchUI Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $UI_TOUCHUI_ARCHIVE
+  echo "--- Setting up TouchUI automatic start"
+  git clone $UI_TOUCHUI_BOOTARCHIVE ~/TouchUI-autostart
+  sudo ~/TouchUI-autostart/helpers/install
+  echo "--- OctoPrint-TouchUI installation complete"
+  jumpto finish
+fi
+
 
 ##############################
 ### Clean up before exiting
 
+finish:
 apt-get clean
 apt-get autoremove -y
 set -x
