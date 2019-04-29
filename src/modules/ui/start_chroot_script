@@ -17,7 +17,7 @@ source /common.sh
 install_cleanup_trap
 
 ##############################
-### A sort of GOTO replacement
+### Some housekeeping 
 
 function jumpto
 {
@@ -33,6 +33,19 @@ jumpto $start
 ### Add required UI code here
 
 start:
+if [ "$UI_INCLUDE_RCOSLCD" != "yes" -a "$UI_INCLUDE_TFT" != "yes" -a "$UI_INCLUDE_TOUCHUI" != "yes" ]
+then
+  echo "--- No touchscreen interface selected."
+  echo "--- No touchscreen interface will be installed."
+  jumpto finish
+else
+  if [ ( "$UI_INCLUDE_RCOSLCD" == "yes" -a "$UI_INCLUDE_TFT" == "yes" ) -o (  "$UI_INCLUDE_RCOSLCD" == "yes" -a "$UI_INCLUDE_TOUCHUI" == "yes" ) -o ( "$UI_INCLUDE_TFT" == "yes" -a "$UI_INCLUDE_TOUCHUI" == "yes" ) ]
+  then 
+    echo "--- You may only install one touchscreen interface."
+	echo "--- No touchscreen interface will be installed."
+	jumpto finish
+  fi
+fi
 
 rcoslcd:
 # Robo CommunityOS LCD
