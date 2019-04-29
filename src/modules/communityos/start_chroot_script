@@ -116,10 +116,7 @@ EOT
   if [ "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]
   then
     echo "--- Installing HAProxy"
-    apt-get -y --allow-change-held-packages install ssl-cert haproxy
-	# sudo usermod -a -G ssl-cert pi
-	# sudo chmod -R 760 /etc/ssl
-	# rm /etc/ssl/private/ssl-cert-snakeoil.key /etc/ssl/certs/ssl-cert-snakeoil.pem
+    apt-get -y --allow-change-held-packages install haproxy
     echo "--- HAProxy installation complete"
   fi
 
@@ -185,16 +182,11 @@ else
 fi
 
 ### haproxy
-if [ "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]
+if [ ! "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]
 then
-  echo "--- Enabling haproxy"
-  chmod +x /root/bin/gencert
-  # systemctl_if_exists enable gencert.service
-else
   # let's remove the configs for system services we don't need
   echo "--- Removing haproxy service"
-  rm /etc/systemd/system/gencert.service
-  # also we need to make OctoPrint bind to all interfaces because otherwise
+  # We need to make OctoPrint bind to all interfaces because otherwise
   # it will be unaccessible...
   [ -f /etc/default/octoprint ] && sed -i "s@HOST=127.0.0.1@HOST=0.0.0.0@" /etc/default/octoprint 
 fi
