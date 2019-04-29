@@ -33,13 +33,13 @@ jumpto $start
 ### Add required UI code here
 
 start:
-if [ "$UI_INCLUDE_RCOSLCD" != "yes" -a "$UI_INCLUDE_TFT" != "yes" -a "$UI_INCLUDE_TOUCHUI" != "yes" ]
+if [[ "$UI_INCLUDE_RCOSLCD" != "yes" && "$UI_INCLUDE_TFT" != "yes" && "$UI_INCLUDE_TOUCHUI" != "yes" ]]
 then
   echo "--- No touchscreen interface selected."
   echo "--- No touchscreen interface will be installed."
   jumpto finish
 else
-  if [ ( "$UI_INCLUDE_RCOSLCD" == "yes" -a "$UI_INCLUDE_TFT" == "yes" ) -o (  "$UI_INCLUDE_RCOSLCD" == "yes" -a "$UI_INCLUDE_TOUCHUI" == "yes" ) -o ( "$UI_INCLUDE_TFT" == "yes" -a "$UI_INCLUDE_TOUCHUI" == "yes" ) ]
+  if [[ ( "$UI_INCLUDE_RCOSLCD" == "yes" && "$UI_INCLUDE_TFT" == "yes" ) || (  "$UI_INCLUDE_RCOSLCD" == "yes" && "$UI_INCLUDE_TOUCHUI" == "yes" ) || ( "$UI_INCLUDE_TFT" == "yes" && "$UI_INCLUDE_TOUCHUI" == "yes" ) ]]
   then 
     echo "--- You may only install one touchscreen interface."
 	echo "--- No touchscreen interface will be installed."
@@ -53,14 +53,14 @@ if [ "$UI_INCLUDE_RCOSLCD" == "yes" ]
 then
   echo "--- Installing Robo CommunityOS LCD"
   cd /home/pi
-  sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev pkg-config libgl1-mesa-dev libgles2-mesa-dev python-setuptools libgstreamer1.0-dev git-core gstreamer1.0-plugins-{bad,base,good,ugly} gstreamer1.0-{omx,alsa} python-dev libmtdev-dev xclip xsel
+  sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev pkg-config libgl1-mesa-dev libgles2-mesa-dev python-setuptools libgstreamer1.0-dev git-core gstreamer1.0-plugins-{bad,base,good,ugly} gstreamer1.0-{omx,alsa} python-dev libmtdev-dev xclip xsel
   sudo /home/pi/OctoPrint/bin/pip install -U Cython==0.28.2
   git clone https://github.com/kivy/kivy
   cd kivy
   make
   echo "export PYTHONPATH=$(pwd):\$PYTHONPATH" >> ~/.profile
   source ~/.profile
-  echo "--- Nothing else to see here"
+  echo "--- Nothing else to see here."
   jumpto finish
  fi
  
@@ -71,7 +71,7 @@ then
   echo"--- Installing OctoPrint-TFT"
   sudo /home/pi/scripts/install-desktop
   sudo dpkg -r --force-depends lightdm
-  sudo apt-get install libgtk-3-0 xserver-xorg xinit x11-xserver-utils
+  sudo apt-get install -y libgtk-3-0 xserver-xorg xinit x11-xserver-utils
   if [ ! "$UI_TFT_BUILD" == "yes" ]
   then
     wget $UI_TFT_RELEASE
