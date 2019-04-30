@@ -20,4 +20,4 @@
 # TouchUI
 [ -n "$UI_INCLUDE_TOUCHUI" ] || UI_INCLUDE_TOUCHUI=no 
 [ -n "$UI_TOUCHUI_ARCHIVE" ] || UI_TOUCHUI_ARCHIVE=https://github.com/BillyBlaze/OctoPrint-TouchUI/archive/master.zip
-[ -n "$UI_TOUCHUI_BOOTARCHIVE" ] || UI_TOUCHUI_BOOTARCHIVE=https://github/BillyBlaze/OctoPrint-TouchUI-autostart.git
+[ -n "$UI_TOUCHUI_BOOTARCHIVE" ] || UI_TOUCHUI_BOOTARCHIVE=https://github.com/BillyBlaze/OctoPrint-TouchUI-autostart.git
