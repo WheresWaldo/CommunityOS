@@ -45,7 +45,7 @@ source $DIR/install-steps/2-boot-to-command
 source $DIR/install-steps/3-apt-get-install
 source $DIR/install-steps/4-xorg-setup
 source $DIR/install-steps/5-setup-startup
-source $DIR/install-steps/6-setup-autologin-as
+#source $DIR/install-steps/6-setup-autologin-as
 
 # Legacy Xserver
 # Try to set Xwrapper.config
@@ -59,9 +59,3 @@ echo "$(color 'green' 'then edit the file '/etc/default/touchui' with the new pa
 
 # Finally check if chromium-browser is able to run with the kernel
 source $DIR/install-steps/7-check-chromium
-
-# Launch TouchUI
-echo ""
-echo "Launching TouchUI:"
-runCmd service touchui start
-successfull $?
