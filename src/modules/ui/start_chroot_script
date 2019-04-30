@@ -16,6 +16,8 @@ export LC_ALL=C
 source /common.sh
 install_cleanup_trap
 
+unpack /filesystem/home/pi/scripts /home/pi/scripts pi
+
 ##############################
 ### Some housekeeping 
 
@@ -84,7 +86,9 @@ else
     sudo -u pi /home/pi/OctoPrint/bin/pip install $UI_TOUCHUI_ARCHIVE
     echo "--- Setting up TouchUI automatic start"
     git clone $UI_TOUCHUI_BOOTARCHIVE ~/TouchUI-autostart
-    sudo ~/TouchUI-autostart/helpers/install
+	cp /home/pi/scripts/install-rcos ~/TouchUI-autostart/helpers/install-rcos
+	chmod +x ~/TouchUI-autostart/helpers/install-rcos
+    sudo ~/TouchUI-autostart/helpers/install-rcos
     echo "--- OctoPrint-TouchUI installation complete"
   fi
 fi
