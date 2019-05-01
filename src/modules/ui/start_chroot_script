@@ -74,7 +74,14 @@ else
 	  sudo dpkg -i octoprint-tft_stretch_1.2.git2669d90-1_armhf.deb
     else
       echo "--- Building from source"
-	  echo "--- Not currently implemented"
+	  curl -fsSL get.docker.com -o get-docker.sh
+      sh get-docker.sh
+	  git clone https://github.com/darksid3r/OctoPrint-TFT.git
+	  cd ~/OctoPrint-TFT
+	  make build
+	  ls -1 build/
+	  echo "--- Now Installing OctoPrint-TFT"
+	  echo "--- Not yet implemented"
     fi
     echo "OctoPrint-TFT installation complete"
   fi
