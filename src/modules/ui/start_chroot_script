@@ -64,10 +64,11 @@ else
   # OctoPrint-TFT
   if [ "$UI_INCLUDE_TFT" == "yes" ]
   then
-    echo"--- Installing OctoPrint-TFT"
-    sudo /home/pi/scripts/install-desktop
+    echo "--- Installing OctoPrint-TFT"
+    echo "--- Installing OctoPrint-TFT"
+    sudo apt-get install -y raspberrypi-ui-mods libgtk-3-0 xserver-xorg xinit x11-xserver-utils
+    sudo systemctl set-default graphical.target
     sudo dpkg -r --force-depends lightdm
-    sudo apt-get install -y libgtk-3-0 xserver-xorg xinit x11-xserver-utils
     if [ ! "$UI_TFT_BUILD" == "yes" ]
     then
       wget $UI_TFT_RELEASE
