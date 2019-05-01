@@ -19,19 +19,6 @@ install_cleanup_trap
 unpack /filesystem/home/pi/scripts /home/pi/scripts pi
 
 ##############################
-### Some housekeeping 
-
-function jumpto
-{
-    label=$1
-    cmd=$(sed -n "/$label:/{:a;n;p;ba};" $0 | grep -v ':$')
-    eval "$cmd"
-    exit
-}
-start=${1:-"start"}
-jumpto $start
-
-##############################
 ### Add required UI code here
 
 start:
