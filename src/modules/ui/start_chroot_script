@@ -16,12 +16,90 @@ export LC_ALL=C
 source /common.sh
 install_cleanup_trap
 
-unpack /filesystem/home/pi /home/pi pi
-unpack /filesystem/home/root /root root
-unpack /filesystem/boot /boot
+unpack /filesystem/home/pi/scripts /home/pi/scripts pi
 
 ##############################
-### Put required touchscreen code here
+### Some housekeeping 
+
+function jumpto
+{
+    label=$1
+    cmd=$(sed -n "/$label:/{:a;n;p;ba};" $0 | grep -v ':$')
+    eval "$cmd"
+    exit
+}
+start=${1:-"start"}
+jumpto $start
+
+##############################
+### Add required UI code here
+
+start:
+if [[ "$UI_INCLUDE_RCOSLCD" != "yes" && "$UI_INCLUDE_TFT" != "yes" && "$UI_INCLUDE_TOUCHUI" != "yes" ]]
+then
+  echo "--- No touchscreen interface selected."
+  echo "--- No touchscreen interface will be installed."
+else
+  if [[ ( "$UI_INCLUDE_RCOSLCD" == "yes" && "$UI_INCLUDE_TFT" == "yes" ) || (  "$UI_INCLUDE_RCOSLCD" == "yes" && "$UI_INCLUDE_TOUCHUI" == "yes" ) || ( "$UI_INCLUDE_TFT" == "yes" && "$UI_INCLUDE_TOUCHUI" == "yes" ) ]]
+  then 
+    echo "--- You may only install one touchscreen interface."
+    echo "--- No touchscreen interface will be installed."
+  fi
+
+  # Robo CommunityOS LCD
+  if [ "$UI_INCLUDE_RCOSLCD" == "yes" ]
+  then
+    echo "--- Installing Robo CommunityOS LCD"
+    cd /home/pi
+    sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev pkg-config libgl1-mesa-dev libgles2-mesa-dev python-setuptools libgstreamer1.0-dev git-core gstreamer1.0-plugins-{bad,base,good,ugly} gstreamer1.0-{omx,alsa} python-dev libmtdev-dev xclip xsel
+    sudo /home/pi/OctoPrint/bin/pip install -U Cython==0.28.2
+    git clone https://github.com/kivy/kivy
+    cd kivy
+    make
+    echo "export PYTHONPATH=$(pwd):\$PYTHONPATH" >> ~/.profile
+    source ~/.profile
+    echo "--- Nothing else to see here."
+  fi
+
+  # OctoPrint-TFT
+  if [ "$UI_INCLUDE_TFT" == "yes" ]
+  then
+    echo "--- Installing OctoPrint-TFT"
+    sudo apt-get install --fix-missing -y libgtk-3-0 xserver-xorg xinit x11-xserver-utils
+    sudo dpkg -r --force-depends lightdm
+    sudo systemctl set-default graphical.target
+    if [ ! "$UI_TFT_BUILD" == "yes" ]
+    then
+      wget $UI_TFT_RELEASE
+      sudo dpkg -i octoprint-tft_stretch_1.2.git2669d90-1_armhf.deb
+      sudo sed -i '/OCTOPRINT_TFT_RESOLUTION=/s/$/800x480/' /etc/octoprint-tft-environment
+    else
+      echo "--- Building from source"
+      curl -fsSL get.docker.com -o get-docker.sh
+      sh get-docker.sh
+      git clone https://github.com/darksid3r/OctoPrint-TFT.git
+      cd ~/OctoPrint-TFT
+      make build
+      ls -1 build/
+      echo "--- Now Installing OctoPrint-TFT"
+      echo "--- Not yet implemented"
+    fi
+    echo "OctoPrint-TFT installation complete"
+  fi
+
+  # OctoPrint-TouchUI
+  if [ "$UI_INCLUDE_TOUCHUI" == "yes" ]
+  then
+    echo "--- Installing OctoPrint-TouchUI Plugin"
+    sudo -u pi /home/pi/OctoPrint/bin/pip install $UI_TOUCHUI_ARCHIVE
+    echo "--- Setting up TouchUI automatic start"
+    git clone $UI_TOUCHUI_BOOTARCHIVE ~/TouchUI-autostart
+    cp /home/pi/scripts/install-rcos ~/TouchUI-autostart/helpers/install-rcos
+    chmod +x ~/TouchUI-autostart/helpers/install-rcos
+    sudo ~/TouchUI-autostart/helpers/install-rcos
+    echo "--- OctoPrint-TouchUI installation complete"
+  fi
+fi
 
 ##############################
 ### Clean up before exiting
