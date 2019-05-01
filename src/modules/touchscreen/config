@@ -1,7 +1,0 @@
-###############################################################################
-# All our config settings must start with TOUCHSCREEN_
-# TOUCHSCREEN_VAR="This is a module variable"
-
-###############################################################################
-# There will be code included to prevent a user from selecting more than one
-# touchscreen driver.
