@@ -43,7 +43,7 @@ else
   if [[ ( "$UI_INCLUDE_RCOSLCD" == "yes" && "$UI_INCLUDE_TFT" == "yes" ) || (  "$UI_INCLUDE_RCOSLCD" == "yes" && "$UI_INCLUDE_TOUCHUI" == "yes" ) || ( "$UI_INCLUDE_TFT" == "yes" && "$UI_INCLUDE_TOUCHUI" == "yes" ) ]]
   then 
     echo "--- You may only install one touchscreen interface."
-	echo "--- No touchscreen interface will be installed."
+    echo "--- No touchscreen interface will be installed."
   fi
 
   # Robo CommunityOS LCD
@@ -65,24 +65,24 @@ else
   if [ "$UI_INCLUDE_TFT" == "yes" ]
   then
     echo "--- Installing OctoPrint-TFT"
-    echo "--- Installing OctoPrint-TFT"
-    sudo apt-get install -y raspberrypi-ui-mods libgtk-3-0 xserver-xorg xinit x11-xserver-utils
-    sudo systemctl set-default graphical.target
+    sudo apt-get install --fix-missing -y libgtk-3-0 xserver-xorg xinit x11-xserver-utils
     sudo dpkg -r --force-depends lightdm
+    sudo systemctl set-default graphical.target
     if [ ! "$UI_TFT_BUILD" == "yes" ]
     then
       wget $UI_TFT_RELEASE
-	  sudo dpkg -i octoprint-tft_stretch_1.2.git2669d90-1_armhf.deb
+      sudo dpkg -i octoprint-tft_stretch_1.2.git2669d90-1_armhf.deb
+      sudo mv /usr/share/X11/xorg.conf.d/99-fbturbo.conf /usr/share/X11/xorg.conf.d/99-fbturbo.conf.old
     else
       echo "--- Building from source"
-	  curl -fsSL get.docker.com -o get-docker.sh
+      curl -fsSL get.docker.com -o get-docker.sh
       sh get-docker.sh
-	  git clone https://github.com/darksid3r/OctoPrint-TFT.git
-	  cd ~/OctoPrint-TFT
-	  make build
-	  ls -1 build/
-	  echo "--- Now Installing OctoPrint-TFT"
-	  echo "--- Not yet implemented"
+      git clone https://github.com/darksid3r/OctoPrint-TFT.git
+      cd ~/OctoPrint-TFT
+      make build
+      ls -1 build/
+      echo "--- Now Installing OctoPrint-TFT"
+      echo "--- Not yet implemented"
     fi
     echo "OctoPrint-TFT installation complete"
   fi
@@ -94,8 +94,8 @@ else
     sudo -u pi /home/pi/OctoPrint/bin/pip install $UI_TOUCHUI_ARCHIVE
     echo "--- Setting up TouchUI automatic start"
     git clone $UI_TOUCHUI_BOOTARCHIVE ~/TouchUI-autostart
-	cp /home/pi/scripts/install-rcos ~/TouchUI-autostart/helpers/install-rcos
-	chmod +x ~/TouchUI-autostart/helpers/install-rcos
+    cp /home/pi/scripts/install-rcos ~/TouchUI-autostart/helpers/install-rcos
+    chmod +x ~/TouchUI-autostart/helpers/install-rcos
     sudo ~/TouchUI-autostart/helpers/install-rcos
     echo "--- OctoPrint-TouchUI installation complete"
   fi
