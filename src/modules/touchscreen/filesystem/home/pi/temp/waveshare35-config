@@ -7,3 +7,4 @@ hdmi_drive=2
 hdmi_force_hotplug=1
 dtoverlay=waveshare35a
 dtparam=i2c_arm=on,spi=on
+disable_overscan=1
