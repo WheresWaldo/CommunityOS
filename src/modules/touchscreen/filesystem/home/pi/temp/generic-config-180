@@ -1,0 +1,3 @@
+dtparm=i2c_arm=on,spi=on
+dtoverlay=ads7846,penirq=25,speed=10000,penirq_pull=2,xohms=150
+display_rotate=2
