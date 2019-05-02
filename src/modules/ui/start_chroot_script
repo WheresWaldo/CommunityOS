@@ -21,7 +21,6 @@ unpack /filesystem/home/pi/scripts /home/pi/scripts pi
 ##############################
 ### Add required UI code here
 
-start:
 if [[ "$UI_INCLUDE_RCOSLCD" != "yes" && "$UI_INCLUDE_TFT" != "yes" && "$UI_INCLUDE_TOUCHUI" != "yes" ]]
 then
   echo "--- No touchscreen interface selected."
