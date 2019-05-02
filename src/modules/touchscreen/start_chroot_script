@@ -61,6 +61,10 @@ if [ "$TOUCHSCREEN_INCLUDE_WS50"  == "yes"]
 then
   echo "--- Installing Waveshare 5.0 LCD drivers"
   git clone $TOUCHSCREEN_WS50_ARCHIVE
+  if [ -e /etc/octoprint-tft-environment ]
+  then
+    sudo sed -i '/OCTOPRINT_TFT_RESOLUTION=/s/$/800x480/' /etc/octoprint-tft-environment
+  fi
   cd /home/pi/LCD-show
   if [ "$TOUCHSCREEN_WS50_ROTATE" != "yes"]
   then
@@ -79,6 +83,10 @@ fi
 if [ "$TOUCHSCREEN_INCLUDE_WS43"  == "yes"]
 then
   echo "--- Installing Waveshare 4.3 LCD drivers"
+  if [ -e /etc/octoprint-tft-environment ]
+  then
+    sudo sed -i '/OCTOPRINT_TFT_RESOLUTION=/s/$/800x600/' /etc/octoprint-tft-environment
+  fi
   if [ "$TOUCHSCREEN_WS43_ROTATE" != "yes"]
   then
     sudo cat /home/pi/temp/waveshare43b-config >> /boot/config.txt
