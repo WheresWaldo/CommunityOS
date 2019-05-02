@@ -40,7 +40,7 @@ Build requires about 6.1 GB of free space available. You can build it by issuing
 
     sudo apt-get install gawk util-linux realpath qemu-user-static git p7zip-full python3
     git clone https://github.com/guysoft/CustomPiOS.git
-    git clone -b devel --single-branch https://github.com/WheresWaldo/CommunityOS.git
+    git clone -b touchscreen --single-branch https://github.com/WheresWaldo/CommunityOS.git
     cd CommunityOS/src/image
     wget -c --trust-server-names 'https://downloads.raspberrypi.org/raspbian_lite_latest'
     cd ..
@@ -54,14 +54,14 @@ Build requires about 6.3 GB of free space available. You can build it by issuing
 
     sudo apt-get install gawk util-linux qemu-user-static git p7zip-full python3
     git clone https://github.com/guysoft/CustomPiOS.git
-    git clone -b devel --single-branch https://github.com/WheresWaldo/CommunityOS.git
+    git clone -b touchscreen --single-branch https://github.com/WheresWaldo/CommunityOS.git
     cd CommunityOS/src/image
     wget -c --trust-server-names 'https://downloads.raspberrypi.org/raspbian_lite_latest'
     cd ..
     ../../CustomPiOS/src/update-custompios-paths
     sudo bash -x ./build_dist
 
-Code contribution would be appreciated!
+Code contribution would be appreciated! Also note that touchscreen and UI are unconfigured, so edit the appropriate config files just after cloning the repository.
 
 How an enduser will use the image?
 ----------------------------------
