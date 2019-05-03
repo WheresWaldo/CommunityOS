@@ -8,3 +8,7 @@
 set -x
 set -e
 
+#############################
+# Place end code here
+
+sudo rm -R /home/pi/temp

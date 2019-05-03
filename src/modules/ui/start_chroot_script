@@ -59,8 +59,6 @@ else
 	  cd /home/pi
       wget $UI_TFT_RELEASE
       sudo dpkg -i octoprint-tft_stretch_1.2.git2669d90-1_armhf.deb
-	  API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
-	  sudo sed -i 's/OCTOPRINT_APIKEY=/${API_KEY}/' /etc/octoprint-tft-environment
     else
       echo "--- Building from source"
       curl -fsSL get.docker.com -o get-docker.sh
@@ -72,6 +70,8 @@ else
       echo "--- Now Installing OctoPrint-TFT"
       echo "--- Not yet implemented"
     fi
+	API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
+	sudo sed -i 's/OCTOPRINT_APIKEY=/${API_KEY}/' /etc/octoprint-tft-environment
     echo "OctoPrint-TFT installation complete"
   fi
 
