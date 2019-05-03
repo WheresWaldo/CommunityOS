@@ -71,7 +71,7 @@ else
       echo "--- Not yet implemented"
     fi
 	API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
-	sudo sed -i 's/OCTOPRINT_APIKEY=/${API_KEY}/' /etc/octoprint-tft-environment
+	sudo sed -i 's/OCTOPRINT_APIKEY=$/${API_KEY}/' /etc/octoprint-tft-environment
     echo "OctoPrint-TFT installation complete"
   fi
 
@@ -82,7 +82,7 @@ else
     sudo -u pi /home/pi/OctoPrint/bin/pip install $UI_TOUCHUI_ARCHIVE
     echo "--- Setting up TouchUI automatic start"
     git clone $UI_TOUCHUI_BOOTARCHIVE ~/TouchUI-autostart
-    cp /home/pi/scripts/install-rcos ~/TouchUI-autostart/helpers/install-rcos
+    mv /home/pi/scripts/install-rcos ~/TouchUI-autostart/helpers/install-rcos
     chmod +x ~/TouchUI-autostart/helpers/install-rcos
     sudo ~/TouchUI-autostart/helpers/install-rcos
     echo "--- OctoPrint-TouchUI installation complete"
