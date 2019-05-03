@@ -16,7 +16,7 @@ source /common.sh
 install_cleanup_trap
 
 unpack /filesystem/home/pi /home/pi pi
-unpack /filesystem/home/root / root
+unpack /filesystem/home/root /root root
 unpack /filesystem/boot /boot
 
 ##############################
@@ -154,7 +154,7 @@ sed -i "s@secure_path=\"@secure_path=\"/root/bin:@g" /etc/sudoers
 chmod +x /root/bin/git
 
 # Unpack root at the end, so files are modified before
-unpack /filesystem/root / root
+unpack /filesystem/root /
 
 ##############################
 ### Set up system services

@@ -20,7 +20,7 @@ install_cleanup_trap
 ### Staging
 
 unpack /filesystem/home/pi /home/pi pi
-unpack /filesystem/root / root
+unpack /filesystem/root / 
 
 ##############################
 ### Add driver code here
