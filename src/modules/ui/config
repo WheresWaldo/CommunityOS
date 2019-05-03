@@ -11,7 +11,10 @@
 [ -n "$UI_RCOSLCD_ARCHIVE" ] || UI_RCOSLCD_ARCHIVE=
 
 # OctoPrint-TFT
+# C2 screen resolution is 480x320
+# R2 screen resolution is 800x480
 [ -n "$UI_INCLUDE_TFT" ] || UI_INCLUDE_TFT=no
+[ -n "$UI_TFT_RESOLUTION" ] || UI_TFT_RESOLUTION=800x480
 [ -n "$UI_TFT_BUILD" ] || UI_TFT_BUILD=no
 [ -n "$UI_TFT_ARCHIVE" ] || UI_TFT_ARCHIVE=https://github.com/darksid3r/OctoPrint-TFT.git
 [ -n "$UI_TFT_LATEST" ] || UI_TFT_LATEST=https://github.com/darksid3r/OctoPrint-TFT/releases/latest

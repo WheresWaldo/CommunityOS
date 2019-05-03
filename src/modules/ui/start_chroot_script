@@ -71,7 +71,8 @@ else
       echo "--- Not yet implemented"
     fi
 	API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
-	sudo sed -i 's/OCTOPRINT_APIKEY=$/${API_KEY}/' /etc/octoprint-tft-environment
+	sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
+	sudo sed -i "/OCTOPRINT_TFT_RESOLUTION=/s/$/"$UI_TFT_RESOLUTION"/g" /etc/octoprint-tft-environment
     echo "OctoPrint-TFT installation complete"
   fi
 
