@@ -2,6 +2,7 @@ webcam:
   stream: /webcam/?action=stream
   snapshot: http://127.0.0.1:8080/?action=snapshot
   ffmpeg: /usr/bin/avconv
+  watermark: false
 plugins:
   cura:
     cura_engine: /usr/local/bin/cura_engine
@@ -12,3 +13,16 @@ server:
     systemShutdownCommand: sudo shutdown -h now
     systemRestartCommand: sudo shutdown -r now
     serverRestartCommand: sudo service octoprint restart
+serial:
+  autoconnect: true
+  baudrate: 115200
+  log: false
+  maxCommunicationTimeouts: {}
+  port: /dev/ttyACM0
+  timeout:
+    communication: 120.0
+printerProfiles:
+  default: _default
+appearance:
+  color: blue
+  name: "Robo3D"
