@@ -6,3 +6,5 @@ hdmi_mode=87
 hdmi_cvt=800 480 60 6 0 0 0
 display_rotate=2
 disable_overscan=1
+enable_uart=1
+dtparm=i2c_arm=on,spi=on

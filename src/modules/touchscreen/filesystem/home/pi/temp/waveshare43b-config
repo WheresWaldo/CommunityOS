@@ -5,3 +5,5 @@ hdmi_group=2
 hdmi_mode=87
 hdmi_cvt=800 480 60 6 0 0 0
 disable_overscan=1
+enable_uart=1
+dtparm=i2c_arm=on,spi=on
