@@ -111,7 +111,6 @@ fi
 ##############################
 ### Clean up before exiting
 
-sudo rm /home/pi/temp/ -R
 apt-get clean
 apt-get autoremove -y
 set -x
