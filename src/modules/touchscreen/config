@@ -1,0 +1,24 @@
+###############################################################################
+# All our configuration settings must start with TOUCHSCREEN_
+# TOUCHSCREEN_VAR="This is a module variable"
+
+# Generic XPT2046 or ADS7846 touchscreen driver
+[ -n "$TOUCHSCREEN_INCLUDE_GENERIC" ] || TOUCHSCREEN_INCLUDE_GENERIC=no
+[ -n "$TOUCHSCREEN_GENERIC_ROTATE" ] || TOUCHSCREEN_GENERIC_ROTATE=no
+[ -n "$TOUCHSCREEN_GENERIC_HORIZONTAL" ] || TOUCHSCREEN_GENERIC_HORIZONTAL=480
+[ -n "$TOUCHSCREEN_GENERIC_VERTICAL" ] || TOUCHSCREEN_GENERIC_VERTICAL=320
+
+# Waveshare / Sunfounder 3.5" resistive touchscreen LCD
+[ -n "$TOUCHSCREEN_INCLUDE_WS35" ] || TOUCHSCREEN_INCLUDE_WS35=no
+[ -n "$TOUCHSCREEN_WS35_ARCHIVE" ] || TOUCHSCREEN_WS35_ARCHIVE=https://github.com/waveshare/LCD-show.git
+[ -n "$TOUCHSCREEN_WS35_ROTATE" ] || TOUCHSCREEN_WS35_ROTATE=no
+
+# Waveshare 5" resistive touchscreen LCD [Robo3D R2]
+[ -n "$TOUCHSCREEN_INCLUDE_WS50" ] || TOUCHSCREEN_INCLUDE_WS50=no
+[ -n "$TOUCHSCREEN_WS50_ARCHIVE" ] || TOUCHSCREEN_WS50_ARCHIVE=https://github.com/waveshare/LCD-show.git
+[ -n "$TOUCHSCREEN_WS50_ROTATE" ] || TOUCHSCREEN_WS50_ROTATE=no
+
+# Put other screen types here
+# Waveshare 4.3" capacitive tablet touchscreen
+[ -n "$TOUCHSCREEN_INCLUDE_WS43" ] || TOUCHSCREEN_INCLUDE_WS43=no
+[ -n "$TOUCHSCREEN_WS43_ROTATE" ] || TOUCHSCREEN_WS43_ROTATE=no

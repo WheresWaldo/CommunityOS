@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+# TOUCHSCREEN for CommunityOS
+# Sets up CommunityOS Touchscreen drivers
+# Written by Bud Hammerton
+# GPL V3
+########
+
+##############################
+### Source error handling, leave this in place
+
+set -e
+
+export LC_ALL=C
+
+source /common.sh
+install_cleanup_trap
+
+##############################
+### Staging
+
+unpack /filesystem/home/pi /home/pi pi
+unpack /filesystem/root / 
+
+##############################
+### Add driver code here
+
+if [ "$TOUCHSCREEN_INCLUDE_GENERIC" == "yes" ]
+then
+  echo "--- Installing generic drivers"
+  sudo cat /home/pi/temp/generic-config >> /boot/config.txt
+  sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-generic /etc/X11/xorg.conf.d/99-calibration.conf
+  if [ "$TOUCHSCREEN_GENERIC_ROTATE" == "yes" ]
+  then
+    sudo cat /home/pi/temp/generic-config-180 >> /boot/config.txt
+	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
+  fi
+  echo "--- Generic touchscreen driver installation complete."
+fi
+
+if [ "$TOUCHSCREEN_INCLUDE_WS35" == "yes" ]
+then
+  echo "--- Installing Waveshare 3.5 LCD drivers"
+  git clone $TOUCHSCREEN_WS35_ARCHIVE
+  cd /home/pi/LCD-show
+  sudo cp ./waveshare35a-overlay.dtb /boot/overlays/waveshare35a.dtbo
+  sudo cp ./waveshare35a-overlay.dtb /boot/overlays/
+  if [ "$TOUCHSCREEN_WS35_ROTATE" != "yes" ]
+  then
+    sudo cat /home/pi/temp/waveshare35-config >> /boot/config.txt
+	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-35 /etc/X11/xorg.conf.d/99-calibration.conf
+  else
+    sudo cat /home/pi/temp/waveshare35-config-180 >> /boot/config.txt
+	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-35-180 /etc/X11/xorg.conf.d/99-calibration.conf
+  fi
+  echo "--- 3.5 inch touchscreen driver installation complete."
+fi
+
+if [ "$TOUCHSCREEN_INCLUDE_WS50" == "yes" ]
+then
+  echo "--- Installing Waveshare 5.0 LCD drivers"
+  git clone $TOUCHSCREEN_WS50_ARCHIVE
+  cd /home/pi/LCD-show
+  if [ "$TOUCHSCREEN_WS50_ROTATE" == "yes" ]
+  then
+    echo "--- Copying rotated configuration"
+    sudo cat /home/pi/temp/waveshare5-config-180 >> /boot/config.txt
+	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5-180 /etc/X11/xorg.conf.d/99-calibration.conf
+  else
+    echo "--- Copying normal configuration"
+	sudo cat /home/pi/temp/waveshare5-config >> /boot/config.txt
+	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
+  fi
+  echo "--- 5 inch touchscreen driver installation complete."
+fi
+
+##############################
+### Add additional screen drivers here
+
+if [ "$TOUCHSCREEN_INCLUDE_WS43" == "yes" ]
+then
+  echo "--- Installing Waveshare 4.3 LCD drivers"
+  if [ "$TOUCHSCREEN_WS43_ROTATE" == "yes" ]
+  then
+    echo "--- Copying rotated configuration"
+    sudo cat /home/pi/temp/waveshare43b-config-180 >> /boot/config.txt
+	sudo cp /etc/X11/xorg.conf.d/40-libinput.conf-43-180 /etc/X11/xorg.conf.d/40-libinput.conf
+  else
+    echo "--- Copying normal configuration"
+    sudo cat /home/pi/temp/waveshare43b-config >> /boot/config.txt
+    sudo cp /etc/X11/xorg.conf.d/40-libinput.conf-43 /etc/X11/xorg.conf.d/40-libinput.conf
+  fi
+  echo "--- 4.3 inch touchscreen driver installation complete."
+fi
+	
+##############################
+### Clean up before exiting
+
+apt-get clean
+apt-get autoremove -y
+set -x
