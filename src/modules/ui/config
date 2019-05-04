@@ -17,8 +17,8 @@
 [ -n "$UI_TFT_RESOLUTION" ] || UI_TFT_RESOLUTION=800x480
 [ -n "$UI_TFT_BUILD" ] || UI_TFT_BUILD=no
 [ -n "$UI_TFT_ARCHIVE" ] || UI_TFT_ARCHIVE=https://github.com/darksid3r/OctoPrint-TFT.git
-[ -n "$UI_TFT_LATEST" ] || UI_TFT_LATEST=https://github.com/darksid3r/OctoPrint-TFT/releases/latest
-[ -n "$UI_TFT_RELEASE" ] || UI_TFT_RELEASE=https://github.com/darksid3r/OctoPrint-TFT/releases/download/1.2/octoprint-tft_stretch_1.2.git2669d90-1_armhf.deb
+[ -n "$UI_TFT_LATEST" ] || UI_TFT_LATEST=$(wget -q -O - https://api.github.com/repos/darksid3r/OctoPrint-TFT/releases/latest | grep "browser_download_url" | grep "octoprint-tft_stretch" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
+[ -n "$UI_TFT_RELEASE" ] || UI_TFT_RELEASE="${UI_TFT_LATEST##*/}"
 
 # TouchUI
 [ -n "$UI_INCLUDE_TOUCHUI" ] || UI_INCLUDE_TOUCHUI=no 
