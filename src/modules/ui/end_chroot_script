@@ -8,3 +8,8 @@
 set -x
 set -e
 
+cd /home/pi
+if [ -e "/home/pi/octoprint-tft_stretch*" ]
+then
+  sudo rm -R /home/pi/octoprint-tft_stretch*
+fi
