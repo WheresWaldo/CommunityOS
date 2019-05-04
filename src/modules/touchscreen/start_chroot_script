@@ -76,17 +76,33 @@ fi
 ##############################
 ### Add additional screen drivers here
 
+if [ "$TOUCHSCREEN_INCLUDE_WS50H" == "yes" ]
+then
+  echo "--- Installing Waveshare 5.0 LCD (H) drivers"
+  if [ "$TOUCHSCREEN_WS50H_ROTATE" == "yes" ]
+  then
+    echo "--- Copying rotated configuration"
+    sudo cat /home/pi/temp/waveshare5h-config-180 >> /boot/config.txt
+	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5h-180 /etc/X11/xorg.conf.d/99-calibration.conf
+  else
+    echo "--- Copying normal configuration"
+	sudo cat /home/pi/temp/waveshare5h-config >> /boot/config.txt
+	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
+  fi
+  echo "--- 5 inch touchscreen driver installation complete."
+fi
+
 if [ "$TOUCHSCREEN_INCLUDE_WS43" == "yes" ]
 then
   echo "--- Installing Waveshare 4.3 LCD drivers"
   if [ "$TOUCHSCREEN_WS43_ROTATE" == "yes" ]
   then
     echo "--- Copying rotated configuration"
-    sudo cat /home/pi/temp/waveshare43b-config-180 >> /boot/config.txt
+    sudo cat /home/pi/temp/waveshare43-config-180 >> /boot/config.txt
 	sudo cp /etc/X11/xorg.conf.d/40-libinput.conf-43-180 /etc/X11/xorg.conf.d/40-libinput.conf
   else
     echo "--- Copying normal configuration"
-    sudo cat /home/pi/temp/waveshare43b-config >> /boot/config.txt
+    sudo cat /home/pi/temp/waveshare43-config >> /boot/config.txt
     sudo cp /etc/X11/xorg.conf.d/40-libinput.conf-43 /etc/X11/xorg.conf.d/40-libinput.conf
   fi
   echo "--- 4.3 inch touchscreen driver installation complete."
@@ -95,6 +111,7 @@ fi
 ##############################
 ### Clean up before exiting
 
+sudo rm /home/pi/test/ -R
 apt-get clean
 apt-get autoremove -y
 set -x
