@@ -67,5 +67,5 @@
 [ -n "$PLUGINS_SPAGHETTI_ARCHIVE" ] || PLUGINS_SPAGHETTI_ARCHIVE=https://github.com/TheSpaghettiDetective/OctoPrint-TheSpaghettiDetective/archive/beta.zip
 
 # Emergency Stop
-[ -n "$PLUGINS_INCLUDE_EMERGENCY" ] || PLUGINS_INCLUDE_EMERGENCY=no 
+[ -n "$PLUGINS_INCLUDE_EMERGENCY" ] || PLUGINS_INCLUDE_EMERGENCY=yes 
 [ -n "$PLUGINS_EMERGENCY_ARCHIVE" ] || PLUGINS_EMERGENCY_ARCHIVE=https://github.com/ntoff/OctoPrint-Estop/archive/master.zip

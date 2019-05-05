@@ -45,7 +45,17 @@ else
     make
     echo "export PYTHONPATH=$(pwd):\$PYTHONPATH" >> ~/.profile
     source ~/.profile
-    echo "--- Nothing else to see here."
+    echo "--- Now installing LCD plugins."
+	sudo -u pi /home/pi/OctoPrint/bin/pip install $UI_RCOSLCD_ARCHIVE
+	pushd /home/pi/.octoprint
+	#check to see if it is set up correctly
+    if grep -Fq 'RoboLCD:' config.yaml
+    then
+      popd
+    else
+      sed -i '/plugins:/rrobolcd.txt' config.yaml
+    fi
+    echo "--- RoboLCD installation complete."
   fi
 
   # OctoPrint-TFT

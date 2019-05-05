@@ -7,8 +7,8 @@
 # UI, it will by default only install the first UI that is selected.
 
 # Robo CommunityOS LCD
-[ -n "$UI_INCLUDE_RCOSLCD" ] || UI_INCLUDE_RCOSLCD=no
-[ -n "$UI_RCOSLCD_ARCHIVE" ] || UI_RCOSLCD_ARCHIVE=
+[ -n "$UI_INCLUDE_RCOSLCD" ] || UI_INCLUDE_RCOSLCD=yes
+[ -n "$UI_RCOSLCD_ARCHIVE" ] || UI_RCOSLCD_ARCHIVE=https://github.com/WheresWaldo/roboLCD_current/archive/do_not_copy.zip
 
 # OctoPrint-TFT
 # C2 screen resolution is 480x320
