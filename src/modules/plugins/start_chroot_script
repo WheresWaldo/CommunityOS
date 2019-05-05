@@ -153,7 +153,29 @@ fi
 ##############################
 ### Additional Useful Plugins
 
-# <plugin name>
+# Autoscroll
+if [ "$PLUGINS_INCLUDE_AUTOSCROLL" == "yes" ]
+then
+  echo "--- Installing Autoscroll Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $PLUGINS_AUTOSCROLL_ARCHIVE
+  echo "--- Autoscroll installation complete"
+fi
+
+# The Spaghetti Detective
+if [ "$PLUGINS_INCLUDE_SPAGHETTI" == "yes" ]
+then
+  echo "--- Installing The Spaghetti Detective Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $PLUGINS_SPAGHETTI_ARCHIVE
+  echo "--- The Spaghetti Detective installation complete"
+fi
+
+# Emergency Stop
+if [ "$PLUGINS_INCLUDE_EMERGENCY" == "yes" ]
+then
+  echo "--- Installing Emergency Stop Button Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $PLUGINS_EMERGENCY_ARCHIVE
+  echo "--- Emergency Stop Button installation complete"
+fi
 	
 ##############################
 ### Clean up before exiting
