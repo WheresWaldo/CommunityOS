@@ -23,6 +23,14 @@ unpack /filesystem/home/pi /home/pi pi
 ##############################
 ### Robo3D listed Plugins
 
+# netconnectd
+if [ "$PLUGINS_INCLUDE_NETCONNECTD" == "yes" ]
+then
+  echo "--- Installing Netconnectd Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $PLUGINS_NETCONNECTD_ARCHIVE
+  echo "--- Netconnectd installation complete"
+fi
+
 # Active Filters
 if [ "$PLUGINS_INCLUDE_ACTIVEFILTERS" == "yes" ]
 then
@@ -176,7 +184,15 @@ then
   sudo -u pi /home/pi/OctoPrint/bin/pip install $PLUGINS_EMERGENCY_ARCHIVE
   echo "--- Emergency Stop Button installation complete"
 fi
-	
+
+# Printer Stats
+if [ "$PLUGINS_INCLUDE_STATS" == "yes" ]
+then
+  echo "--- Installing Printer Stats Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $PLUGINS_STATS_ARCHIVE
+  echo "--- Printer Stats installation complete"
+fi
+
 ##############################
 ### Clean up before exiting
 

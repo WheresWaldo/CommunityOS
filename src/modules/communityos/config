@@ -34,5 +34,5 @@
 # yq
 [ -n "$COMMUNITYOS_YQ_DOWNLOAD" ] || COMMUNITYOS_YQ_DOWNLOAD=$(wget -q -O - https://api.github.com/repos/mikefarah/yq/releases/latest | grep "browser_download_url" | grep "yq_linux_arm" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
 
+# signature
 [ -n "$COMMUNITYOS_COMMIT" ] || COMMUNITYOS_COMMIT=`pushd "${DIST_PATH}" > /dev/null ; git rev-parse HEAD ; popd > /dev/null`
-
