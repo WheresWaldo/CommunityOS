@@ -51,6 +51,10 @@
 [ -n "$PLUGINS_INCLUDE_CUSTOMCONTROL" ] || PLUGINS_INCLUDE_CUSTOMCONTROL=no 
 [ -n "$PLUGINS_CUSTOMCONTROL_ARCHIVE" ] || PLUGINS_CUSTOMCONTROL_ARCHIVE=https://github.com/Salandora/octoprint-customControl/archive/master.zip
 
+# Netconnectd
+[ -n "$PLUGINS_INCLUDE_NETCONNECTD" ] || PLUGINS_INCLUDE_NETCONNECTD=no 
+[ -n "$PLUGINS_NETCONNECTD_ARCHIVE" ] || PLUGINS_NETCONNECTD_ARCHIVE=https://github.com/foosel/netconnectd/archive/master.zip
+
 # STL Viewer
 [ -n "$PLUGINS_INCLUDE_STLVIEWER" ] || PLUGINS_INCLUDE_STLVIEWER=no 
 [ -n "$PLUGINS_STLVIEWER_ARCHIVE" ] || PLUGINS_STLVIEWER_ARCHIVE=https://github.com/jneilliii/Octoprint-STLViewer/archive/master.zip
@@ -69,3 +73,7 @@
 # Emergency Stop
 [ -n "$PLUGINS_INCLUDE_EMERGENCY" ] || PLUGINS_INCLUDE_EMERGENCY=yes 
 [ -n "$PLUGINS_EMERGENCY_ARCHIVE" ] || PLUGINS_EMERGENCY_ARCHIVE=https://github.com/ntoff/OctoPrint-Estop/archive/master.zip
+
+# Printer Stats
+[ -n "$PLUGINS_INCLUDE_STATS" ] || PLUGINS_INCLUDE_STATS=yes 
+[ -n "$PLUGINS_STATS_ARCHIVE" ] || PLUGINS_STATS_ARCHIVE=https://github.com/amsbr/OctoPrint-Stats/archive/master.zip
