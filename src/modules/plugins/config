@@ -7,6 +7,10 @@
 # repository, but have been directed at the original source and not the
 # Robo3D forks.
 
+# Netconnectd
+[ -n "$PLUGINS_INCLUDE_NETCONNECTD" ] || PLUGINS_INCLUDE_NETCONNECTD=yes
+[ -n "$PLUGINS_NETCONNECTD_ARCHIVE" ] || PLUGINS_NETCONNECTD_ARCHIVE=https://github.com/OctoPrint/OctoPrint-Netconnectd/archive/master.zip
+
 # Active Filters Extended
 [ -n "$PLUGINS_INCLUDE_ACTIVEFILTERS" ] || PLUGINS_INCLUDE_ACTIVEFILTERS=yes 
 [ -n "$PLUGINS_ACTIVEFILTERS_ARCHIVE" ] || PLUGINS_ACTIVEFILTERS_ARCHIVE=https://github.com/jneilliii/OctoPrint-ActiveFiltersExtended/archive/master.zip
@@ -75,5 +79,5 @@
 [ -n "$PLUGINS_EMERGENCY_ARCHIVE" ] || PLUGINS_EMERGENCY_ARCHIVE=https://github.com/ntoff/OctoPrint-Estop/archive/master.zip
 
 # Printer Stats
-[ -n "$PLUGINS_INCLUDE_STATS" ] || PLUGINS_INCLUDE_STATS=yes 
+[ -n "$PLUGINS_INCLUDE_STATS" ] || PLUGINS_INCLUDE_STATS=yes
 [ -n "$PLUGINS_STATS_ARCHIVE" ] || PLUGINS_STATS_ARCHIVE=https://github.com/amsbr/OctoPrint-Stats/archive/master.zip

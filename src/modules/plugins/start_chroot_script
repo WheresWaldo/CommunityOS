@@ -23,6 +23,14 @@ unpack /filesystem/home/pi /home/pi pi
 ##############################
 ### Robo3D listed Plugins
 
+# netconnectd
+if [ "$PLUGINS_INCLUDE_NETCONNECTD" == "yes" ]
+then
+  echo "--- Installing Netconnectd Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $PLUGINS_NETCONNECTD_ARCHIVE
+  echo "--- Netconnectd installation complete"
+fi
+
 # Active Filters
 if [ "$PLUGINS_INCLUDE_ACTIVEFILTERS" == "yes" ]
 then
