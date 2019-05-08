@@ -55,6 +55,10 @@
 [ -n "$PLUGINS_INCLUDE_CUSTOMCONTROL" ] || PLUGINS_INCLUDE_CUSTOMCONTROL=no 
 [ -n "$PLUGINS_CUSTOMCONTROL_ARCHIVE" ] || PLUGINS_CUSTOMCONTROL_ARCHIVE=https://github.com/Salandora/octoprint-customControl/archive/master.zip
 
+# Netconnectd
+[ -n "$PLUGINS_INCLUDE_NETCONNECTD" ] || PLUGINS_INCLUDE_NETCONNECTD=no 
+[ -n "$PLUGINS_NETCONNECTD_ARCHIVE" ] || PLUGINS_NETCONNECTD_ARCHIVE=https://github.com/foosel/netconnectd/archive/master.zip
+
 # STL Viewer
 [ -n "$PLUGINS_INCLUDE_STLVIEWER" ] || PLUGINS_INCLUDE_STLVIEWER=no 
 [ -n "$PLUGINS_STLVIEWER_ARCHIVE" ] || PLUGINS_STLVIEWER_ARCHIVE=https://github.com/jneilliii/Octoprint-STLViewer/archive/master.zip

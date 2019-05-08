@@ -1,0 +1,15 @@
+  RoboLCD:
+    Model: Robo R2
+    Temp_Preset:
+      ABS:
+        Bed: 85
+        Extruder1: 225
+      PC:
+        Bed: 45
+        Extruder1: 245
+      PET-G:
+        Bed: 65
+        Extruder1: 235
+      PLA:
+        Bed: 40
+        Extruder1: 190

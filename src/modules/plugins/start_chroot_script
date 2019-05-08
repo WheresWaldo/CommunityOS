@@ -150,6 +150,14 @@ then
   echo "--- Custom Control Editor installation complete"
 fi
 
+# Netconnectd
+if [ "$PLUGINS_INCLUDE_NETCONNECTD" == "yes" ]
+then
+  echo "--- Installing Netconnectd Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $PLUGINS_NETCONNECTD_ARCHIVE
+  echo "--- Netconnectd installation complete"
+fi
+
 # STL Viewer
 if [ "$PLUGINS_INCLUDE_STLVIEWER" == "yes" ]
 then
