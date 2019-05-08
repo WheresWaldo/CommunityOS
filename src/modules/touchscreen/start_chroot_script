@@ -32,7 +32,7 @@ then
   if [ "$TOUCHSCREEN_GENERIC_ROTATE" == "yes" ]
   then
     sudo cat /home/pi/temp/generic-config-180 >> /boot/config.txt
-	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
   echo "--- Generic touchscreen driver installation complete."
 fi
@@ -47,10 +47,10 @@ then
   if [ "$TOUCHSCREEN_WS35_ROTATE" != "yes" ]
   then
     sudo cat /home/pi/temp/waveshare35-config >> /boot/config.txt
-	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-35 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-35 /etc/X11/xorg.conf.d/99-calibration.conf
   else
     sudo cat /home/pi/temp/waveshare35-config-180 >> /boot/config.txt
-	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-35-180 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-35-180 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
   echo "--- 3.5 inch touchscreen driver installation complete."
 fi
@@ -64,11 +64,11 @@ then
   then
     echo "--- Copying rotated configuration"
     sudo cat /home/pi/temp/waveshare5-config-180 >> /boot/config.txt
-	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5-180 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5-180 /etc/X11/xorg.conf.d/99-calibration.conf
   else
     echo "--- Copying normal configuration"
-	sudo cat /home/pi/temp/waveshare5-config >> /boot/config.txt
-	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cat /home/pi/temp/waveshare5-config >> /boot/config.txt
+    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
   echo "--- 5 inch touchscreen driver installation complete."
 fi
@@ -83,11 +83,11 @@ then
   then
     echo "--- Copying rotated configuration"
     sudo cat /home/pi/temp/waveshare5h-config-180 >> /boot/config.txt
-	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5h-180 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5h-180 /etc/X11/xorg.conf.d/99-calibration.conf
   else
     echo "--- Copying normal configuration"
-	sudo cat /home/pi/temp/waveshare5h-config >> /boot/config.txt
-	sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cat /home/pi/temp/waveshare5h-config >> /boot/config.txt
+    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
   echo "--- 5 inch touchscreen driver installation complete."
 fi
@@ -99,7 +99,7 @@ then
   then
     echo "--- Copying rotated configuration"
     sudo cat /home/pi/temp/waveshare43-config-180 >> /boot/config.txt
-	sudo cp /etc/X11/xorg.conf.d/40-libinput.conf-43-180 /etc/X11/xorg.conf.d/40-libinput.conf
+    sudo cp /etc/X11/xorg.conf.d/40-libinput.conf-43-180 /etc/X11/xorg.conf.d/40-libinput.conf
   else
     echo "--- Copying normal configuration"
     sudo cat /home/pi/temp/waveshare43-config >> /boot/config.txt
