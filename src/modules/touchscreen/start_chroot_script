@@ -26,6 +26,7 @@ unpack /filesystem/root /
 
 if [ "$TOUCHSCREEN_INCLUDE_GENERIC" == "yes" ]
 then
+  cd /home/pi
   echo "--- Installing generic drivers"
   sudo cat /home/pi/temp/generic-config >> /boot/config.txt
   sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-generic /etc/X11/xorg.conf.d/99-calibration.conf
@@ -39,6 +40,7 @@ fi
 
 if [ "$TOUCHSCREEN_INCLUDE_WS35" == "yes" ]
 then
+  cd /home/pi
   echo "--- Installing Waveshare 3.5 LCD drivers"
   git clone $TOUCHSCREEN_WS35_ARCHIVE
   cd /home/pi/LCD-show
@@ -57,6 +59,7 @@ fi
 
 if [ "$TOUCHSCREEN_INCLUDE_WS50" == "yes" ]
 then
+cd /home/pi
   echo "--- Installing Waveshare 5.0 LCD drivers"
   git clone $TOUCHSCREEN_WS50_ARCHIVE
   cd /home/pi/LCD-show
