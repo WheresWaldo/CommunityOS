@@ -111,6 +111,20 @@ then
   echo "--- 4.3 inch touchscreen driver installation complete."
 fi
 	
+if [ "$TOUCHSCREEN_INCLUDE_RPI7" == "yes" ]
+then
+  cd /home/pi
+  echo "--- Installing rPi 7 touchscreen drivers"
+  sudo cat /home/pi/temp/generic-config >> /boot/config.txt
+  sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-generic /etc/X11/xorg.conf.d/99-calibration.conf
+  if [ "$TOUCHSCREEN_RPI7_ROTATE" == "yes" ]
+  then
+    sudo cat /home/pi/temp/generic-config-180 >> /boot/config.txt
+    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
+  fi
+  echo "--- rPi 7 inch touchscreen driver installation complete."
+fi
+
 ##############################
 ### Clean up before exiting
 

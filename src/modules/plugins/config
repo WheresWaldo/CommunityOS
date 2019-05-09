@@ -56,7 +56,7 @@
 [ -n "$PLUGINS_CUSTOMCONTROL_ARCHIVE" ] || PLUGINS_CUSTOMCONTROL_ARCHIVE=https://github.com/Salandora/octoprint-customControl/archive/master.zip
 
 # Netconnectd
-[ -n "$PLUGINS_INCLUDE_NETCONNECTD" ] || PLUGINS_INCLUDE_NETCONNECTD=no 
+[ -n "$PLUGINS_INCLUDE_NETCONNECTD" ] || PLUGINS_INCLUDE_NETCONNECTD=yes
 [ -n "$PLUGINS_NETCONNECTD_ARCHIVE" ] || PLUGINS_NETCONNECTD_ARCHIVE=https://github.com/foosel/netconnectd/archive/master.zip
 
 # STL Viewer
