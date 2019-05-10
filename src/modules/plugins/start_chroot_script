@@ -7,8 +7,6 @@
 
 ##############################
 ### Source error handling, leave this in place
-
-set -x
 set -e
 
 export LC_ALL=C
@@ -206,4 +204,3 @@ fi
 
 apt-get clean
 apt-get autoremove -y
-set -x
