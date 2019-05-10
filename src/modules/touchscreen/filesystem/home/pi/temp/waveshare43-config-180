@@ -1,0 +1,10 @@
+
+# Additional settings for Waveshare 4.3 IPS screen
+max_usb_current=1
+hdmi_group=2
+hdmi_mode=87
+hdmi_cvt=800 480 60 6 0 0 0
+display_rotate=2
+disable_overscan=1
+enable_uart=1
+dtparm=i2c_arm=on,spi=on

@@ -7,7 +7,6 @@
 
 
 # Source error handling, leave this in place
-set +x
 set -e
 
 export LC_ALL=C
@@ -116,8 +115,7 @@ EOT
   if [ "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]
   then
     echo "--- Installing HAProxy"
-    apt-get -y --allow-change-held-packages install ssl-cert haproxy
-    rm /etc/ssl/private/ssl-cert-snakeoil.key /etc/ssl/certs/ssl-cert-snakeoil.pem
+    apt-get -y --allow-change-held-packages install haproxy
     echo "--- HAProxy installation complete"
   fi
 
@@ -164,6 +162,8 @@ unpack /filesystem/root /
 systemctl_if_exists disable lightdm.service || true
 
 ### Change default password and hostname (if available)
+chmod +x /etc/init.d/change_password
+chmod +x /etc/init.d/change_hostname
 update-rc.d change_password defaults
 update-rc.d change_hostname defaults
 
@@ -171,6 +171,7 @@ update-rc.d change_hostname defaults
 if [ "$COMMUNITYOS_INCLUDE_OCTOPRINT" == "yes" ]
 then
   echo "--- Enabling OctoPrint service"
+  chmod +x /etc/init.d/octoprint
   update-rc.d octoprint defaults 95
 else
   # let's remove the configs for system services we don't need
@@ -180,15 +181,11 @@ else
 fi
 
 ### haproxy
-if [ "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]
+if [ ! "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]
 then
-  echo "--- Enabling haproxy"
-  systemctl_if_exists enable gencert.service
-else
   # let's remove the configs for system services we don't need
   echo "--- Removing haproxy service"
-  rm /etc/systemd/system/gencert.service
-  # also we need to make OctoPrint bind to all interfaces because otherwise
+  # We need to make OctoPrint bind to all interfaces because otherwise
   # it will be unaccessible...
   [ -f /etc/default/octoprint ] && sed -i "s@HOST=127.0.0.1@HOST=0.0.0.0@" /etc/default/octoprint 
 fi
@@ -206,6 +203,8 @@ if [ "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" == "yes" ]
 then
   # make webcamd autostart
   echo "--- Enabling webcam service"
+  chmod +x /etc/init.d/webcamd
+  chmod +x /root/bin/webcamd
   update-rc.d webcamd defaults
 else
   echo "--- Removing webcam service"
@@ -230,4 +229,3 @@ fi
 
 apt-get clean
 apt-get autoremove -y
-set -x

@@ -61,7 +61,7 @@ Build requires about 6.3 GB of free space available. You can build it by issuing
     ../../CustomPiOS/src/update-custompios-paths
     sudo bash -x ./build_dist
 
-Code contribution would be appreciated!
+Code contribution would be appreciated! Also note that touchscreen and UI are unconfigured, so edit the appropriate config files just after cloning the repository.
 
 How an enduser will use the image?
 ----------------------------------
