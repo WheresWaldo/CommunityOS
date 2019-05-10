@@ -1,6 +1,6 @@
 [Plymouth Theme]
-Name=CommunityOS Theme
-Description=Raspberry Pi simple static loading theme
+Name=CommunityOS
+Description=CommunityOS a la Windows 10 boot splash theme
 ModuleName=script
 
 [script]
