@@ -59,11 +59,14 @@ else
 	echo "--- Setting OctoPrint-TFT defaults"
 	if [ ! "$UI_TFT_ROBO" == "no" ]
 	unpack /filesystem/root / pi
+	cat /home/pi/.octoprint/config.yasml.r3d.txt >> /home/pi/.octoprint/config.yaml
 	then
 	  if [ "$UI_TFT_ROBO" == "c2" ]
 	  then
+	    echo "--- C2 printer settings"
 	    sudo cp /home/helpers/octoprint-tft-environment-c2.txt /etc/octoprint-tft-environment
 	  else
+	    echo "--- R2 Printer settings"
 	    sudo cp /home/helpers/octoprint-tft-environment-r2.txt /etc/octoprint-tft-environment
 	  fi
 	fi

@@ -9,7 +9,7 @@ axes:
     inverted: false
     speed: 6000
   z:
-    inverted: false
+    inverted: true
     speed: 200
 color: default
 extruder:
@@ -19,13 +19,13 @@ extruder:
   - - 0.0
     - 0.0
 heatedBed: true
-id: robor1
-model: Robo R1
-name: Robo R1
+id: robor2
+model: Robo R2
+name: Robo R2
 volume:
   custom_box: false
-  depth: 236.0
+  depth: 197.0
   formFactor: rectangular
-  height: 230.0
+  height: 250.0
   origin: lowerleft
-  width: 220.0
+  width: 197.0
