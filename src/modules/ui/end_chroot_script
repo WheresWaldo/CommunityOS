@@ -1,10 +1,2 @@
 #!/usr/bin/env bash
-# Touchscreen UI for CommunityOS
-# Selects and installs enabled touchscreen for CommunityOS
-# Written by <Author>
-# GPL V3
-########
-
-set -x
-set -e
-
+# Intentionally left blank
