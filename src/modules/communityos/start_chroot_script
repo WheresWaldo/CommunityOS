@@ -228,6 +228,157 @@ if [ "$COMMUNITYOS_INCLUDE_THEME" == "yes" ]; then
 fi
 
 ##############################
+### Setting up default list of OctoPrint plugins
+
+# Robo3D listed Plugins
+
+# netconnectd
+if [ "$COMMUNITYOS_INCLUDE_NETCONNECTD" == "yes" ]; then
+  echo "--- Installing Netconnectd Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_NETCONNECTD_ARCHIVE
+  echo "--- Netconnectd installation complete"
+fi
+
+# Active Filters
+if [ "$COMMUNITYOS_INCLUDE_ACTIVEFILTERS" == "yes" ]; then
+  echo "--- Installing Active Filters Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_ACTIVEFILTERS_ARCHIVE
+  pushd /home/pi/helpers
+  # check to see if set up correctly
+  if grep -Fq 'terminalfilters:' /home/pi/.ocotprint/config.yaml; then
+    popd
+  else
+    cat activefilters.txt >> /home/pi/.ocotprint/config.yaml
+    popd
+  fi
+  echo "--- Active Filter installation complete"
+fi
+
+# Filament Sensor Reloaded
+if [ "$COMMUNITYOS_INCLUDE_FILAMENTSENSOR" == "yes" ]; then
+  echo "--- Installing Filament Sensor Reloaded Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_FILAMENTSENSOR_ARCHIVE
+  pushd /home/pi/helpers
+  # check to see if set up correctly
+  if grep -Fq 'filamentreload:' /home/pi/.octoprint/config.yaml; then
+	popd
+  else
+    sed -i '/plugins:/rfilamentreload.txt' /home/pi/.octoprint/config.yaml
+    popd
+  fi
+  echo "--- Filament Sensor Reloaded installation complete"
+fi
+
+# Firmware Updater
+if [ "$COMMUNITYOS_INCLUDE_FIRMWAREUPDATER" == "yes" ]; then
+  echo "--- Installing Firmware Updater Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_FIRMWAREUPDATER_ARCHIVE
+  apt-get -y install avrdude
+  # check to see if set up correctly
+  pushd /home/pi/helpers
+  if grep -Fq 'firmwareupdater:' /home/pi/.octoprint/config.yaml; then
+    sed -i 's|avrdud_path:.*|avrdude_path: /usr/bin/avrdude|g' /home/pi/.octoprint/config.yaml
+  else
+    sed -i '/plugins:/rfirmwareupdater.txt' /home/pi/.octoprint/config.yaml
+  fi
+  popd
+  echo "--- Firmware Updater installation complete"
+fi
+
+# Alexa Skill
+if [ "$COMMUNITYOS_INCLUDE_ALEXASKILL" == "yes" ]; then
+  echo "--- Installing Alexa Skill Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_ALEXASKILL_ARCHIVE
+  echo "--- Alexa Skill installation complete"
+fi
+
+# EEPROM Editor
+if [ "$COMMUNITYOS_INCLUDE_EEPROMEDITOR" == "yes" ]; then
+  echo "--- Installing Marlin EEPROM Editor Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_EEPROMEDITOR_ARCHIVE
+  echo "--- Marlin EEPROM Editor installation complete"
+fi
+
+# Polar Cloud
+if [ "$COMMUNITYOS_INCLUDE_POLARCLOUD" == "yes" ]; then
+  echo "--- Installing Polar Cloud Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_POLARCLOUD_ARCHIVE
+  echo "--- Polar Cloud installation complete"
+fi
+
+# 3DPrinterOS
+if [ "$COMMUNITYOS_INCLUDE_3DPRINTEROS" == "yes" ]; then
+  echo "--- Installing 3DPrinterOS Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_3DPRINTEROS_ARCHIVE
+  echo "--- 3DPrinterOS installation complete"
+fi
+
+# AstroPrint Cloud
+if [ "$COMMUNITYOS_INCLUDE_ASTROPRINT" == "yes" ]; then
+  echo "--- Installing AstroPrint Cloud Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_ASTROPRINT_ARCHIVE
+  echo "--- AstroPrint Cloud installation complete"
+fi
+
+# Screen Squish
+if [ "$COMMUNITYOS_INCLUDE_SCREENSQUISH" == "yes" ]; then
+  echo "--- Installing Screen Squish Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_SCREENSQUISH_ARCHIVE
+  echo "--- Screen Squish installation complete"
+fi
+
+# Request Spinner
+if [ "$COMMUNITYOS_INCLUDE_REQUESTSPINNER" == "yes" ]; then
+  echo "--- Installing Request Spinner Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_REQUESTSPINNER_ARCHIVE
+  echo "--- Request Spinner installation complete"
+fi
+
+# Custom Control Editor
+if [ "$COMMUNITYOS_INCLUDE_CUSTOMCONTROL" == "yes" ]; then
+  echo "--- Installing Custom Control Editor Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_CUSTOMCONTROL_ARCHIVE
+  echo "--- Custom Control Editor installation complete"
+fi
+
+# STL Viewer
+if [ "$COMMUNITYOS_INCLUDE_STLVIEWER" == "yes" ]; then
+  echo "--- Installing STL Viewer Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_STLVIEWER_ARCHIVE
+  echo "--- STL Viewer installation complete"
+fi
+
+# Additional Useful Plugins
+
+# Autoscroll
+if [ "$COMMUNITYOS_INCLUDE_AUTOSCROLL" == "yes" ]; then
+  echo "--- Installing Autoscroll Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_AUTOSCROLL_ARCHIVE
+  echo "--- Autoscroll installation complete"
+fi
+
+# The Spaghetti Detective
+if [ "$COMMUNITYOS_INCLUDE_SPAGHETTI" == "yes" ]; then
+  echo "--- Installing The Spaghetti Detective Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_SPAGHETTI_ARCHIVE
+  echo "--- The Spaghetti Detective installation complete"
+fi
+
+# Emergency Stop
+if [ "$COMMUNITYOS_INCLUDE_EMERGENCY" == "yes" ]; then
+  echo "--- Installing Emergency Stop Button Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_EMERGENCY_ARCHIVE
+  echo "--- Emergency Stop Button installation complete"
+fi
+
+# Printer Stats
+if [ "$COMMUNITYOS_INCLUDE_STATS" == "yes" ]; then
+  echo "--- Installing Printer Stats Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_STATS_ARCHIVE
+  echo "--- Printer Stats installation complete"
+fi
+
+##############################
 ### Clean up before exiting
 
 apt-get clean
