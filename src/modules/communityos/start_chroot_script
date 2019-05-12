@@ -3,10 +3,10 @@
 # Sets up base installation of CommunityOS
 # Written by Bud Hammerton
 # GPL V3
-########
+##############################
 
-
-# Source error handling, leave this in place
+##############################
+### Source error handling, leave this in place
 set -e
 
 export LC_ALL=C
@@ -29,20 +29,23 @@ apt-get remove -y --purge  $remove_extra
 apt-get autoremove -y
 # add packages we need
 echo "--- Installing required packages"
-apt-get -y --allow-change-held-packages install python2.7 python-virtualenv python-dev git screen subversion cmake checkinstall avahi-daemon libavahi-compat-libdnssd1 libffi-dev libssl-dev
-echo "--- Reinstall iputils-ping"
+required_packages=$(python2.7 python-virtualenv python-dev git screen subversion cmake checkinstall avahi-daemon libavahi-compat-libdnssd1 libffi-dev libssl-dev)
+echo "--- Installing:" $required_packages
+apt-get -y --allow-change-held-packages install $required_packages
+echo "--- Reinstalling iputils-ping"
 apt-get install --reinstall iputils-ping
+echo "--- All packages updated"
 
 ### OctoPrint environment
-# start building  pi user environmenmt
+# start building pi user environmenmt
 pushd /home/pi
   # building virtualenv
+  echo "--- Building OctoPrint virtual environment"
   sudo -u pi virtualenv OctoPrint
   sudo -u pi /home/pi/OctoPrint/bin/pip install --upgrade pip
   
   # OctoPrint & pyserial
-  if [ "$COMMUNITYOS_INCLUDE_OCTOPRINT" == "yes" ]
-  then
+  if [ "$COMMUNITYOS_INCLUDE_OCTOPRINT" == "yes" ]; then
     echo "--- Installing pyBonjour"
     # pybonjour (for mdns discovery)
     sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_PYBONJOUR_ARCHIVE
@@ -53,8 +56,7 @@ pushd /home/pi
   fi
   
   # mjpg-streamer
-  if [ "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" == "yes" ]
-  then
+  if [ "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" == "yes" ]; then
     echo "--- Installing mjpg-streamer"
     if [ $( is_in_apt libjpeg62-turbo-dev ) -eq 1 ]; then
       echo "--- Installing libjpeg6"
@@ -92,8 +94,7 @@ EOT
   
   
   # CuraEngine
-  if [ "$COMMUNITYOS_INCLUDE_CURAENGINE" == "yes" ]
-  then
+  if [ "$COMMUNITYOS_INCLUDE_CURAENGINE" == "yes" ]; then
     echo "--- Installing CuraEngine"
     folder=CuraEngine-$COMMUNITYOS_CURAENGINE_VERSION
     zipfile=$folder.zip
@@ -112,16 +113,14 @@ EOT
   
   
   # HAProxy for http and https, and webcam
-  if [ "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]
-  then
+  if [ "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]; then
     echo "--- Installing HAProxy"
     apt-get -y --allow-change-held-packages install haproxy
     echo "--- HAProxy installation complete"
   fi
 
   # WiringPi
-  if [ "$COMMUNITYOS_INCLUDE_WIRINGPI" == "yes" ]
-  then
+  if [ "$COMMUNITYOS_INCLUDE_WIRINGPI" == "yes" ]; then
     echo "--- Installing WiringPi"
     apt-get install wiringpi
     echo "--- WiringPi installation complete"
@@ -133,22 +132,27 @@ EOT
   echo "--- Yq installation complete"
 popd
 
+echo "--- Performing general houskeeping chores"
 # Make sure user pi has access to serial ports
+echo "--- Make sure user pi has access to serial ports"
 usermod -a -G tty pi
 usermod -a -G dialout pi
 
 # Store CommunityOS commit used to build this image
+echo "--- Store CommunityOS build version"
 echo "$COMMUNITYOS_COMMIT" > /etc/communityos_commit
 
 # Keep legacy compatibility
 ln -s /etc/custompios_buildbase /etc/communityos_buildbase
 
 # Allow pi user to run shutdown and service commands
+echo "--- Allow pi user to run shutdown and service commands"
 echo "pi ALL=NOPASSWD: /sbin/shutdown" > /etc/sudoers.d/octoprint-shutdown
 echo "pi ALL=NOPASSWD: /usr/sbin/service" > /etc/sudoers.d/octoprint-service
 
 # Make sure users don't run git with sudo, thus breaking permissions, by adding /root/bin to the
 # default sudo path and placing a git wrapper script there that checks if it's run as root
+echo "--- Other housekeeping chores"
 sed -i "s@secure_path=\"@secure_path=\"/root/bin:@g" /etc/sudoers
 chmod +x /root/bin/git
 
@@ -158,18 +162,20 @@ unpack /filesystem/root /
 ##############################
 ### Set up system services
 
+echo "--- Setting up services"
 ### Disable GUI at start
 systemctl_if_exists disable lightdm.service || true
+echo "--- Disable GUI"
 
 ### Change default password and hostname (if available)
 chmod +x /etc/init.d/change_password
 chmod +x /etc/init.d/change_hostname
 update-rc.d change_password defaults
 update-rc.d change_hostname defaults
+echo "--- Change default password and hostname (if files exist)"
 
 ### OctoPrint
-if [ "$COMMUNITYOS_INCLUDE_OCTOPRINT" == "yes" ]
-then
+if [ "$COMMUNITYOS_INCLUDE_OCTOPRINT" == "yes" ]; then
   echo "--- Enabling OctoPrint service"
   chmod +x /etc/init.d/octoprint
   update-rc.d octoprint defaults 95
@@ -181,26 +187,24 @@ else
 fi
 
 ### haproxy
-if [ ! "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]
-then
+if [ ! "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]; then
   # let's remove the configs for system services we don't need
-  echo "--- Removing haproxy service"
+  echo "--- Removing select haproxy service configurations"
   # We need to make OctoPrint bind to all interfaces because otherwise
   # it will be unaccessible...
-  [ -f /etc/default/octoprint ] && sed -i "s@HOST=127.0.0.1@HOST=0.0.0.0@" /etc/default/octoprint 
+  [ -f /etc/default/octoprint ] && sed -i "s@HOST=127.0.0.1@HOST=0.0.0.0@" /etc/default/octoprint
+  echo "--- Bind OctoPrint to all interfaces"  
 fi
 
 ### CuraEngine
-if [ ! "$COMMUNITYOS_INCLUDE_CURAENGINE" == "yes" ]
-then
+if [ ! "$COMMUNITYOS_INCLUDE_CURAENGINE" == "yes" ]; then
   # unconfigure the cura engine path in OctoPrint's config.yaml
   echo "--- Removing CuraEngine"
   sudo -u pi sed -i -e "s@cura_engine: /usr/local/bin/cura_engine@cura_engine:@g" /home/pi/.octoprint/config.yaml
 fi
 
 ### mjpg_streamer
-if [ "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" == "yes" ]
-then
+if [ "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" == "yes" ]; then
   # make webcamd autostart
   echo "--- Enabling webcam service"
   chmod +x /etc/init.d/webcamd
@@ -214,14 +218,13 @@ else
   rm /root/bin/webcamd
 fi
 
-# Make sure plymouth is set to the correct theme
-if [ "$COMMUNITYOS_INCLUDE_THEME" == "yes" ]
-then
-  echo "--- Setting default theme"
+# Make sure Plymouth is set to the correct theme
+if [ "$COMMUNITYOS_INCLUDE_THEME" == "yes" ]; then
+  echo "--- Setting default Plymouth theme"
   pushd /usr/share/plymouth/themes
   plymouth-set-default-theme communityos -R
   sed -i 's/$/ quiet splash logo.nologo plymouth.ignore-serial-consoles/' /boot/cmdline.txt
-  echo "--- Theme installation complete"
+  echo "--- Plymouth theme installation complete"
 fi
 
 ##############################

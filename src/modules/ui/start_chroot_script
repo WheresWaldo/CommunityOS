@@ -3,7 +3,7 @@
 # Selects and installs Touchscreen UI for CommunityOS
 # Written by <author>
 # GPL V3
-########
+##############################
 
 ##############################
 ### Source error handling, leave this in place
@@ -21,30 +21,28 @@ unpack /filesystem/home/pi /home/pi pi
 ##############################
 ### Add required UI code here
 
-if [[ "$UI_INCLUDE_RCOSLCD" != "yes" && "$UI_INCLUDE_TFT" != "yes" && "$UI_INCLUDE_TOUCHUI" != "yes" ]]
-then
+if [[ "$UI_INCLUDE_RCOSLCD" != "yes" && "$UI_INCLUDE_TFT" != "yes" && "$UI_INCLUDE_TOUCHUI" != "yes" ]]; then
   echo "--- No touchscreen interface selected."
   echo "--- No touchscreen interface will be installed."
 else
-  if [[ ( "$UI_INCLUDE_RCOSLCD" == "yes" && "$UI_INCLUDE_TFT" == "yes" ) || (  "$UI_INCLUDE_RCOSLCD" == "yes" && "$UI_INCLUDE_TOUCHUI" == "yes" ) || ( "$UI_INCLUDE_TFT" == "yes" && "$UI_INCLUDE_TOUCHUI" == "yes" ) ]]
-  then 
+  if [[ ( "$UI_INCLUDE_RCOSLCD" == "yes" && "$UI_INCLUDE_TFT" == "yes" ) || (  "$UI_INCLUDE_RCOSLCD" == "yes" && "$UI_INCLUDE_TOUCHUI" == "yes" ) || ( "$UI_INCLUDE_TFT" == "yes" && "$UI_INCLUDE_TOUCHUI" == "yes" ) ]]; then 
     echo "--- You may only install one touchscreen interface."
     echo "--- No touchscreen interface will be installed."
   fi
 
   # OctoPrint-TFT
-  if [ "$UI_INCLUDE_TFT" == "yes" ]
-  then
+  if [ "$UI_INCLUDE_TFT" == "yes" ]; then
     echo "--- Installing OctoPrint-TFT"
     sudo apt-get install --fix-missing -y libgtk-3-0 xserver-xorg xinit x11-xserver-utils
     sudo dpkg -r --force-depends lightdm
     sudo systemctl set-default graphical.target
     # Are we building from source?
-	if [ ! "$UI_TFT_BUILD" == "yes" ]
-    then
-	  cd /home/pi
+	if [ ! "$UI_TFT_BUILD" == "yes" ]; then
+	  echo "--- Installing precompiled OctoPrint-TFT package"
+      pushd /home/pi
       wget $UI_TFT_LATEST
       sudo dpkg -i $UI_TFT_RELEASE
+	  echo "--- Package installation complete"
     else
       echo "--- Building from source"
       curl -fsSL get.docker.com -o get-docker.sh
@@ -57,12 +55,10 @@ else
       echo "--- Not yet completely implemented"
     fi
 	echo "--- Setting OctoPrint-TFT defaults"
-	if [ ! "$UI_TFT_ROBO" == "no" ]
-	unpack /filesystem/root / 
-	cat /home/pi/.octoprint/config.r3d.txt >> /home/pi/.octoprint/config.yaml
-	then
-	  if [ "$UI_TFT_ROBO" == "c2" ]
-	  then
+	if [ ! "$UI_TFT_ROBO" == "no" ]; then
+	  unpack /filesystem/root / 
+	  cat /home/pi/.octoprint/config.r3d.txt >> /home/pi/.octoprint/config.yaml
+	  if [ "$UI_TFT_ROBO" == "c2" ]; then
 	    echo "--- C2 printer settings"
 	    sudo cp /home/pi/helpers/octoprint-tft-environment-c2.txt /etc/octoprint-tft-environment
 	  else
@@ -70,15 +66,14 @@ else
 	    sudo cp /home/pi/helpers/octoprint-tft-environment-r2.txt /etc/octoprint-tft-environment
 	  fi
 	fi
-	API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
-	sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
-	rm /home/pi/$UI_TFT_RELEASE
+    API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
+    sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
+    rm /home/pi/$UI_TFT_RELEASE
     echo "OctoPrint-TFT installation complete"
   fi
 
   # OctoPrint-TouchUI
-  if [ "$UI_INCLUDE_TOUCHUI" == "yes" ]
-  then
+  if [ "$UI_INCLUDE_TOUCHUI" == "yes" ]; then
     echo "--- Installing OctoPrint-TouchUI Plugin"
     sudo -u pi /home/pi/OctoPrint/bin/pip install $UI_TOUCHUI_ARCHIVE
     echo "--- Setting up TouchUI automatic start"
@@ -88,7 +83,6 @@ else
     sudo ~/TouchUI-autostart/helpers/install-rcos
     echo "--- OctoPrint-TouchUI installation complete"
   fi
-fi
 
   # Robo CommunityOS LCD
   if [ "$UI_INCLUDE_RCOSLCD" == "yes" ]
@@ -115,10 +109,12 @@ fi
     fi
     echo "--- RoboLCD installation complete."
   fi
+fi
 
 ##############################
 ### Clean up before exiting
 
+sudo rm /home/pi/helpers -r
 apt-get clean
 apt-get autoremove -y
 set -x
