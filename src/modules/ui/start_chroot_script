@@ -58,8 +58,8 @@ else
     fi
 	echo "--- Setting OctoPrint-TFT defaults"
 	if [ ! "$UI_TFT_ROBO" == "no" ]
-	unpack /filesystem/root / pi
-	cat /home/pi/.octoprint/config.yasml.r3d.txt >> /home/pi/.octoprint/config.yaml
+	unpack /filesystem/root / 
+	cat /home/pi/.octoprint/config.r3d.txt >> /home/pi/.octoprint/config.yaml
 	then
 	  if [ "$UI_TFT_ROBO" == "c2" ]
 	  then
