@@ -64,10 +64,10 @@ else
 	  if [ "$UI_TFT_ROBO" == "c2" ]
 	  then
 	    echo "--- C2 printer settings"
-	    sudo cp /home/helpers/octoprint-tft-environment-c2.txt /etc/octoprint-tft-environment
+	    sudo cp /home/pi/helpers/octoprint-tft-environment-c2.txt /etc/octoprint-tft-environment
 	  else
 	    echo "--- R2 Printer settings"
-	    sudo cp /home/helpers/octoprint-tft-environment-r2.txt /etc/octoprint-tft-environment
+	    sudo cp /home/pi/helpers/octoprint-tft-environment-r2.txt /etc/octoprint-tft-environment
 	  fi
 	fi
 	API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
