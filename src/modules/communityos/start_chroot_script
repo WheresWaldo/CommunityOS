@@ -245,10 +245,10 @@ if [ "$COMMUNITYOS_INCLUDE_ACTIVEFILTERS" == "yes" ]; then
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_ACTIVEFILTERS_ARCHIVE
   pushd /home/pi/helpers
   # check to see if set up correctly
-  if grep -Fq 'terminalfilters:' /home/pi/.ocotprint/config.yaml; then
+  if grep -Fq 'terminalfilters:' /home/pi/.octoprint/config.yaml; then
     popd
   else
-    cat activefilters.txt >> /home/pi/.ocotprint/config.yaml
+    cat activefilters.txt >> /home/pi/.octoprint/config.yaml
     popd
   fi
   echo "--- Active Filter installation complete"
