@@ -23,7 +23,7 @@ unpack /filesystem/boot /boot
 
 apt-get update
 # remove packages in case we are building from a regular raspbian image instead of the lite one...
-remove_extra="remove_if_installed scratch squeak-plugins-scratch squeak-vm wolfram-engine python-minecraftpi minecraft-pi sonic-pi oracle-java8-jdk bluej libreoffice-common libreoffice-core freepats greenfoot nodered"
+remove_extra="scratch squeak-plugins-scratch squeak-vm wolfram-engine python-minecraftpi minecraft-pi sonic-pi oracle-java8-jdk bluej libreoffice-common libreoffice-core freepats greenfoot nodered"
 echo "--- Removing:" $remove_extra
 apt-get remove -y --purge $remove_extra
 apt-get autoremove -y
