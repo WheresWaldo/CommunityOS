@@ -47,6 +47,18 @@
 [ -n "$COMMUNITYOS_INCLUDE_RPI7" ] || COMMUNITYOS_INCLUDE_RPI7=no
 [ -n "$COMMUNITYOS_INCLUDE_WS43" ] || COMMUNITYOS_INCLUDE_WS43=no
 
+# User interface selection options
+# Choose only one from this section
+[ -n "$COMMUNITYOS_INCLUDE_TFT" ] || COMMUNITYOS_INCLUDE_TFT=yes
+[ -n "$COMMUNITYOS_INCLUDE_TOUCHUI" ] || COMMUNITYOS_INCLUDE_TOUCHUI=no
+
+# Printer specific default options
+# Choose only one from this section
+[ -n "$COMMUNITYOS_INCLUDE_R2" ] || COMMUNITYOS_INCLUDE_R2=yes
+[ -n "$COMMUNITYOS_INCLUDE_C2" ] || COMMUNITYOS_INCLUDE_C2=no
+[ -n "$COMMUNITYOS_INCLUDE_R1P" ] || COMMUNITYOS_INCLUDE_R1P=no
+
+
 ###############################################################################
 # Additional base variable declarations
 # Please do not edit any of these lines unless you understand the consequences
@@ -161,3 +173,23 @@
 # Raspberry Pi 7" capacitive touchscreen
 [ -n "$COMMUNITYOS_RPI7_ROTATE" ] || COMMUNITYOS_RPI7_ROTATE=no
 [ -n "$COMMUNITYOS_RPI7_RESOLUTION" ] || COMMUNITYOS_RPI7_RESOLUTION=800x480
+
+###############################################################################
+# Additional unser interface variable declarations
+# Please do not edit any of these lines unless you understand the consequences
+
+# OctoPrint-TFT
+[ -n "$COMMUNITYOS_TFT_LATEST" ] || COMMUNITYOS_TFT_LATEST=$(wget -q -O - https://api.github.com/repos/darksid3r/OctoPrint-TFT/releases/latest | grep "browser_download_url" | grep "octoprint-tft_stretch" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
+[ -n "$COMMUNITYOS_TFT_RELEASE" ] || COMMUNITYOS_TFT_RELEASE="${COMMUNITYOS_TFT_LATEST##*/}"
+# Build OctoPrint-TFT from source
+[ -n "$COMMUNITYOS_TFT_BUILD" ] || COMMUNITYOS_TFT_BUILD=no
+[ -n "$COMMUNITYOS_TFT_ARCHIVE" ] || COMMUNITYOS_TFT_ARCHIVE=https://github.com/darksid3r/OctoPrint-TFT.git
+
+# TouchUI
+[ -n "$COMMUNITYOS_INCLUDE_TOUCHUI" ] || COMMUNITYOS_INCLUDE_TOUCHUI=no 
+[ -n "$COMMUNITYOS_TOUCHUI_ARCHIVE" ] || COMMUNITYOS_TOUCHUI_ARCHIVE=https://github.com/BillyBlaze/OctoPrint-TouchUI/archive/master.zip
+[ -n "$COMMUNITYOS_TOUCHUI_BOOTARCHIVE" ] || COMMUNITYOS_TOUCHUI_BOOTARCHIVE=https://github.com/BillyBlaze/OctoPrint-TouchUI-autostart.git
+
+# Robo CommunityOS LCD
+[ -n "$COMMUNITYOS_INCLUDE_RCOSLCD" ] || COMMUNITYOS_INCLUDE_RCOSLCD=no
+[ -n "$COMMUNITYOS_RCOSLCD_ARCHIVE" ] || COMMUNITYOS_RCOSLCD_ARCHIVE=https://github.com/WheresWaldo/roboLCD_current/archive/do_not_copy.zip

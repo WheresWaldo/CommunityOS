@@ -379,7 +379,7 @@ if [ "$COMMUNITYOS_INCLUDE_STATS" == "yes" ]; then
 fi
 
 ##############################
-### Screen driver code here
+### Screen driver installation
 
 if [ "$COMMUNITYOS_INCLUDE_GENERIC" == "yes" ]; then
   pushd /home/pi
@@ -397,7 +397,7 @@ fi
 if [ "$COMMUNITYOS_INCLUDE_WS35" == "yes" ]; then
   pushd /home/pi
   echo "--- Installing Waveshare 3.5 LCD drivers"
-  git clone $COMMUNITYOS_WS35_ARCHIVE
+  gitclone $COMMUNITYOS_WS35_ARCHIVE LCD-show
   pushd /home/pi/LCD-show
   sudo cp ./waveshare35a-overlay.dtb /boot/overlays/waveshare35a.dtbo
   sudo cp ./waveshare35a-overlay.dtb /boot/overlays/
@@ -416,7 +416,7 @@ fi
 if [ "$COMMUNITYOS_INCLUDE_WS50" == "yes" ]; then
   pushd /home/pi
   echo "--- Installing Waveshare 5.0 LCD drivers"
-  git clone $COMMUNITYOS_WS50_ARCHIVE
+  gitclone $COMMUNITYOS_WS50_ARCHIVE LCD-show
   pushd /home/pi/LCD-show
   if [ "$COMMUNITYOS_WS50_ROTATE" == "yes" ]; then
     echo "--- Copying rotated configuration"
@@ -474,6 +474,83 @@ if [ "$COMMUNITYOS_INCLUDE_RPI7" == "yes" ]; then
   echo "--- rPi 7 inch touchscreen driver installation complete."
   popd
 fi
+
+##############################
+### User interface installation
+
+if [[ "$COMMUNITYOS_INCLUDE_TFT" != "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" != "yes" ]]; then
+  echo "--- No touchscreen interface selected."
+  echo "--- No touchscreen interface will be installed."
+else
+  if [[ ( "$COMMUNITYOS_INCLUDE_TFT" == "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" ) ]]; then 
+    echo "--- You may only install one touchscreen interface."
+    echo "--- No touchscreen interface will be installed."
+  fi
+  COMMUNITYOS_INCLUDE_TFT="no"
+  COMMUNITYOS_INCLUDE_TOUCHUI="no"
+fi
+
+  # OctoPrint-TFT
+  if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
+    echo "--- Installing OctoPrint-TFT"
+    sudo apt-get install --fix-missing -y libgtk-3-0 xserver-xorg xinit x11-xserver-utils
+    sudo dpkg -r --force-depends lightdm
+    sudo systemctl set-default graphical.target
+    # Are we building from source?
+	if [ ! "$COMMUNITYOS_TFT_BUILD" == "yes" ]; then
+	  echo "--- Installing precompiled OctoPrint-TFT package"
+      pushd /home/pi
+      wget $COMMUNITYOS_TFT_LATEST
+      sudo dpkg -i $COMMUNITYOS_TFT_RELEASE
+	  echo "--- Package installation complete"
+    else
+      echo "--- Building from source"
+      curl -fsSL get.docker.com -o get-docker.sh
+      sh get-docker.sh
+      gitclone $COMMUNITYOS_TFT_ARCHIVE OctoPrint-TFT
+      cd ~/OctoPrint-TFT
+      make build
+      ls -1 build/
+      echo "--- Now Installing OctoPrint-TFT"
+      echo "--- Not yet completely implemented"
+    fi
+    rm /home/pi/$COMMUNITYOS_TFT_RELEASE
+    echo "OctoPrint-TFT installation complete"
+  fi
+
+  # OctoPrint-TouchUI
+  if [ "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" ]; then
+	echo "--- Installing OctoPrint-TouchUI Plugin"
+    pushd /home/pi
+    sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_TOUCHUI_ARCHIVE
+    echo "--- Setting up TouchUI automatic start"
+    gitclone $COMMUNITYOS_TOUCHUI_BOOTARCHIVE ~/TouchUI-autostart
+    mv /home/pi/scripts/install-rcos ~/TouchUI-autostart/helpers/install-rcos
+    chmod +x ~/TouchUI-autostart/helpers/install-rcos
+    sudo ~/TouchUI-autostart/helpers/install-rcos
+    echo "--- OctoPrint-TouchUI installation complete"
+  fi
+
+##############################
+### Miscellaneous printer settings
+
+if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" || "$COMMUNITYOS_INCLUDE_R1P" == "yes" ]]; then
+  echo "--- Setting Robo3D defaults"
+  cat /home/pi/helpers/config.r3d.txt >> /home/pi/.octoprint/config.yaml
+  if [ "$COMMUNITYOS_INCLUDE_R2" == "yes" ]; then
+    echo "--- R2 printer settings"
+    sudo cp /home/pi/helpers/octoprint-tft-environment-r2.txt /etc/octoprint-tft-environment
+	mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
+  fi
+  if [ "$COMMUNITYOS_INCLUDE_C2" == "yes" ]; then
+    echo "--- C2 Printer settings"
+	sudo cp /home/pi/helpers/octoprint-tft-environment-c2.txt /etc/octoprint-tft-environment
+	mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
+  fi
+fi
+API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
+sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
+
 
 ##############################
 ### Clean up before exiting
