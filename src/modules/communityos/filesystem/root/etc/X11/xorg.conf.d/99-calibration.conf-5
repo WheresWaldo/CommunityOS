@@ -6,4 +6,4 @@ Section "InputClass"
         Option "EmulateThirdButton" "1"
         Option "EmulateThirdButtonTimeout" "1000"
         Option "EmulateThirdButtonMoveThreshold" "300"
-EndSectio
+EndSection

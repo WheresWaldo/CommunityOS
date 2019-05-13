@@ -36,10 +36,20 @@
 [ -n "$COMMUNITYOS_INCLUDE_EMERGENCY" ] || COMMUNITYOS_INCLUDE_EMERGENCY=yes 
 [ -n "$COMMUNITYOS_INCLUDE_STATS" ] || COMMUNITYOS_INCLUDE_STATS=yes
 
-###############################################################################
-# Additional necessary variable declarations
-# Please do not edit any of these lines unless you understand the consequences
+# Touchscreen selection options
+# Choose only one of the following: 
+#   Generic rPi TFT screen, Waveshare 3.5" TFT, Waveshare 5" TFT, Waveshare 5" IPS,
+#   Raspberry Pi 7", Waveshare 4.3" IPS
+[ -n "$COMMUNITYOS_INCLUDE_GENERIC" ] || COMMUNITYOS_INCLUDE_GENERIC=no
+[ -n "$COMMUNITYOS_INCLUDE_WS35" ] || COMMUNITYOS_INCLUDE_WS35=no
+[ -n "$COMMUNITYOS_INCLUDE_WS50" ] || COMMUNITYOS_INCLUDE_WS50=yes
+[ -n "$COMMUNITYOS_INCLUDE_WS50H" ] || COMMUNITYOS_INCLUDE_WS50H=no
+[ -n "$COMMUNITYOS_INCLUDE_RPI7" ] || COMMUNITYOS_INCLUDE_RPI7=no
+[ -n "$COMMUNITYOS_INCLUDE_WS43" ] || COMMUNITYOS_INCLUDE_WS43=no
 
+###############################################################################
+# Additional base variable declarations
+# Please do not edit any of these lines unless you understand the consequences
 
 # OctoPrint archive
 [ -n "$COMMUNITYOS_OCTOPRINT_ARCHIVE" ] || COMMUNITYOS_OCTOPRINT_ARCHIVE=$(wget -q -O - https://api.github.com/repos/foosel/OctoPrint/releases/latest | grep "zipball_url" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
@@ -63,6 +73,10 @@
 
 # signature
 [ -n "$COMMUNITYOS_COMMIT" ] || COMMUNITYOS_COMMIT=`pushd "${DIST_PATH}" > /dev/null ; git rev-parse HEAD ; popd > /dev/null`
+
+###############################################################################
+# Additional plugin variable declarations
+# Please do not edit any of these lines unless you understand the consequences
 
 # Netconnectd
 [ -n "$COMMUNITYOS_NETCONNECTD_ARCHIVE" ] || COMMUNITYOS_NETCONNECTD_ARCHIVE=https://github.com/OctoPrint/OctoPrint-Netconnectd/archive/master.zip
@@ -117,3 +131,33 @@
 
 # Printer Stats
 [ -n "$COMMUNITYOS_STATS_ARCHIVE" ] || COMMUNITYOS_STATS_ARCHIVE=https://github.com/amsbr/OctoPrint-Stats/archive/master.zip
+
+###############################################################################
+# Additional touchscreen variable declarations
+# Please do not edit any of these lines unless you understand the consequences
+
+# Generic XPT2046 or ADS7846 touchscreen driver [Likely Robo3D C2]
+[ -n "$COMMUNITYOS_GENERIC_ROTATE" ] || COMMUNITYOS_GENERIC_ROTATE=no
+[ -n "$COMMUNITYOS_GENERIC_RESOLUTION" ] || COMMUNITYOS_GENERIC_RESOLUTION=480x320
+
+# Waveshare 3.5" resistive touchscreen LCD
+[ -n "$COMMUNITYOS_WS35_ARCHIVE" ] || COMMUNITYOS_WS35_ARCHIVE=https://github.com/waveshare/LCD-show.git
+[ -n "$COMMUNITYOS_WS35_ROTATE" ] || COMMUNITYOS_WS35_ROTATE=no
+[ -n "$COMMUNITYOS_WS35_RESOLUTION" ] || COMMUNITYOS_WS35_RESOLUTION=480x320
+
+# Waveshare 5" resistive touchscreen LCD [Likely Robo3D R2]
+[ -n "$COMMUNITYOS_WS50_ARCHIVE" ] || COMMUNITYOS_WS50_ARCHIVE=https://github.com/waveshare/LCD-show.git
+[ -n "$COMMUNITYOS_WS50_ROTATE" ] || COMMUNITYOS_WS50_ROTATE=no
+[ -n "$COMMUNITYOS_WS50_RESOLUTION" ] || COMMUNITYOS_WS50_RESOLUTION=480x320
+
+# Waveshare 5" capactitive touchscreen
+[ -n "$COMMUNITYOS_WS50H_ROTATE" ] || COMMUNITYOS_WS50H_ROTATE=no
+[ -n "$COMMUNITYOS_WS50H_RESOLUTION" ] || COMMUNITYOS_WS50H_RESOLUTION=800x480
+
+# Waveshare 4.3" capacitive touchscreen
+[ -n "$COMMUNITYOS_WS43_ROTATE" ] || COMMUNITYOS_WS43_ROTATE=no
+[ -n "$COMMUNITYOS_WS43_RESOLUTION" ] || COMMUNITYOS_WS43_RESOLUTION=800x480
+
+# Raspberry Pi 7" capacitive touchscreen
+[ -n "$COMMUNITYOS_RPI7_ROTATE" ] || COMMUNITYOS_RPI7_ROTATE=no
+[ -n "$COMMUNITYOS_RPI7_RESOLUTION" ] || COMMUNITYOS_RPI7_RESOLUTION=800x480
