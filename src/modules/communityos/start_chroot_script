@@ -397,7 +397,7 @@ fi
 if [ "$COMMUNITYOS_INCLUDE_WS35" == "yes" ]; then
   pushd /home/pi
   echo "--- Installing Waveshare 3.5 LCD drivers"
-  gitclone $COMMUNITYOS_WS35_ARCHIVE LCD-show
+  gitclone $COMMUNITYOS_WS35_ARCHIVE
   pushd /home/pi/LCD-show
   sudo cp ./waveshare35a-overlay.dtb /boot/overlays/waveshare35a.dtbo
   sudo cp ./waveshare35a-overlay.dtb /boot/overlays/
@@ -416,7 +416,7 @@ fi
 if [ "$COMMUNITYOS_INCLUDE_WS50" == "yes" ]; then
   pushd /home/pi
   echo "--- Installing Waveshare 5.0 LCD drivers"
-  gitclone $COMMUNITYOS_WS50_ARCHIVE LCD-show
+  gitclone $COMMUNITYOS_WS50_ARCHIVE
   pushd /home/pi/LCD-show
   if [ "$COMMUNITYOS_WS50_ROTATE" == "yes" ]; then
     echo "--- Copying rotated configuration"
@@ -507,7 +507,7 @@ fi
       echo "--- Building from source"
       curl -fsSL get.docker.com -o get-docker.sh
       sh get-docker.sh
-      gitclone $COMMUNITYOS_TFT_ARCHIVE OctoPrint-TFT
+      gitclone $COMMUNITYOS_TFT_ARCHIVE
       cd ~/OctoPrint-TFT
       make build
       ls -1 build/
