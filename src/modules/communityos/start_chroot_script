@@ -397,7 +397,7 @@ fi
 if [ "$COMMUNITYOS_INCLUDE_WS35" == "yes" ]; then
   pushd /home/pi
   echo "--- Installing Waveshare 3.5 LCD drivers"
-  gitclone $COMMUNITYOS_WS35_ARCHIVE
+  git clone $COMMUNITYOS_WS35_ARCHIVE
   pushd /home/pi/LCD-show
   sudo cp ./waveshare35a-overlay.dtb /boot/overlays/waveshare35a.dtbo
   sudo cp ./waveshare35a-overlay.dtb /boot/overlays/
@@ -416,7 +416,7 @@ fi
 if [ "$COMMUNITYOS_INCLUDE_WS50" == "yes" ]; then
   pushd /home/pi
   echo "--- Installing Waveshare 5.0 LCD drivers"
-  gitclone $COMMUNITYOS_WS50_ARCHIVE
+  git clone $COMMUNITYOS_WS50_ARCHIVE
   pushd /home/pi/LCD-show
   if [ "$COMMUNITYOS_WS50_ROTATE" == "yes" ]; then
     echo "--- Copying rotated configuration"
@@ -507,7 +507,7 @@ fi
       echo "--- Building from source"
       curl -fsSL get.docker.com -o get-docker.sh
       sh get-docker.sh
-      gitclone $COMMUNITYOS_TFT_ARCHIVE
+      git clone $COMMUNITYOS_TFT_ARCHIVE
       cd ~/OctoPrint-TFT
       make build
       ls -1 build/
@@ -524,7 +524,7 @@ fi
     pushd /home/pi
     sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_TOUCHUI_ARCHIVE
     echo "--- Setting up TouchUI automatic start"
-    gitclone $COMMUNITYOS_TOUCHUI_BOOTARCHIVE ~/TouchUI-autostart
+    git clone $COMMUNITYOS_TOUCHUI_BOOTARCHIVE ~/TouchUI-autostart
     mv /home/pi/scripts/install-rcos ~/TouchUI-autostart/helpers/install-rcos
     chmod +x ~/TouchUI-autostart/helpers/install-rcos
     sudo ~/TouchUI-autostart/helpers/install-rcos
