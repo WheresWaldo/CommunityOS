@@ -194,7 +194,6 @@ if [ ! "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]; then
   # We need to make OctoPrint bind to all interfaces because otherwise
   # it will be unaccessible...
   [ -f /etc/default/octoprint ] && sed -i "s@HOST=127.0.0.1@HOST=0.0.0.0@" /etc/default/octoprint
-  touch /boot/communityos-hostname.txt
   echo "--- Bind OctoPrint to all interfaces"  
 fi
 
@@ -556,6 +555,7 @@ fi
 API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
 sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
 
+touch /boot/communityos-hostname.txt
 
 ##############################
 ### Clean up before exiting
