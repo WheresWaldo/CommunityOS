@@ -386,10 +386,10 @@ if [ "$COMMUNITYOS_INCLUDE_GENERIC" == "yes" ]; then
   pushd /home/pi
   echo "--- Installing generic drivers"
   sudo cat /home/pi/helpers/generic-config >> /boot/config.txt
-  sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-generic /etc/X11/xorg.conf.d/99-calibration.conf
+  sudo cp /home/pi/helpers/99-calibration.conf-generic /etc/X11/xorg.conf.d/99-calibration.conf
   if [ "$COMMUNITYOS_GENERIC_ROTATE" == "yes" ]; then
     sudo cat /home/pi/helpers/generic-config-180 >> /boot/config.txt
-    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp /home/pi/helpers/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
   echo "--- Generic touchscreen driver installation complete."
   popd
@@ -405,10 +405,10 @@ if [ "$COMMUNITYOS_INCLUDE_WS35" == "yes" ]; then
   popd
   if [ "$COMMUNITYOS_WS35_ROTATE" != "yes" ]; then
     sudo cat /home/pi/helpers/waveshare35-config >> /boot/config.txt
-    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-35 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp /home/pi/helpers/99-calibration.conf-35 /etc/X11/xorg.conf.d/99-calibration.conf
   else
     sudo cat /home/pi/helpers/waveshare35-config-180 >> /boot/config.txt
-    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-35-180 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp /home/pi/helpers/99-calibration.conf-35-180 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
   echo "--- 3.5 inch touchscreen driver installation complete."
   popd
@@ -422,11 +422,11 @@ if [ "$COMMUNITYOS_INCLUDE_WS50" == "yes" ]; then
   if [ "$COMMUNITYOS_WS50_ROTATE" == "yes" ]; then
     echo "--- Copying rotated configuration"
     sudo cat /home/pi/helpers/waveshare5-config-180 >> /boot/config.txt
-    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5-180 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp /home/pi/helpers/99-calibration.conf-5-180 /etc/X11/xorg.conf.d/99-calibration.conf
   else
     echo "--- Copying normal configuration"
     sudo cat /home/pi/helpers/waveshare5-config >> /boot/config.txt
-    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp /home/pi/helpers/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
   popd
   echo "--- 5 inch touchscreen driver installation complete."
@@ -440,11 +440,11 @@ if [ "$COMMUNITYOS_INCLUDE_WS50H" == "yes" ]; then
   if [ "$COMMUNITYOS_WS50H_ROTATE" == "yes" ]; then
     echo "--- Copying rotated configuration"
     sudo cat /home/pi/helpers/waveshare5h-config-180 >> /boot/config.txt
-    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5h-180 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp /home/pi/helpers/99-calibration.conf-5h-180 /etc/X11/xorg.conf.d/99-calibration.conf
   else
     echo "--- Copying normal configuration"
     sudo cat /home/pi/helpers/waveshare5h-config >> /boot/config.txt
-    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo /home/pi/helpers/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
   echo "--- 5 inch touchscreen driver installation complete."
 fi
@@ -454,11 +454,11 @@ if [ "$COMMUNITYOS_INCLUDE_WS43" == "yes" ]; then
   if [ "$COMMUNITYOS_WS43_ROTATE" == "yes" ]; then
     echo "--- Copying rotated configuration"
     sudo cat /home/pi/helpers/waveshare43-config-180 >> /boot/config.txt
-    sudo cp /etc/X11/xorg.conf.d/40-libinput.conf-43-180 /etc/X11/xorg.conf.d/40-libinput.conf
+    sudo cp /home/pi/helpers/40-libinput.conf-43-180 /etc/X11/xorg.conf.d/40-libinput.conf
   else
     echo "--- Copying normal configuration"
     sudo cat /home/pi/helpers/waveshare43-config >> /boot/config.txt
-    sudo cp /etc/X11/xorg.conf.d/40-libinput.conf-43 /etc/X11/xorg.conf.d/40-libinput.conf
+    sudo cp /home/pi/helpers/40-libinput.conf-43 /etc/X11/xorg.conf.d/40-libinput.conf
   fi
   echo "--- 4.3 inch touchscreen driver installation complete."
 fi
@@ -467,10 +467,10 @@ if [ "$COMMUNITYOS_INCLUDE_RPI7" == "yes" ]; then
   pushd /home/pi
   echo "--- Installing rPi 7 touchscreen drivers"
   sudo cat /home/pi/helpers/generic-config >> /boot/config.txt
-  sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-generic /etc/X11/xorg.conf.d/99-calibration.conf
+  sudo cp /home/pi/helpers/99-calibration.conf-generic /etc/X11/xorg.conf.d/99-calibration.conf
   if [ "$COMMUNITYOS_RPI7_ROTATE" == "yes" ]; then
     sudo cat /home/pi/helpers/generic-config-180 >> /boot/config.txt
-    sudo cp /etc/X11/xorg.conf.d/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp /home/pi/helpers/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
   echo "--- rPi 7 inch touchscreen driver installation complete."
   popd
@@ -566,6 +566,8 @@ if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" |
 	mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
   fi
   echo "--- Printer setting complete"
+else
+  cat /home/pi/helpers/config.gen.txt >> home/pi/.octoprint/config.yaml
 fi
 
 touch /boot/communityos-hostname.txt
