@@ -503,8 +503,6 @@ fi
       pushd /home/pi
       wget $COMMUNITYOS_TFT_LATEST
       sudo dpkg -i $COMMUNITYOS_TFT_RELEASE
-	  sudo cp /etc/communityos_version /etc/octopi_version
-	  sudo sed 's/^/CommunityOS /' /etc/octopi_version
 	  echo "--- Package installation complete"
     else
       echo "--- Building from source"
@@ -517,8 +515,9 @@ fi
       echo "--- Now Installing OctoPrint-TFT"
       echo "--- Not yet completely implemented"
     fi
-	sudo sed /etc/octopi-version 
     rm /home/pi/$COMMUNITYOS_TFT_RELEASE
+	sudo cp /etc/communityos_version /etc/octopi_version
+	sudo sed -i 's/^/CommunityOS /' /etc/octopi_version
     echo "OctoPrint-TFT installation complete"
   fi
 
@@ -556,6 +555,7 @@ API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
 sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
 
 touch /boot/communityos-hostname.txt
+sudo rm /home/pi/helpers -R
 
 ##############################
 ### Clean up before exiting
