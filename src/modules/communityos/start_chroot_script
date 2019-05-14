@@ -380,6 +380,72 @@ if [ "$COMMUNITYOS_INCLUDE_STATS" == "yes" ]; then
 fi
 
 ##############################
+### User interface installation
+
+if [[ "$COMMUNITYOS_INCLUDE_TFT" != "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" != "yes" ]]; then
+  echo "--- No touchscreen interface selected."
+  echo "--- No touchscreen interface will be installed."
+else
+  if [[ ( "$COMMUNITYOS_INCLUDE_TFT" == "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" ) ]]; then 
+    echo "--- You may only install one touchscreen interface."
+    echo "--- No touchscreen interface will be installed."
+	COMMUNITYOS_INCLUDE_TFT="no"
+    COMMUNITYOS_INCLUDE_TOUCHUI="no"
+  fi
+fi
+
+  # OctoPrint-TFT
+  if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
+    echo "--- Installing OctoPrint-TFT"
+    sudo apt-get install --fix-missing -y libgtk-3-0 xserver-xorg xinit x11-xserver-utils
+    sudo dpkg -r --force-depends lightdm
+    sudo systemctl set-default graphical.target
+    # Are we building from source?
+	if [ ! "$COMMUNITYOS_TFT_BUILD" == "yes" ]; then
+	  echo "--- Installing precompiled OctoPrint-TFT package"
+      pushd /home/pi
+      wget $COMMUNITYOS_TFT_LATEST
+      sudo dpkg -i $COMMUNITYOS_TFT_RELEASE
+	  echo "--- Package installation complete"
+    else
+      echo "--- Building from source"
+      curl -fsSL get.docker.com -o get-docker.sh
+      sh get-docker.sh
+      git clone $COMMUNITYOS_TFT_ARCHIVE
+      cd ~/OctoPrint-TFT
+      make build
+      ls -1 build/
+      echo "--- Now Installing OctoPrint-TFT"
+      echo "--- Not yet completely implemented"
+    fi
+    rm /home/pi/$COMMUNITYOS_TFT_RELEASE
+	sudo cp /etc/communityos_version /etc/octopi_version
+	sudo sed -i 's/^/CommunityOS /' /etc/octopi_version
+    echo "OctoPrint-TFT installation complete"
+  fi
+
+  # OctoPrint-TouchUI
+  if [ "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" ]; then
+	echo "--- Installing OctoPrint-TouchUI Plugin"
+    pushd /home/pi
+    sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_TOUCHUI_ARCHIVE
+    echo "--- Setting up TouchUI automatic start"
+	sudo raspi-config nonint do_boot_behaviour B1
+	sudo apt-get install --fix-missing -y xinit xinput xserver-xorg xserver-xorg-video-fbdev x11-xserver-utils x11-xserver-utils matchbox unclutter chromium-browser
+	git clone https://github.com/BillyBlaze/OctoPrint-TouchUI-autostart.git ~/TouchUI-autostart/
+	fbuffer="$(ls /dev/ | grep fb | tail -1)"
+	sed -i "s@\/dev\/*@&"$fbuffer"@" /home/pi/helpers/99-fbdev.conf.touchui
+	sudo cp /home/pi/helpers/99-fbdev.conf.touchui /etc/X11/xorg.conf.d/99-fbdev.conf
+	cp /home/pi/helpers/touchui.init /etc/init.d/touchui
+	chmod +x /etc/init.d/touchui
+	cp /home/pi/helpers/touchui.default /etc/default/touchui
+	update-rc.d touchui defaults
+	sudo raspi-config nonint do_gldriver G1
+	popd
+    echo "--- OctoPrint-TouchUI installation complete"
+  fi
+
+##############################
 ### Screen driver installation
 
 if [ "$COMMUNITYOS_INCLUDE_GENERIC" == "yes" ]; then
@@ -476,71 +542,6 @@ if [ "$COMMUNITYOS_INCLUDE_RPI7" == "yes" ]; then
   popd
 fi
 
-##############################
-### User interface installation
-
-if [[ "$COMMUNITYOS_INCLUDE_TFT" != "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" != "yes" ]]; then
-  echo "--- No touchscreen interface selected."
-  echo "--- No touchscreen interface will be installed."
-else
-  if [[ ( "$COMMUNITYOS_INCLUDE_TFT" == "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" ) ]]; then 
-    echo "--- You may only install one touchscreen interface."
-    echo "--- No touchscreen interface will be installed."
-	COMMUNITYOS_INCLUDE_TFT="no"
-    COMMUNITYOS_INCLUDE_TOUCHUI="no"
-  fi
-fi
-
-  # OctoPrint-TFT
-  if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
-    echo "--- Installing OctoPrint-TFT"
-    sudo apt-get install --fix-missing -y libgtk-3-0 xserver-xorg xinit x11-xserver-utils
-    sudo dpkg -r --force-depends lightdm
-    sudo systemctl set-default graphical.target
-    # Are we building from source?
-	if [ ! "$COMMUNITYOS_TFT_BUILD" == "yes" ]; then
-	  echo "--- Installing precompiled OctoPrint-TFT package"
-      pushd /home/pi
-      wget $COMMUNITYOS_TFT_LATEST
-      sudo dpkg -i $COMMUNITYOS_TFT_RELEASE
-	  echo "--- Package installation complete"
-    else
-      echo "--- Building from source"
-      curl -fsSL get.docker.com -o get-docker.sh
-      sh get-docker.sh
-      git clone $COMMUNITYOS_TFT_ARCHIVE
-      cd ~/OctoPrint-TFT
-      make build
-      ls -1 build/
-      echo "--- Now Installing OctoPrint-TFT"
-      echo "--- Not yet completely implemented"
-    fi
-    rm /home/pi/$COMMUNITYOS_TFT_RELEASE
-	sudo cp /etc/communityos_version /etc/octopi_version
-	sudo sed -i 's/^/CommunityOS /' /etc/octopi_version
-    echo "OctoPrint-TFT installation complete"
-  fi
-
-  # OctoPrint-TouchUI
-  if [ "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" ]; then
-	echo "--- Installing OctoPrint-TouchUI Plugin"
-    pushd /home/pi
-    sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_TOUCHUI_ARCHIVE
-    echo "--- Setting up TouchUI automatic start"
-	sudo raspi-config nonint do_boot_behaviour B1
-	sudo apt-get install --fix-missing -y xinit xinput xserver-xorg xserver-xorg-video-fbdev x11-xserver-utils x11-xserver-utils matchbox unclutter chromium-browser
-	git clone https://github.com/BillyBlaze/OctoPrint-TouchUI-autostart.git ~/TouchUI-autostart/
-	fbuffer="$(ls /dev/ | grep fb | tail -1)"
-	sed -i "s@\/dev\/*@&"$fbuffer"@" /home/pi/helpers/99-fbdev.conf.touchui
-	sudo cp /home/pi/helpers/99-fbdev.conf.touchui /etc/X11/xorg.conf.d/99-fbdev.conf
-	cp /home/pi/helpers/touchui.init /etc/init.d/touchui
-	chmod +x /etc/init.d/touchui
-	cp /home/pi/helpers/touchui.default /etc/default/touchui
-	update-rc.d touchui defaults
-	sudo raspi-config nonint do_gldriver G1
-	popd
-    echo "--- OctoPrint-TouchUI installation complete"
-  fi
 
 ##############################
 ### Miscellaneous printer settings
