@@ -4,14 +4,11 @@
 #
 # For ease of configuration all included options will be listed first
 
-# Included base install options
-# Please do not edit any of these lines unless you understand the consequences
-[ -n "$COMMUNITYOS_INCLUDE_OCTOPRINT" ] || COMMUNITYOS_INCLUDE_OCTOPRINT=yes
-[ -n "$COMMUNITYOS_INCLUDE_CURAENGINE" ] || COMMUNITYOS_INCLUDE_CURAENGINE=yes
-[ -n "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" ] || COMMUNITYOS_INCLUDE_MJPGSTREAMER=yes
-[ -n "$COMMUNITYOS_INCLUDE_HAPROXY" ] || COMMUNITYOS_INCLUDE_HAPROXY=yes
-[ -n "$COMMUNITYOS_INCLUDE_WIRINGPI" ] || COMMUNITYOS_INCLUDE_WIRINGPI=yes
-[ -n "$COMMUNITYOS_INCLUDE_THEME" ] || COMMUNITYOS_INCLUDE_THEME=yes
+# Printer specific default options (default = Robo3D R2)
+# Choose only one from this section or none
+[ -n "$COMMUNITYOS_INCLUDE_R2" ] || COMMUNITYOS_INCLUDE_R2=yes
+[ -n "$COMMUNITYOS_INCLUDE_C2" ] || COMMUNITYOS_INCLUDE_C2=no
+[ -n "$COMMUNITYOS_INCLUDE_R1P" ] || COMMUNITYOS_INCLUDE_R1P=no
 
 # Included OctoPrint base Plugin options
 # Select any or all
@@ -36,7 +33,7 @@
 [ -n "$COMMUNITYOS_INCLUDE_EMERGENCY" ] || COMMUNITYOS_INCLUDE_EMERGENCY=yes 
 [ -n "$COMMUNITYOS_INCLUDE_STATS" ] || COMMUNITYOS_INCLUDE_STATS=yes
 
-# Touchscreen selection options
+# Touchscreen selection options (default = 5" TFT [Robo3D R2])
 # Choose only one of the following: 
 #   Generic rPi TFT screen, Waveshare 3.5" TFT, Waveshare 5" TFT, Waveshare 5" IPS,
 #   Raspberry Pi 7", Waveshare 4.3" IPS
@@ -47,16 +44,10 @@
 [ -n "$COMMUNITYOS_INCLUDE_RPI7" ] || COMMUNITYOS_INCLUDE_RPI7=no
 [ -n "$COMMUNITYOS_INCLUDE_WS43" ] || COMMUNITYOS_INCLUDE_WS43=no
 
-# User interface selection options
+# User interface selection options (default = OctoPrint-TFT)
 # Choose only one from this section
 [ -n "$COMMUNITYOS_INCLUDE_TFT" ] || COMMUNITYOS_INCLUDE_TFT=yes
 [ -n "$COMMUNITYOS_INCLUDE_TOUCHUI" ] || COMMUNITYOS_INCLUDE_TOUCHUI=no
-
-# Printer specific default options
-# Choose only one from this section
-[ -n "$COMMUNITYOS_INCLUDE_R2" ] || COMMUNITYOS_INCLUDE_R2=yes
-[ -n "$COMMUNITYOS_INCLUDE_C2" ] || COMMUNITYOS_INCLUDE_C2=no
-[ -n "$COMMUNITYOS_INCLUDE_R1P" ] || COMMUNITYOS_INCLUDE_R1P=no
 
 
 ###############################################################################
@@ -64,6 +55,7 @@
 # Please do not edit any of these lines unless you understand the consequences
 
 # OctoPrint archive
+[ -n "$COMMUNITYOS_INCLUDE_OCTOPRINT" ] || COMMUNITYOS_INCLUDE_OCTOPRINT=yes
 [ -n "$COMMUNITYOS_OCTOPRINT_ARCHIVE" ] || COMMUNITYOS_OCTOPRINT_ARCHIVE=$(wget -q -O - https://api.github.com/repos/foosel/OctoPrint/releases/latest | grep "zipball_url" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
 [ -n "$COMMUNITYOS_OCTOPRINT_REPO_SHIP" ] || COMMUNITYOS_OCTOPRINT_REPO_SHIP=https://github.com/foosel/OctoPrint.git
 
@@ -71,20 +63,31 @@
 [ -n "$COMMUNITYOS_PYBONJOUR_ARCHIVE" ] || COMMUNITYOS_PYBONJOUR_ARCHIVE=https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/pybonjour/pybonjour-1.1.1.tar.gz
 
 # CuraEngine archive & version
+[ -n "$COMMUNITYOS_INCLUDE_CURAENGINE" ] || COMMUNITYOS_INCLUDE_CURAENGINE=yes
 [ -n "$COMMUNITYOS_CURAENGINE_VERSION" ] || COMMUNITYOS_CURAENGINE_VERSION=15.04.6
 [ -n "$COMMUNITYOS_CURAENGINE_ARCHIVE" ] || COMMUNITYOS_CURAENGINE_ARCHIVE=https://github.com/Ultimaker/CuraEngine/archive/$COMMUNITYOS_CURAENGINE_VERSION.zip
 
 # mjpg streamer
+[ -n "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" ] || COMMUNITYOS_INCLUDE_MJPGSTREAMER=yes
 [ -n "$COMMUNITYOS_MJPGSTREAMER_REPO_SHIP" ] || COMMUNITYOS_MJPGSTREAMER_REPO_SHIP=https://github.com/jacksonliam/mjpg-streamer.git
 [ -n "$COMMUNITYOS_MJPGSTREAMER_REPO_BUILD" ] || COMMUNITYOS_MJPGSTREAMER_REPO_BUILD=
 [ -n "$COMMUNITYOS_MJPGSTREAMER_REPO_BRANCH" ] || COMMUNITYOS_MJPGSTREAMER_REPO_BRANCH=master
 [ -n "$COMMUNITYOS_MJPGSTREAMER_REPO_DEPTH" ] || COMMUNITYOS_MJPGSTREAMER_REPO_DEPTH=1
+
+# HAProxy
+[ -n "$COMMUNITYOS_INCLUDE_HAPROXY" ] || COMMUNITYOS_INCLUDE_HAPROXY=yes
+
+# WiringPi
+[ -n "$COMMUNITYOS_INCLUDE_WIRINGPI" ] || COMMUNITYOS_INCLUDE_WIRINGPI=yes
 
 # yq
 [ -n "$COMMUNITYOS_YQ_DOWNLOAD" ] || COMMUNITYOS_YQ_DOWNLOAD=$(wget -q -O - https://api.github.com/repos/mikefarah/yq/releases/latest | grep "browser_download_url" | grep "yq_linux_arm" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
 
 # signature
 [ -n "$COMMUNITYOS_COMMIT" ] || COMMUNITYOS_COMMIT=`pushd "${DIST_PATH}" > /dev/null ; git rev-parse HEAD ; popd > /dev/null`
+
+# CommunityOS startup and shutdown theme
+[ -n "$COMMUNITYOS_INCLUDE_THEME" ] || COMMUNITYOS_INCLUDE_THEME=yes
 
 ###############################################################################
 # Additional plugin variable declarations
