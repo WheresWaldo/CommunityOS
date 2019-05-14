@@ -233,13 +233,6 @@ fi
 
 # Robo3D listed Plugins
 
-# netconnectd
-if [ "$COMMUNITYOS_INCLUDE_NETCONNECTD" == "yes" ]; then
-  echo "--- Installing Netconnectd Plugin"
-  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_NETCONNECTD_ARCHIVE
-  echo "--- Netconnectd installation complete"
-fi
-
 # Active Filters
 if [ "$COMMUNITYOS_INCLUDE_ACTIVEFILTERS" == "yes" ]; then
   echo "--- Installing Active Filters Plugin"
@@ -347,6 +340,13 @@ if [ "$COMMUNITYOS_INCLUDE_STLVIEWER" == "yes" ]; then
   echo "--- Installing STL Viewer Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_STLVIEWER_ARCHIVE
   echo "--- STL Viewer installation complete"
+fi
+
+# netconnectd
+if [ "$COMMUNITYOS_INCLUDE_NETCONNECTD" == "yes" ]; then
+  echo "--- Installing Netconnectd Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_NETCONNECTD_ARCHIVE
+  echo "--- Netconnectd installation complete"
 fi
 
 # Additional Useful Plugins
