@@ -16,7 +16,8 @@
 [ -n "$COMMUNITYOS_INCLUDE_FILAMENTSENSOR" ] || COMMUNITYOS_INCLUDE_FILAMENTSENSOR=yes 
 [ -n "$COMMUNITYOS_INCLUDE_FIRMWAREUPDATER" ] || COMMUNITYOS_INCLUDE_FIRMWAREUPDATER=yes 
 [ -n "$COMMUNITYOS_INCLUDE_EEPROMEDITOR" ] || COMMUNITYOS_INCLUDE_EEPROMEDITOR=yes 
-[ -n "$COMMUNITYOS_INCLUDE_REQUESTSPINNER" ] || COMMUNITYOS_INCLUDE_REQUESTSPINNER=yes 
+[ -n "$COMMUNITYOS_INCLUDE_REQUESTSPINNER" ] || COMMUNITYOS_INCLUDE_REQUESTSPINNER=yes
+[ -n "$COMMUNITYOS_INCLUDE_ANYWHERE" ] || COMMUNITYOS_INCLUDE_ANYWHERE=no
 [ -n "$COMMUNITYOS_INCLUDE_ALEXASKILL" ] || COMMUNITYOS_INCLUDE_ALEXASKILL=no 
 [ -n "$COMMUNITYOS_INCLUDE_POLARCLOUD" ] || COMMUNITYOS_INCLUDE_POLARCLOUD=no 
 [ -n "$COMMUNITYOS_INCLUDE_3DPRINTEROS" ] || COMMUNITYOS_INCLUDE_3DPRINTEROS=no 
@@ -47,7 +48,6 @@
 # User interface selection options (default = OctoPrint-TFT)
 # Choose only one from this section
 [ -n "$COMMUNITYOS_INCLUDE_TFT" ] || COMMUNITYOS_INCLUDE_TFT=yes
-[ -n "$COMMUNITYOS_INCLUDE_TOUCHUI" ] || COMMUNITYOS_INCLUDE_TOUCHUI=no
 
 
 ###############################################################################
@@ -131,6 +131,9 @@
 
 # STL Viewer
 [ -n "$COMMUNITYOS_STLVIEWER_ARCHIVE" ] || COMMUNITYOS_STLVIEWER_ARCHIVE=https://github.com/jneilliii/Octoprint-STLViewer/archive/master.zip
+
+# OctoPrint Anywhere
+[ -n "$COMMUNITYOS_ANYWHERE_ARCHIVE" ] || COMMUNITYOS_ANYWHERE_ARCHIVE=https://github.com/kennethjiang/OctoPrint-Anywhere/archive/master.zip
 
 ###############################################################################
 # Additional useful OctoPrint Plugins
