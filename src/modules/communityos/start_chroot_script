@@ -342,6 +342,13 @@ if [ "$COMMUNITYOS_INCLUDE_STLVIEWER" == "yes" ]; then
   echo "--- STL Viewer installation complete"
 fi
 
+# OctoPrint Anywwhere
+if [ "$COMMUNITYOS_INCLUDE_ANMYWHERE" == "yes" ]; then
+  echo "--- Installing OctoPrint Anywhere Plugin"
+  sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_ANYWHERE_ARCHIVE
+  echo "--- OctoPrint Anywhere installation complete"
+fi
+
 # netconnectd
 if [ "$COMMUNITYOS_INCLUDE_NETCONNECTD" == "yes" ]; then
   echo "--- Installing Netconnectd Plugin"
