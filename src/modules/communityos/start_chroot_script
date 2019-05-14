@@ -529,6 +529,7 @@ fi
     echo "--- Setting up TouchUI automatic start"
 	sudo raspi-config nonint do_boot_behaviour B1
 	sudo apt-get install --fix-missing -y xinit xinput xserver-xorg xserver-xorg-video-fbdev x11-xserver-utils x11-xserver-utils matchbox unclutter chromium-browser
+	git clone https://github.com/BillyBlaze/OctoPrint-TouchUI-autostart.git ~/TouchUI-autostart/
 	fbuffer="$(ls /dev/ | grep fb | tail -1)"
 	sed -i "s@\/dev\/*@&"$fbuffer"@" /home/pi/helpers/99-fbdev.conf.touchui
 	sudo cp /home/pi/helpers/99-fbdev.conf.touchui /etc/X11/xorg.conf.d/99-fbdev.conf
