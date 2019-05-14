@@ -527,10 +527,17 @@ fi
     pushd /home/pi
     sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_TOUCHUI_ARCHIVE
     echo "--- Setting up TouchUI automatic start"
-    git clone $COMMUNITYOS_TOUCHUI_BOOTARCHIVE ~/TouchUI-autostart
-    mv /home/pi/scripts/install-rcos ~/TouchUI-autostart/helpers/install-rcos
-    chmod +x ~/TouchUI-autostart/helpers/install-rcos
-    sudo ~/TouchUI-autostart/helpers/install-rcos
+	sudo raspi-config nonint do_boot_behaviour B1
+	sudo apt-get install --fix-missing -y xinit xinput xserver-xorg xserver-xorg-video-fbdev x11-xserver-utils x11-xserver-utils matchbox unclutter chromium-browser
+	fbuffer="$(ls /dev/ | grep fb | tail -1)"
+	sed -i "s@\/dev\/*@&"$framebuffer"@" /home/pi/helpers/99-fbdev.conf.touchui
+	sudo cp /home/pi/helpers/99-fbdev.conf.touchui /etc/X11/xorg.conf.d/99-fbdev.conf
+	cp /home/pi/helpers/touchui.init /etc/init.d/touchui
+	chmod +x /etc/init.d/touchui
+	cp /home/pi/helpers/touchui.default /etc/default/touchui
+	update-rc.d touchui defaults
+	sudo raspi-config nonint do_gldriver G1
+	popd
     echo "--- OctoPrint-TouchUI installation complete"
   fi
 
