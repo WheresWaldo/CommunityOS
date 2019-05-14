@@ -549,17 +549,24 @@ if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" |
   cat /home/pi/helpers/config.r3d.txt >> /home/pi/.octoprint/config.yaml
   if [ "$COMMUNITYOS_INCLUDE_R2" == "yes" ]; then
     echo "--- R2 printer settings"
-    sudo cp /home/pi/helpers/octoprint-tft-environment-r2.txt /etc/octoprint-tft-environment
+	if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
+      sudo cp /home/pi/helpers/octoprint-tft-environment-r2.txt /etc/octoprint-tft-environment
+	  API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
+      sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
+	fi
 	mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
   fi
   if [ "$COMMUNITYOS_INCLUDE_C2" == "yes" ]; then
     echo "--- C2 Printer settings"
-	sudo cp /home/pi/helpers/octoprint-tft-environment-c2.txt /etc/octoprint-tft-environment
+	if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
+	  sudo cp /home/pi/helpers/octoprint-tft-environment-c2.txt /etc/octoprint-tft-environment
+	  API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
+      sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
+	fi
 	mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
   fi
+  echo "--- Printer setting complete"
 fi
-API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
-sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
 
 touch /boot/communityos-hostname.txt
 sudo rm /home/pi/helpers -R
