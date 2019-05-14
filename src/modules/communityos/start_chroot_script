@@ -435,7 +435,7 @@ fi
 	git clone https://github.com/BillyBlaze/OctoPrint-TouchUI-autostart.git ~/TouchUI-autostart/
 	fbuffer="$(ls /dev/ | grep fb | tail -1)"
 	sed -i "s@\/dev\/*@&"$fbuffer"@" /home/pi/helpers/99-fbdev.conf.touchui
-	sudo cp /home/pi/helpers/99-fbdev.conf.touchui /etc/X11/xorg.conf.d/99-fbdev.conf
+	sudo cp /home/pi/helpers/99-fbdev.conf-touchui /etc/X11/xorg.conf.d/99-fbdev.conf
 	cp /home/pi/helpers/touchui.init /etc/init.d/touchui
 	chmod +x /etc/init.d/touchui
 	cp /home/pi/helpers/touchui.default /etc/default/touchui
