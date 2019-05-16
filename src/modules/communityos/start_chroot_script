@@ -110,6 +110,9 @@ EOT
     popd
     sudo -u pi rm -r $folder $zipfile
     echo "--- CuraEngine compilation complete"
+	echo "--- Installing Cura Legacy plugin---"
+    sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_CURAPLUGIN_ARCHIVE
+	echo "--- Cura Legacy plugin install complete"
   fi
   
   
