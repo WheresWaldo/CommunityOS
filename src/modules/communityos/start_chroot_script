@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # CommunityOS
 # Sets up base installation of CommunityOS
-# Written by Bud Hammerton
+# Written by WheresWaldo
 # GPL V3
 ##############################
 
@@ -44,7 +44,7 @@ pushd /home/pi
   echo "--- Building OctoPrint virtual environment"
   sudo -u pi virtualenv OctoPrint
   sudo -u pi /home/pi/OctoPrint/bin/pip install --upgrade pip
-  
+
   # OctoPrint & pyserial
   if [ "$COMMUNITYOS_INCLUDE_OCTOPRINT" == "yes" ]; then
     echo "--- Installing pyBonjour"
@@ -55,14 +55,14 @@ pushd /home/pi
     PIP_DEFAULT_TIMEOUT=60 sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_OCTOPRINT_ARCHIVE
     echo "--- pyBonjour & OctoPrint installation complete"
   fi
-  
+
   # mjpg-streamer
   if [ "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" == "yes" ]; then
     echo "--- Installing mjpg-streamer"
     if [ $( is_in_apt libjpeg62-turbo-dev ) -eq 1 ]; then
       echo "--- Installing libjpeg6"
       sudo apt-get -y --allow-change-held-packages install libjpeg62-turbo-dev
-    elif [ $( is_in_apt libjpeg8-dev ) -eq 1 ]; then 
+    elif [ $( is_in_apt libjpeg8-dev ) -eq 1 ]; then
       echo "--- Installing libjpeg8"
       sudo apt-get -y --allow-change-held-packages install libjpeg8-dev
     fi
@@ -70,13 +70,13 @@ pushd /home/pi
     sudo apt-get -y --allow-change-held-packages --no-install-recommends install imagemagick libav-tools libv4l-dev
     gitclone COMMUNITYOS_MJPGSTREAMER_REPO mjpg-streamer
     pushd mjpg-streamer
-      mv mjpg-streamer-experimental/* .
-      echo "--- Compiling mjpg-streamer"
-      sudo -u pi make
-      # create our custom web folder and add a minimal index.html to it
-      sudo -u pi mkdir www-octoprint
-      pushd www-octoprint
-        cat <<EOT >> index.html
+    mv mjpg-streamer-experimental/* .
+    echo "--- Compiling mjpg-streamer"
+    sudo -u pi make
+    # create our custom web folder and add a minimal index.html to it
+    sudo -u pi mkdir www-octoprint
+    pushd www-octoprint
+    cat <<EOT >> index.html
 <html>
 <head><title>mjpg_streamer test page</title></head>
 <body>
@@ -88,12 +88,12 @@ pushd /home/pi
 </body>
 </html>
 EOT
-      popd
     popd
-  echo "--- mjpg-streamer and dependency installation complete"  
+    popd
+  echo "--- mjpg-streamer and dependency installation complete"
   fi
-  
-  
+
+
   # CuraEngine
   if [ "$COMMUNITYOS_INCLUDE_CURAENGINE" == "yes" ]; then
     echo "--- Installing CuraEngine"
@@ -104,18 +104,18 @@ EOT
     sudo -u pi wget -O$zipfile $COMMUNITYOS_CURAENGINE_ARCHIVE
     sudo -u pi unzip $zipfile
     pushd $folder
-      sudo -u pi make CXX=g++-4.9 VERSION=$COMMUNITYOS_CURAENGINE_VERSION
-      echo "--- Compiling Cura Engine"
-      cp build/CuraEngine /usr/local/bin/cura_engine
+    sudo -u pi make CXX=g++-4.9 VERSION=$COMMUNITYOS_CURAENGINE_VERSION
+    echo "--- Compiling Cura Engine"
+    cp build/CuraEngine /usr/local/bin/cura_engine
     popd
     sudo -u pi rm -r $folder $zipfile
     echo "--- CuraEngine compilation complete"
-	echo "--- Installing Cura Legacy plugin---"
+    echo "--- Installing Cura Legacy plugin---"
     sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_CURAPLUGIN_ARCHIVE
-	echo "--- Cura Legacy plugin install complete"
+    echo "--- Cura Legacy plugin install complete"
   fi
-  
-  
+
+
   # HAProxy for http and https, and webcam
   if [ "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]; then
     echo "--- Installing HAProxy"
@@ -129,7 +129,7 @@ EOT
     apt-get install wiringpi
     echo "--- WiringPi installation complete"
   fi
-    
+
   # fetch current yq build and install to /usr/local/bin
   echo "--- Downloading Yq YAML processor"
   wget -O yq $COMMUNITYOS_YQ_DOWNLOAD && chmod +x yq && mv yq /usr/local/bin
@@ -195,14 +195,14 @@ if [ ! "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]; then
   # let's remove the configs for system services we don't need
   echo "--- Removing select haproxy service configurations"
   # We need to make OctoPrint bind to all interfaces because otherwise
-  # it will be unaccessible...
+  # it will be inaccessible...
   [ -f /etc/default/octoprint ] && sed -i "s@HOST=127.0.0.1@HOST=0.0.0.0@" /etc/default/octoprint
-  echo "--- Bind OctoPrint to all interfaces"  
+  echo "--- Bind OctoPrint to all interfaces"
 fi
 
 ### CuraEngine
 if [ ! "$COMMUNITYOS_INCLUDE_CURAENGINE" == "yes" ]; then
-  # unconfigure the cura engine path in OctoPrint's config.yaml
+  # remove the cura engine path in OctoPrint's config.yaml
   echo "--- Removing CuraEngine"
   sudo -u pi sed -i -e "s@cura_engine: /usr/local/bin/cura_engine@cura_engine:@g" /home/pi/.octoprint/config.yaml
 fi
@@ -258,7 +258,7 @@ if [ "$COMMUNITYOS_INCLUDE_FILAMENTSENSOR" == "yes" ]; then
   pushd /home/pi/helpers
   # check to see if set up correctly
   if grep -Fq 'filamentreload:' /home/pi/.octoprint/config.yaml; then
-	popd
+    popd
   else
     sed -i '/plugins:/rfilamentreload.txt' /home/pi/.octoprint/config.yaml
     popd
@@ -396,10 +396,10 @@ if [[ "$COMMUNITYOS_INCLUDE_TFT" != "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" != "
   echo "--- No touchscreen interface selected."
   echo "--- No touchscreen interface will be installed."
 else
-  if [[ ( "$COMMUNITYOS_INCLUDE_TFT" == "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" ) ]]; then 
+  if [[ ( "$COMMUNITYOS_INCLUDE_TFT" == "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" ) ]]; then
     echo "--- You may only install one touchscreen interface."
     echo "--- No touchscreen interface will be installed."
-	COMMUNITYOS_INCLUDE_TFT="no"
+    COMMUNITYOS_INCLUDE_TFT="no"
     COMMUNITYOS_INCLUDE_TOUCHUI="no"
   fi
 fi
@@ -411,12 +411,12 @@ fi
     sudo dpkg -r --force-depends lightdm
     sudo systemctl set-default graphical.target
     # Are we building from source?
-	if [ ! "$COMMUNITYOS_TFT_BUILD" == "yes" ]; then
-	  echo "--- Installing precompiled OctoPrint-TFT package"
+    if [ ! "$COMMUNITYOS_TFT_BUILD" == "yes" ]; then
+      echo "--- Installing precompiled OctoPrint-TFT package"
       pushd /home/pi
       wget $COMMUNITYOS_TFT_LATEST
       sudo dpkg -i $COMMUNITYOS_TFT_RELEASE
-	  echo "--- Package installation complete"
+      echo "--- Package installation complete"
     else
       echo "--- Building from source"
       curl -fsSL get.docker.com -o get-docker.sh
@@ -429,29 +429,29 @@ fi
       echo "--- Not yet completely implemented"
     fi
     rm /home/pi/$COMMUNITYOS_TFT_RELEASE
-	sudo cp /etc/communityos_version /etc/octopi_version
-	sudo sed -i 's/^/CommunityOS /' /etc/octopi_version
+    sudo cp /etc/communityos_version /etc/octopi_version
+    sudo sed -i 's/^/CommunityOS /' /etc/octopi_version
     echo "OctoPrint-TFT installation complete"
   fi
 
   # OctoPrint-TouchUI
   if [ "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" ]; then
-	echo "--- Installing OctoPrint-TouchUI Plugin"
+    echo "--- Installing OctoPrint-TouchUI Plugin"
     pushd /home/pi
     sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_TOUCHUI_ARCHIVE
     echo "--- Setting up TouchUI automatic start"
-	sudo raspi-config nonint do_boot_behaviour B1
-	sudo apt-get install --fix-missing -y xinit xinput xserver-xorg xserver-xorg-video-fbdev x11-xserver-utils x11-xserver-utils matchbox unclutter chromium-browser
-	git clone https://github.com/BillyBlaze/OctoPrint-TouchUI-autostart.git ~/TouchUI-autostart/
-	fbuffer="$(ls /dev/ | grep fb | tail -1)"
-	sed -i "s@\/dev\/*@&"$fbuffer"@" /home/pi/helpers/99-fbdev.conf-touchui
-	sudo cp /home/pi/helpers/99-fbdev.conf-touchui /etc/X11/xorg.conf.d/99-fbdev.conf
-	cp /home/pi/helpers/touchui.init /etc/init.d/touchui
-	chmod +x /etc/init.d/touchui
-	cp /home/pi/helpers/touchui.default /etc/default/touchui
-	update-rc.d touchui defaults
-	sudo raspi-config nonint do_gldriver G1
-	popd
+    sudo raspi-config nonint do_boot_behaviour B1
+    sudo apt-get install --fix-missing -y xinit xinput xserver-xorg xserver-xorg-video-fbdev x11-xserver-utils x11-xserver-utils matchbox unclutter chromium-browser
+    git clone https://github.com/BillyBlaze/OctoPrint-TouchUI-autostart.git ~/TouchUI-autostart/
+    fbuffer="$(ls /dev/ | grep fb | tail -1)"
+    sed -i "s@\/dev\/*@&"$fbuffer"@" /home/pi/helpers/99-fbdev.conf-touchui
+    sudo cp /home/pi/helpers/99-fbdev.conf-touchui /etc/X11/xorg.conf.d/99-fbdev.conf
+    cp /home/pi/helpers/touchui.init /etc/init.d/touchui
+    chmod +x /etc/init.d/touchui
+    cp /home/pi/helpers/touchui.default /etc/default/touchui
+    update-rc.d touchui defaults
+    sudo raspi-config nonint do_gldriver G1
+    popd
     echo "--- OctoPrint-TouchUI installation complete"
   fi
 
@@ -538,7 +538,7 @@ if [ "$COMMUNITYOS_INCLUDE_WS43" == "yes" ]; then
   fi
   echo "--- 4.3 inch touchscreen driver installation complete."
 fi
-	
+
 if [ "$COMMUNITYOS_INCLUDE_RPI7" == "yes" ]; then
   pushd /home/pi
   echo "--- Installing rPi 7 touchscreen drivers"
@@ -561,21 +561,21 @@ if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" |
   cat /home/pi/helpers/config.r3d.txt >> /home/pi/.octoprint/config.yaml
   if [ "$COMMUNITYOS_INCLUDE_R2" == "yes" ]; then
     echo "--- R2 printer settings"
-	if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
+    if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
       sudo cp /home/pi/helpers/octoprint-tft-environment-r2.txt /etc/octoprint-tft-environment
-	  API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
+      API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
       sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
-	fi
-	mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
+    fi
+    mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
   fi
   if [ "$COMMUNITYOS_INCLUDE_C2" == "yes" ]; then
     echo "--- C2 Printer settings"
-	if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
-	  sudo cp /home/pi/helpers/octoprint-tft-environment-c2.txt /etc/octoprint-tft-environment
-	  API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
+    if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
+      sudo cp /home/pi/helpers/octoprint-tft-environment-c2.txt /etc/octoprint-tft-environment
+      API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
       sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
-	fi
-	mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
+    fi
+    mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
   fi
   echo "--- Printer setting complete"
 else
@@ -588,5 +588,6 @@ sudo rm /home/pi/helpers -R
 ##############################
 ### Clean up before exiting
 
+set +x
 apt-get clean
 apt-get autoremove -y
