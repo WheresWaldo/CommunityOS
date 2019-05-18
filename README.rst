@@ -68,7 +68,7 @@ How an enduser will use the image?
    
    You do not need to expand the filesystem, current versions of CommunityOS do this automatically.
 
-OctoPrint is located at `http://communityos.local <http://communityos.local>`_. SSL certificates are not included because self signed certificates are not valid and all modern browsers will display a warning about unsafe web sites, you can ignore this warning.
+OctoPrint is located at `http://communityos.local <http://communityos.local>`_. SSL certificates are not included because self signed certificates in all modern browsers will display a warning about unsafe web sites. If you choose to create your own certificates, you can ignore this warning. Please note, no trusted certificate authorities will issue SSL certificates for .local domains.
 
 To install plugins from the commandline instead of OctoPrint's built-in plugin manager, :code:`pip` may be found at :code:`/home/pi/OctoPrint/bin/pip`.  Thus, an example install cmd may be:  :code:`/home/pi/OctoPrint/bin/pip install <plugin-uri>`
 
