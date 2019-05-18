@@ -1,0 +1,3 @@
+appearance:
+  color: blue
+  name: "CommunityOS for Robo3D"
