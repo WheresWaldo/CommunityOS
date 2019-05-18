@@ -1,6 +1,58 @@
 ###############################################################################
 # All our configuration settings must start with COMMUNITYOS_
 # COMMUNITYOS_VAR="This is a module variable"
+#
+# For ease of configuration all included options will be listed first
+
+# Printer specific default options (default = Robo3D R2)
+# Choose only one from this section or none
+[ -n "$COMMUNITYOS_INCLUDE_R2" ] || COMMUNITYOS_INCLUDE_R2=yes
+[ -n "$COMMUNITYOS_INCLUDE_C2" ] || COMMUNITYOS_INCLUDE_C2=no
+[ -n "$COMMUNITYOS_INCLUDE_R1P" ] || COMMUNITYOS_INCLUDE_R1P=no
+
+# Included OctoPrint base Plugin options
+# Select any or all
+[ -n "$COMMUNITYOS_INCLUDE_ACTIVEFILTERS" ] || COMMUNITYOS_INCLUDE_ACTIVEFILTERS=yes 
+[ -n "$COMMUNITYOS_INCLUDE_FILAMENTSENSOR" ] || COMMUNITYOS_INCLUDE_FILAMENTSENSOR=yes 
+[ -n "$COMMUNITYOS_INCLUDE_FIRMWAREUPDATER" ] || COMMUNITYOS_INCLUDE_FIRMWAREUPDATER=yes 
+[ -n "$COMMUNITYOS_INCLUDE_EEPROMEDITOR" ] || COMMUNITYOS_INCLUDE_EEPROMEDITOR=yes 
+[ -n "$COMMUNITYOS_INCLUDE_REQUESTSPINNER" ] || COMMUNITYOS_INCLUDE_REQUESTSPINNER=yes
+[ -n "$COMMUNITYOS_INCLUDE_ANYWHERE" ] || COMMUNITYOS_INCLUDE_ANYWHERE=no
+[ -n "$COMMUNITYOS_INCLUDE_ALEXASKILL" ] || COMMUNITYOS_INCLUDE_ALEXASKILL=no 
+[ -n "$COMMUNITYOS_INCLUDE_POLARCLOUD" ] || COMMUNITYOS_INCLUDE_POLARCLOUD=no 
+[ -n "$COMMUNITYOS_INCLUDE_3DPRINTEROS" ] || COMMUNITYOS_INCLUDE_3DPRINTEROS=no 
+[ -n "$COMMUNITYOS_INCLUDE_ASTROPRINT" ] || COMMUNITYOS_INCLUDE_ASTROPRINT=no 
+[ -n "$COMMUNITYOS_INCLUDE_SCREENSQUISH" ] || COMMUNITYOS_INCLUDE_SCREENSQUISH=no 
+[ -n "$COMMUNITYOS_INCLUDE_CUSTOMCONTROL" ] || COMMUNITYOS_INCLUDE_CUSTOMCONTROL=no 
+[ -n "$COMMUNITYOS_INCLUDE_STLVIEWER" ] || COMMUNITYOS_INCLUDE_STLVIEWER=no 
+[ -n "$COMMUNITYOS_INCLUDE_NETCONNECTD" ] || COMMUNITYOS_INCLUDE_NETCONNECTD=no
+
+# Included OctoPrint useful Plugin options
+# Select any or all
+[ -n "$COMMUNITYOS_INCLUDE_AUTOSCROLL" ] || COMMUNITYOS_INCLUDE_AUTOSCROLL=yes 
+[ -n "$COMMUNITYOS_INCLUDE_EMERGENCY" ] || COMMUNITYOS_INCLUDE_EMERGENCY=yes 
+[ -n "$COMMUNITYOS_INCLUDE_STATS" ] || COMMUNITYOS_INCLUDE_STATS=yes
+[ -n "$COMMUNITYOS_INCLUDE_SPAGHETTI" ] || COMMUNITYOS_INCLUDE_SPAGHETTI=no 
+
+# Touchscreen selection options (default = 5" TFT [Robo3D R2])
+# Choose only one of the following: 
+#   Generic rPi TFT screen, Waveshare 3.5" TFT, Waveshare 5" TFT, Waveshare 5" IPS,
+#   Raspberry Pi 7", Waveshare 4.3" IPS
+[ -n "$COMMUNITYOS_INCLUDE_GENERIC" ] || COMMUNITYOS_INCLUDE_GENERIC=no
+[ -n "$COMMUNITYOS_INCLUDE_WS35" ] || COMMUNITYOS_INCLUDE_WS35=no
+[ -n "$COMMUNITYOS_INCLUDE_WS50" ] || COMMUNITYOS_INCLUDE_WS50=yes
+[ -n "$COMMUNITYOS_INCLUDE_WS50H" ] || COMMUNITYOS_INCLUDE_WS50H=no
+[ -n "$COMMUNITYOS_INCLUDE_RPI7" ] || COMMUNITYOS_INCLUDE_RPI7=no
+[ -n "$COMMUNITYOS_INCLUDE_WS43" ] || COMMUNITYOS_INCLUDE_WS43=no
+
+# User interface selection options (default = OctoPrint-TFT)
+# Choose only one from this section
+[ -n "$COMMUNITYOS_INCLUDE_TFT" ] || COMMUNITYOS_INCLUDE_TFT=yes
+
+
+###############################################################################
+# Additional base variable declarations
+# Please do not edit any of these lines unless you understand the consequences
 
 # OctoPrint archive
 [ -n "$COMMUNITYOS_INCLUDE_OCTOPRINT" ] || COMMUNITYOS_INCLUDE_OCTOPRINT=yes
@@ -11,9 +63,10 @@
 [ -n "$COMMUNITYOS_PYBONJOUR_ARCHIVE" ] || COMMUNITYOS_PYBONJOUR_ARCHIVE=https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/pybonjour/pybonjour-1.1.1.tar.gz
 
 # CuraEngine archive & version
-[ -n "$COMMUNITYOS_INCLUDE_CURAENGINE" ] || COMMUNITYOS_INCLUDE_CURAENGINE=yes
+[ -n "$COMMUNITYOS_INCLUDE_CURAENGINE" ] || COMMUNITYOS_INCLUDE_CURAENGINE=no
 [ -n "$COMMUNITYOS_CURAENGINE_VERSION" ] || COMMUNITYOS_CURAENGINE_VERSION=15.04.6
 [ -n "$COMMUNITYOS_CURAENGINE_ARCHIVE" ] || COMMUNITYOS_CURAENGINE_ARCHIVE=https://github.com/Ultimaker/CuraEngine/archive/$COMMUNITYOS_CURAENGINE_VERSION.zip
+[ -n "$COMMUNITYOS_CURAPLUGIN_ARCHIVE" ] || COMMUNITYOS_CURAPLUGIN_ARCHIVE=https://github.com/OctoPrint/OctoPrint-CuraLegacy/archive/master.zip
 
 # mjpg streamer
 [ -n "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" ] || COMMUNITYOS_INCLUDE_MJPGSTREAMER=yes
@@ -28,11 +81,122 @@
 # WiringPi
 [ -n "$COMMUNITYOS_INCLUDE_WIRINGPI" ] || COMMUNITYOS_INCLUDE_WIRINGPI=yes
 
-# Plymouth theme
-[ -n "$COMMUNITYOS_INCLUDE_THEME" ] || COMMUNITYOS_INCLUDE_THEME=yes
-
 # yq
 [ -n "$COMMUNITYOS_YQ_DOWNLOAD" ] || COMMUNITYOS_YQ_DOWNLOAD=$(wget -q -O - https://api.github.com/repos/mikefarah/yq/releases/latest | grep "browser_download_url" | grep "yq_linux_arm" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
 
+# signature
 [ -n "$COMMUNITYOS_COMMIT" ] || COMMUNITYOS_COMMIT=`pushd "${DIST_PATH}" > /dev/null ; git rev-parse HEAD ; popd > /dev/null`
 
+# CommunityOS startup and shutdown theme
+[ -n "$COMMUNITYOS_INCLUDE_THEME" ] || COMMUNITYOS_INCLUDE_THEME=yes
+
+###############################################################################
+# Additional plugin variable declarations
+# Please do not edit any of these lines unless you understand the consequences
+
+# Netconnectd
+[ -n "$COMMUNITYOS_NETCONNECTD_ARCHIVE" ] || COMMUNITYOS_NETCONNECTD_ARCHIVE=https://github.com/OctoPrint/OctoPrint-Netconnectd/archive/master.zip
+
+# Active Filters Extended
+[ -n "$COMMUNITYOS_ACTIVEFILTERS_ARCHIVE" ] || COMMUNITYOS_ACTIVEFILTERS_ARCHIVE=https://github.com/jneilliii/OctoPrint-ActiveFiltersExtended/archive/master.zip
+
+# Filament Sensor Reloaded
+[ -n "$COMMUNITYOS_FILAMENTSENSOR_ARCHIVE" ] || COMMUNITYOS_FILAMENTSENSOR_ARCHIVE=https://github.com/kontakt/Octoprint-Filament-Reloaded/archive/master.zip
+
+# Firmware Updater
+[ -n "$COMMUNITYOS_FIRMWAREUPDATER_ARCHIVE" ] || COMMUNITYOS_FIRMWAREUPDATER_ARCHIVE=https://github.com/OctoPrint/OctoPrint-FirmwareUpdater/archive/master.zip
+
+# Alexa Skill
+[ -n "$COMMUNITYOS_ALEXASKILL_ARCHIVE" ] || COMMUNITYOS_ALEXASKILL_ARCHIVE=https://github.com/Robo3D/Alexa-OctoPrint-Skill/archive/master.zip
+
+# Marlin EEPROM Editor
+[ -n "$COMMUNITYOS_EEPROMEDITOR_ARCHIVE" ] || COMMUNITYOS_EEPROMEDITOR_ARCHIVE=https://github.com/amsbr/OctoPrint-EEprom-Marlin/archive/master.zip
+
+# Polar Cloud
+[ -n "$COMMUNITYOS_POLARCLOUD_ARCHIVE" ] || COMMUNITYOS_POLARCLOUD_ARCHIVE=https://github.com/markwal/OctoPrint-PolarCloud/archive/master.zip
+
+# 3DPrinterOS
+[ -n "$COMMUNITYOS_3DPRINTEROS_ARCHIVE" ] || COMMUNITYOS_3DPRINTEROS_ARCHIVE=https://github.com/3dprinteros/OctoPrint-3DPrinterOS/archive/master.zip
+
+# AstroPrint Cloud
+[ -n "$COMMUNITYOS_ASTROPRINT_ARCHIVE" ] || COMMUNITYOS_ASTROPRINT_ARCHIVE=https://github.com/AstroPrint/OctoPrint-AstroPrint/archive/master.zip
+
+# Screen Squish
+[ -n "$COMMUNITYOS_SCREENSQUISH_ARCHIVE" ] || COMMUNITYOS_SCREENSQUISH_ARCHIVE=https://github.com/markwal/OctoPrint-ScreenSquish/archive/master.zip
+
+# Request Spinner
+[ -n "$COMMUNITYOS_REQUESTSPINNER_ARCHIVE" ] || COMMUNITYOS_REQUESTSPINNER_ARCHIVE=https://github.com/OctoPrint/OctoPrint-RequestSpinner/archive/master.zip
+
+# Custom Control Editor
+[ -n "$COMMUNITYOS_CUSTOMCONTROL_ARCHIVE" ] || COMMUNITYOS_CUSTOMCONTROL_ARCHIVE=https://github.com/Salandora/octoprint-customControl/archive/master.zip
+
+# STL Viewer
+[ -n "$COMMUNITYOS_STLVIEWER_ARCHIVE" ] || COMMUNITYOS_STLVIEWER_ARCHIVE=https://github.com/jneilliii/Octoprint-STLViewer/archive/master.zip
+
+# OctoPrint Anywhere
+[ -n "$COMMUNITYOS_ANYWHERE_ARCHIVE" ] || COMMUNITYOS_ANYWHERE_ARCHIVE=https://github.com/kennethjiang/OctoPrint-Anywhere/archive/master.zip
+
+###############################################################################
+# Additional useful OctoPrint Plugins
+
+# Autoscroll
+[ -n "$COMMUNITYOS_AUTOSCROLL_ARCHIVE" ] || COMMUNITYOS_AUTOSCROLL_ARCHIVE=https://github.com/MoonshineSG/OctoPrint-Autoscroll/archive/master.zip
+
+# The Spaghetti Detective (Beta)
+[ -n "$COMMUNITYOS_SPAGHETTI_ARCHIVE" ] || COMMUNITYOS_SPAGHETTI_ARCHIVE=https://github.com/TheSpaghettiDetective/OctoPrint-TheSpaghettiDetective/archive/beta.zip
+
+# Emergency Stop
+[ -n "$COMMUNITYOS_EMERGENCY_ARCHIVE" ] || COMMUNITYOS_EMERGENCY_ARCHIVE=https://github.com/ntoff/OctoPrint-Estop/archive/master.zip
+
+# Printer Stats
+[ -n "$COMMUNITYOS_STATS_ARCHIVE" ] || COMMUNITYOS_STATS_ARCHIVE=https://github.com/amsbr/OctoPrint-Stats/archive/master.zip
+
+###############################################################################
+# Additional touchscreen variable declarations
+# Please do not edit any of these lines unless you understand the consequences
+
+# Generic XPT2046 or ADS7846 touchscreen driver [Likely Robo3D C2]
+[ -n "$COMMUNITYOS_GENERIC_ROTATE" ] || COMMUNITYOS_GENERIC_ROTATE=no
+[ -n "$COMMUNITYOS_GENERIC_RESOLUTION" ] || COMMUNITYOS_GENERIC_RESOLUTION=480x320
+
+# Waveshare 3.5" resistive touchscreen LCD
+[ -n "$COMMUNITYOS_WS35_ARCHIVE" ] || COMMUNITYOS_WS35_ARCHIVE=https://github.com/waveshare/LCD-show.git
+[ -n "$COMMUNITYOS_WS35_ROTATE" ] || COMMUNITYOS_WS35_ROTATE=no
+[ -n "$COMMUNITYOS_WS35_RESOLUTION" ] || COMMUNITYOS_WS35_RESOLUTION=480x320
+
+# Waveshare 5" resistive touchscreen LCD [Likely Robo3D R2]
+[ -n "$COMMUNITYOS_WS50_ARCHIVE" ] || COMMUNITYOS_WS50_ARCHIVE=https://github.com/waveshare/LCD-show.git
+[ -n "$COMMUNITYOS_WS50_ROTATE" ] || COMMUNITYOS_WS50_ROTATE=no
+[ -n "$COMMUNITYOS_WS50_RESOLUTION" ] || COMMUNITYOS_WS50_RESOLUTION=480x320
+
+# Waveshare 5" capactitive touchscreen
+[ -n "$COMMUNITYOS_WS50H_ROTATE" ] || COMMUNITYOS_WS50H_ROTATE=no
+[ -n "$COMMUNITYOS_WS50H_RESOLUTION" ] || COMMUNITYOS_WS50H_RESOLUTION=800x480
+
+# Waveshare 4.3" capacitive touchscreen
+[ -n "$COMMUNITYOS_WS43_ROTATE" ] || COMMUNITYOS_WS43_ROTATE=no
+[ -n "$COMMUNITYOS_WS43_RESOLUTION" ] || COMMUNITYOS_WS43_RESOLUTION=800x480
+
+# Raspberry Pi 7" capacitive touchscreen
+[ -n "$COMMUNITYOS_RPI7_ROTATE" ] || COMMUNITYOS_RPI7_ROTATE=no
+[ -n "$COMMUNITYOS_RPI7_RESOLUTION" ] || COMMUNITYOS_RPI7_RESOLUTION=800x480
+
+###############################################################################
+# Additional unser interface variable declarations
+# Please do not edit any of these lines unless you understand the consequences
+
+# OctoPrint-TFT
+[ -n "$COMMUNITYOS_TFT_LATEST" ] || COMMUNITYOS_TFT_LATEST=$(wget -q -O - https://api.github.com/repos/darksid3r/OctoPrint-TFT/releases/latest | grep "browser_download_url" | grep "octoprint-tft_stretch" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
+[ -n "$COMMUNITYOS_TFT_RELEASE" ] || COMMUNITYOS_TFT_RELEASE="${COMMUNITYOS_TFT_LATEST##*/}"
+# Build OctoPrint-TFT from source
+[ -n "$COMMUNITYOS_TFT_BUILD" ] || COMMUNITYOS_TFT_BUILD=no
+[ -n "$COMMUNITYOS_TFT_ARCHIVE" ] || COMMUNITYOS_TFT_ARCHIVE=https://github.com/darksid3r/OctoPrint-TFT.git
+
+# TouchUI
+[ -n "$COMMUNITYOS_INCLUDE_TOUCHUI" ] || COMMUNITYOS_INCLUDE_TOUCHUI=no 
+[ -n "$COMMUNITYOS_TOUCHUI_ARCHIVE" ] || COMMUNITYOS_TOUCHUI_ARCHIVE=https://github.com/BillyBlaze/OctoPrint-TouchUI/archive/master.zip
+[ -n "$COMMUNITYOS_TOUCHUI_BOOTARCHIVE" ] || COMMUNITYOS_TOUCHUI_BOOTARCHIVE=https://github.com/BillyBlaze/OctoPrint-TouchUI-autostart.git
+
+# Robo CommunityOS LCD
+[ -n "$COMMUNITYOS_INCLUDE_RCOSLCD" ] || COMMUNITYOS_INCLUDE_RCOSLCD=no
+[ -n "$COMMUNITYOS_RCOSLCD_ARCHIVE" ] || COMMUNITYOS_RCOSLCD_ARCHIVE=https://github.com/WheresWaldo/roboLCD_current/archive/do_not_copy.zip

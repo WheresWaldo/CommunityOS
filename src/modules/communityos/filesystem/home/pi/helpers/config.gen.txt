@@ -1,0 +1,3 @@
+appearance:
+  color: Orange
+  name: "CommunityOS"
