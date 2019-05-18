@@ -1,5 +1,0 @@
-Section "Device"
-  Identifier "touchscreen"
-  Driver "fbdev"
-  Option "fbdev" "/dev/"
-EndSection
