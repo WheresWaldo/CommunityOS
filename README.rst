@@ -15,7 +15,8 @@ Features
 * `OctoPrint <http://octoprint.org>`_ host software for 3d printers out of the box
 * `Raspbian <http://www.raspbian.org/>`_ tweaked for maximum performance for printing out of the box
 * `mjpg-streamer with RaspiCam support <https://github.com/jacksonliam/mjpg-streamer>`_ for live viewing of prints and timelapse video creation.
-* `CuraEngine <https://github.com/Ultimaker/CuraEngine>`_ pre-installed for slicing directly on the Raspberry Pi
+* `HAProxy & unique hostname` for .local access on your network
+* `CuraEngine <https://github.com/Ultimaker/CuraEngine>`_ optionally pre-installed for slicing directly on the Raspberry Pi
 
 Developing
 ----------
@@ -48,20 +49,7 @@ Build requires about 6.1 GB of free space available. You can build it by issuing
     sudo modprobe loop
     sudo bash -x ./build_dist
 	
-Building from within Ubuntu
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Build requires about 6.3 GB of free space available. You can build it by issuing the following commands::
-
-    sudo apt-get install gawk util-linux qemu-user-static git p7zip-full python3
-    git clone https://github.com/guysoft/CustomPiOS.git
-    git clone -b master --single-branch https://github.com/WheresWaldo/CommunityOS.git
-    cd CommunityOS/src/image
-    wget -c --trust-server-names 'https://downloads.raspberrypi.org/raspbian_lite_latest'
-    cd ..
-    ../../CustomPiOS/src/update-custompios-paths
-    sudo bash -x ./build_dist
-
-Code contribution would be appreciated! Also note that touchscreen and UI are unconfigured, so edit the appropriate config files just after cloning the repository.
+Code contribution would be appreciated! Note that touchscreen and UI are unconfigured, so edit the appropriate config file entries just after cloning the repository.
 
 How an enduser will use the image?
 ----------------------------------
@@ -80,10 +68,10 @@ How an enduser will use the image?
    
    You do not need to expand the filesystem, current versions of CommunityOS do this automatically.
 
-OctoPrint is located at `http://communityos.local <http://communityos.local>`_ and also at `https://communityos.local <https://communityos.local>`_. Since the SSL certificate is self signed (and generated upon first boot), you will get a certificate warning at the latter location, please ignore it.
+OctoPrint is located at `http://communityos.local <http://communityos.local>`_. SSL certificates are not included because self signed certificates in all modern browsers will display a warning about unsafe web sites. If you choose to create your own certificates, you can ignore this warning. Please note, no trusted certificate authorities will issue SSL certificates for .local domains.
 
 To install plugins from the commandline instead of OctoPrint's built-in plugin manager, :code:`pip` may be found at :code:`/home/pi/OctoPrint/bin/pip`.  Thus, an example install cmd may be:  :code:`/home/pi/OctoPrint/bin/pip install <plugin-uri>`
 
-If a USB webcam or the Raspberry Pi camera is detected, MJPG-streamer will be started automatically as webcam server. OctoPrint on CommunityOS ships with correctly configured stream and snapshot URLs pointing at it. If necessary, you can reach it under `http://communityos.local/webcam/?action=stream <communityos.local/webcam/?action=stream>`_ and SSL respectively, or directly on its configured port 8080: `http://communityos.local:8080/?action=stream <communityos.local:8080/?action=stream>`_.
+If a USB webcam or the Raspberry Pi camera is detected, MJPG-streamer will be started automatically as webcam server. OctoPrint on CommunityOS ships with correctly configured stream and snapshot URLs already set within OctoPrint. If necessary, you can reach it under `http://communityos.local/webcam/?action=stream <communityos.local/webcam/?action=stream>`_, or directly on its configured port 8080: `http://communityos.local:8080/?action=stream <communityos.local:8080/?action=stream>`_.
 
-CuraEngine is installed and OctoPrint ships pre-configured with the correct path to utilize it for on-board-slicing. Just import a Cura Slicing Profile in OctoPrint's settings and start slicing directly on your Pi.
+CuraEngine is optional and if selected will pre-configure it with the correct path to utilize it for on-board-slicing. The new CuraEngine Legacy plugin will also be installed. Just import a Cura Slicing Profile in OctoPrint's settings and start slicing directly on your Pi.
