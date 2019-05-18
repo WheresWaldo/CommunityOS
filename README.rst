@@ -74,4 +74,4 @@ To install plugins from the commandline instead of OctoPrint's built-in plugin m
 
 If a USB webcam or the Raspberry Pi camera is detected, MJPG-streamer will be started automatically as webcam server. OctoPrint on CommunityOS ships with correctly configured stream and snapshot URLs already set within OctoPrint. If necessary, you can reach it under `http://communityos.local/webcam/?action=stream <communityos.local/webcam/?action=stream>`_, or directly on its configured port 8080: `http://communityos.local:8080/?action=stream <communityos.local:8080/?action=stream>`_.
 
-CuraEngine is optional and if selected will pre-configure it with the correct path to utilize it for on-board-slicing. The new CuraEngine Legacy plugin will also be installed. Just import a Cura Slicing Profile in OctoPrint's settings and start slicing directly on your Pi.
+CuraEngine is optional and if selected will be compiled and pre-configured with the correct path to utilize it for on-board-slicing. The new CuraEngine Legacy plugin will also be installed for access via the web interface. Just import a Cura Slicing Profile in OctoPrint's settings and start slicing directly on your Pi.
