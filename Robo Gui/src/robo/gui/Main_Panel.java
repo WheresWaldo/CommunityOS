@@ -27,8 +27,7 @@ public class Main_Panel extends javax.swing.JPanel {
     
     Main_Panel(String netName)  {
         initComponents();
-        PRINTER_DETAILS.setText(netName);
-        
+        PRINTER_DETAILS.setText(netName);        
     }
 
     /**
@@ -40,15 +39,38 @@ public class Main_Panel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        TopSubPanel1 = new javax.swing.JPanel();
+        TopSubPanel = new javax.swing.JPanel();
+        TopSubPanel2 = new javax.swing.JPanel();
         PRINTER_DETAILS = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        ExitButtno = new javax.swing.JButton();
 
-        jButton1.setText("Quit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout TopSubPanel1Layout = new javax.swing.GroupLayout(TopSubPanel1);
+        TopSubPanel1.setLayout(TopSubPanel1Layout);
+        TopSubPanel1Layout.setHorizontalGroup(
+            TopSubPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 390, Short.MAX_VALUE)
+        );
+        TopSubPanel1Layout.setVerticalGroup(
+            TopSubPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 125, Short.MAX_VALUE)
+        );
+
+        TopSubPanel.setOpaque(false);
+
+        javax.swing.GroupLayout TopSubPanelLayout = new javax.swing.GroupLayout(TopSubPanel);
+        TopSubPanel.setLayout(TopSubPanelLayout);
+        TopSubPanelLayout.setHorizontalGroup(
+            TopSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        TopSubPanelLayout.setVerticalGroup(
+            TopSubPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 99, Short.MAX_VALUE)
+        );
+
+        TopSubPanel2.setOpaque(false);
 
         PRINTER_DETAILS.setEditable(false);
         PRINTER_DETAILS.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
@@ -64,35 +86,74 @@ public class Main_Panel extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout TopSubPanel2Layout = new javax.swing.GroupLayout(TopSubPanel2);
+        TopSubPanel2.setLayout(TopSubPanel2Layout);
+        TopSubPanel2Layout.setHorizontalGroup(
+            TopSubPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TopSubPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PRINTER_DETAILS, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        TopSubPanel2Layout.setVerticalGroup(
+            TopSubPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TopSubPanel2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(PRINTER_DETAILS, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
+        );
+
+        jPanel1.setOpaque(false);
+
+        ExitButtno.setText("Quit");
+        ExitButtno.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        ExitButtno.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        ExitButtno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitButtnoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(ExitButtno))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addComponent(ExitButtno)
+                .addGap(19, 19, 19))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(PRINTER_DETAILS, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(60, Short.MAX_VALUE))
+            .addComponent(TopSubPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(TopSubPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(PRINTER_DETAILS, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(TopSubPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TopSubPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ExitButtnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtnoActionPerformed
         RoboGui.SaveProperties();
         System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ExitButtnoActionPerformed
 
     private void PRINTER_DETAILSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PRINTER_DETAILSActionPerformed
         // TODO add your handling code here:
@@ -100,7 +161,11 @@ public class Main_Panel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ExitButtno;
     private javax.swing.JTextField PRINTER_DETAILS;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel TopSubPanel;
+    private javax.swing.JPanel TopSubPanel1;
+    private javax.swing.JPanel TopSubPanel2;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
