@@ -44,13 +44,13 @@ public class RoboGui {
         try {
             //read properties files...
             GetProperties("RoboGUI.properties");
+            //popluate vars from props
             nMaxHeight   = Integer.valueOf(properties.getProperty("MAX_HEIGHT"));
             nMaxWidth    = Integer.valueOf(properties.getProperty("MAX_WIDTH"));
             NetName      = properties.getProperty("NETWORK_NAME");
             PrinterType  = properties.getProperty("PRINTER_STYLE");
             LogDir       = properties.getProperty("LOG_DIRECTORY");
             logErr       = new FileHandler(LogDir + "RoboGUI.log", true);
-
 
             //customize main frame
             // Disables decorations for this frame. By setting undecorated
@@ -72,7 +72,14 @@ public class RoboGui {
             myFrame.setVisible(true);
             
             while(true) {
-                //foo
+                /* 
+                 * loop 4Eva (or until they click the exit button 
+                 * exit button will not be in the final/release verson or
+                 * will be hidden and disabled if it is. All of the event 
+                 * handlers should be in the Main_Panel class or at worst
+                 * myFrame (which is currently NOT even subclassed -- just 
+                 * a default JFrame);
+                 */
             }
             //SaveProps on Exit
         } catch (Exception ex)  {
