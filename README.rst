@@ -5,7 +5,7 @@ Robo CommunityOS
 .. :scale: 50 %
 .. :alt: CommunityOS logo
 
-A replacement distribution for Robo3D R2 and C2 printers. It includes the `OctoPrint <http://octoprint.org>`_ host software for 3d printers out of the box and `mjpg-streamer with RaspiCam support <https://github.com/jacksonliam/mjpg-streamer>`_ for live viewing of prints and timelapse video creation.
+A replacement distribution for Robo3D R2 and C2 printers. It includes the `OctoPrint <http://octoprint.org>`_ host software for 3d printers out of the box and `mjpg-streamer with RaspiCam support <https://github.com/jacksonliam/mjpg-streamer>`_ for live viewing of prints and timelapse video creation. The menu system is replaced with an autostart Java application that has the same (plus extended) functionality.
 
 This repository contains the source script to generate the distribution out of an existing `Raspbian <http://www.raspbian.org/>`_ distro image.
 
