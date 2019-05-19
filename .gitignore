@@ -11,3 +11,4 @@ src/build.log
 src/vagrant/*.log
 src/vagrant/.vagrant
 README.rst
+/Robo Gui/nbproject/private/
