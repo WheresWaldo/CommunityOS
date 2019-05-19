@@ -12,3 +12,5 @@ src/vagrant/*.log
 src/vagrant/.vagrant
 README.rst
 /Robo Gui/nbproject/private/
+/Robo Gui/build/
+/Robo Gui/dist/
