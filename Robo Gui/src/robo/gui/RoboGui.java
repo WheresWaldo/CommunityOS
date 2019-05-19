@@ -5,6 +5,9 @@
  */
 package robo.gui;
 
+import java.awt.BorderLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author john
@@ -15,7 +18,10 @@ public class RoboGui {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        //read properties files...
+        
+        //display main form
+        Main_Panel newPanel = new Main_Panel();
     }
     
 }
