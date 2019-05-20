@@ -1,6 +1,13 @@
 package robo.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
@@ -20,10 +27,20 @@ public class Main_Panel extends javax.swing.JPanel {
     /**
      * Creates new form Main_Panel
      */
-    public Main_Panel() {
+    public Main_Panel() throws FontFormatException {
         initComponents();
-//        bottomPanelMain.setEnabled(true);
-//        bottomPanelMain.setVisible(true);
+        //create the font to use. Specify the size!
+        Font customFont;
+        try {
+            customFont = Font.createFont(Font.TRUETYPE_FONT, new File("Media" + File.separator + "S-Core - CoreSansD55Bold.otf")).deriveFont(12f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            //register the font
+            ge.registerFont(customFont);
+            //use the font
+            PRINTER_DETAILS.setFont(customFont);            
+        } catch (Exception ex) {
+            Logger.getLogger(Main_Panel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     Main_Panel(BorderLayout borderLayout) {
@@ -32,9 +49,21 @@ public class Main_Panel extends javax.swing.JPanel {
     
     Main_Panel(String netName)  {
         initComponents();
-        PRINTER_DETAILS.setText(netName);        
-//        bottomPanelMain.setEnabled(true);
-//        bottomPanelMain.setVisible(true);
+        //create the font to use. Specify the size!
+        Font customFont;
+        try {
+            String dir = System.getProperty("user.dir");
+            File myFont = new File(dir + File.separator  + "Media" + File.separator + "S-Core - CoreSansD55Bold.otf");
+            customFont = Font.createFont(Font.TRUETYPE_FONT, myFont).deriveFont(16f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            //register the font
+            ge.registerFont(customFont);
+            //use the font
+            PRINTER_DETAILS.setFont(customFont);            
+            PRINTER_DETAILS.setText(netName);        
+        } catch (Exception ex) {
+            Logger.getLogger(Main_Panel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
