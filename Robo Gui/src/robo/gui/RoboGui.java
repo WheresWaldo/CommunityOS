@@ -5,6 +5,7 @@ package robo.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.beans.PropertyChangeSupport;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -62,13 +63,13 @@ public class RoboGui {
             Main_Panel mainPanel = new Main_Panel(NetName + ":" + PrinterType);
 
             // setbackground of panel 
-            mainPanel.setBackground(Color.blue); 
+            mainPanel.setBackground(Color.black); 
 
             // add panel to frame 
             myFrame.getContentPane().add(mainPanel); 
             // set the size of frame 
-            myFrame.setSize(nMaxHeight, nMaxWidth); 
-            
+            myFrame.setSize(new Dimension(nMaxWidth, nMaxHeight));
+            myFrame.setPreferredSize(new Dimension(nMaxWidth, nMaxHeight));
             myFrame.toFront();
             myFrame.setVisible(true);
             
@@ -101,8 +102,8 @@ public class RoboGui {
                 //set defaults
                 LogDir = System.getProperty("user.dir");
                 properties.setProperty("LOG_DIRECTORY", LogDir);
-                properties.setProperty("MAX_HEIGHT", "350");
-                properties.setProperty("MAX_WIDTH", "400");
+                properties.setProperty("MAX_HEIGHT", "430");
+                properties.setProperty("MAX_WIDTH", "350");
                 properties.setProperty("NETWORK_NAME", "ROBO3D_DEFAULT");
                 properties.setProperty("PRINTER_STYLE", "C2");
         }         
