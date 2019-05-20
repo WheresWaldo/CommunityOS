@@ -1,6 +1,7 @@
 package robo.gui;
 
 import java.awt.BorderLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
 /*
@@ -46,14 +47,15 @@ public class Main_Panel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         filesBtn = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        printerBtn = new javax.swing.JButton();
+        utlBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        quiteBtn = new javax.swing.JButton();
 
         PRINTER_DETAILS.setEditable(false);
         PRINTER_DETAILS.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
         PRINTER_DETAILS.setForeground(new java.awt.Color(255, 0, 51));
+        PRINTER_DETAILS.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         PRINTER_DETAILS.setBorder(null);
         PRINTER_DETAILS.setFocusable(false);
         PRINTER_DETAILS.setName(""); // NOI18N
@@ -65,22 +67,40 @@ public class Main_Panel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Courier New", 1, 11)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Files");
 
+        jLabel2.setFont(new java.awt.Font("Courier New", 1, 11)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Printer");
 
+        jLabel3.setFont(new java.awt.Font("Courier New", 1, 11)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Utility");
 
         filesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/files.png"))); // NOI18N
         filesBtn.setName(""); // NOI18N
         filesBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        filesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filesBtnActionPerformed(evt);
+            }
+        });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer.png"))); // NOI18N
+        printerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer.png"))); // NOI18N
+        printerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printerBtnActionPerformed(evt);
+            }
+        });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png"))); // NOI18N
+        utlBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png"))); // NOI18N
+        utlBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                utlBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -88,24 +108,24 @@ public class Main_Panel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(filesBtn)
-                .addGap(2, 2, 2)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addComponent(filesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(printerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(utlBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(filesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(printerBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
+            .addComponent(utlBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Quit");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        quiteBtn.setText("Quit");
+        quiteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                quiteBtnActionPerformed(evt);
             }
         });
 
@@ -114,26 +134,20 @@ public class Main_Panel extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(quiteBtn)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(92, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addGap(0, 103, Short.MAX_VALUE)
+                .addComponent(quiteBtn))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(PRINTER_DETAILS, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -144,7 +158,14 @@ public class Main_Panel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 45, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PRINTER_DETAILS, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,26 +183,44 @@ public class Main_Panel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void quiteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quiteBtnActionPerformed
         RoboGui.SaveProperties();
         System.exit(0);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_quiteBtnActionPerformed
 
     private void PRINTER_DETAILSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PRINTER_DETAILSActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PRINTER_DETAILSActionPerformed
 
+    private void filesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filesBtnActionPerformed
+        filesBtn.setIcon(new ImageIcon(Class.class.getResource("/Media/files_active.png")));
+        printerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer.png"))); // NOI18N
+        utlBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png")));        
+    }//GEN-LAST:event_filesBtnActionPerformed
+
+    private void printerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printerBtnActionPerformed
+        filesBtn.setIcon(new ImageIcon(Class.class.getResource("/Media/files.png")));
+        printerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer_active.png"))); // NOI18N
+        utlBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png")));        
+    }//GEN-LAST:event_printerBtnActionPerformed
+
+    private void utlBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utlBtnActionPerformed
+        filesBtn.setIcon(new ImageIcon(Class.class.getResource("/Media/files.png")));
+        printerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer.png"))); // NOI18N
+        utlBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings_active.png")));        
+    }//GEN-LAST:event_utlBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField PRINTER_DETAILS;
     private javax.swing.JButton filesBtn;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton printerBtn;
+    private javax.swing.JButton quiteBtn;
+    private javax.swing.JButton utlBtn;
     // End of variables declaration//GEN-END:variables
 }
