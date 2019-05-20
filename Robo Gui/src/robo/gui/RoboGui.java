@@ -42,6 +42,7 @@ public class RoboGui {
     public static void main(String[] args) {
         final JFrame myFrame = new JFrame("Main_Frame");
         try {
+            
             //read properties files...
             GetProperties("RoboGUI.properties");
             //popluate vars from props
