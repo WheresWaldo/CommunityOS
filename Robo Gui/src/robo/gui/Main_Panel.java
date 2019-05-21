@@ -217,6 +217,7 @@ public class Main_Panel extends javax.swing.JPanel {
         btmPnlFiles.setBackground(new java.awt.Color(0, 0, 0));
         btmPnlFiles.setForeground(new java.awt.Color(255, 255, 255));
         btmPnlFiles.setToolTipText("");
+        btmPnlFiles.setPreferredSize(new java.awt.Dimension(420, 182));
 
         FilesPane.setDividerLocation(215);
 
@@ -239,6 +240,7 @@ public class Main_Panel extends javax.swing.JPanel {
 
         btmPnlMain.setBackground(new java.awt.Color(51, 51, 51));
         btmPnlMain.setForeground(new java.awt.Color(0, 255, 255));
+        btmPnlMain.setPreferredSize(new java.awt.Dimension(405, 153));
 
         quiteBtn.setText("Quit");
         quiteBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -279,9 +281,9 @@ public class Main_Panel extends javax.swing.JPanel {
         btmPnlMainLayout.setHorizontalGroup(
             btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btmPnlMainLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 31, Short.MAX_VALUE)
                 .addComponent(RoboStatLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(btmPnlMainLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,7 +307,7 @@ public class Main_Panel extends javax.swing.JPanel {
                     .addComponent(quiteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(RoboStatLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 73, Short.MAX_VALUE))
         );
 
         btmPnlUtility.setBackground(new java.awt.Color(0, 0, 0));
@@ -433,7 +435,7 @@ public class Main_Panel extends javax.swing.JPanel {
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         BtmLayeredPane.setLayer(btmPnlFiles, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -444,21 +446,19 @@ public class Main_Panel extends javax.swing.JPanel {
         BtmLayeredPane.setLayout(BtmLayeredPaneLayout);
         BtmLayeredPaneLayout.setHorizontalGroup(
             BtmLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btmPnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btmPnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(BtmLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(BtmLayeredPaneLayout.createSequentialGroup()
                     .addComponent(btmPnlFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(BtmLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(BtmLayeredPaneLayout.createSequentialGroup()
-                    .addComponent(btmPnlUtility, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 14, Short.MAX_VALUE)))
+                .addComponent(btmPnlUtility, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         BtmLayeredPaneLayout.setVerticalGroup(
             BtmLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BtmLayeredPaneLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btmPnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btmPnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
             .addGroup(BtmLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(BtmLayeredPaneLayout.createSequentialGroup()
@@ -468,7 +468,7 @@ public class Main_Panel extends javax.swing.JPanel {
                 .addGroup(BtmLayeredPaneLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(btmPnlUtility, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(30, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -477,7 +477,7 @@ public class Main_Panel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BtmLayeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
