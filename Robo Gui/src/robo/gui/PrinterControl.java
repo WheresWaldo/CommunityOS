@@ -52,6 +52,7 @@ public class PrinterControl {
 
         FilesPanel filePanel = new FilesPanel();
         filePanel.setProps(props);
+        filePanel.setMain(pFrame, mainPnl);
         pFrame.getContentPane().add(filePanel);        
         filePanel.setPrinter(this);
         pFrame.validate();

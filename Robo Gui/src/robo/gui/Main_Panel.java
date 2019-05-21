@@ -48,6 +48,7 @@ public class Main_Panel extends javax.swing.JPanel {
     private static final long serialVersionUID = 1L;
     private String name;
     private Properties props;
+    private int selectedPanel = 0;
 
     public void setProps(Properties props) {
         this.props = props;
@@ -57,6 +58,17 @@ public class Main_Panel extends javax.swing.JPanel {
         this.printer = printer;
     }
 
+    public void setPrintProgress(int percent)   {
+        if (percent > 100) {
+            PrintProgress.setValue(100);
+            return;
+        }
+        if (percent < 0)    {
+            PrintProgress.setValue(0);
+            return;
+        }
+        PrintProgress.setValue(percent);        
+    }
     private PrinterControl printer;
     
     /**
@@ -84,6 +96,11 @@ public class Main_Panel extends javax.swing.JPanel {
 
     Main_Panel(BorderLayout borderLayout) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void setPrinterActive()
+    {
+        printerBtnActionPerformed(null);
     }
     
     Main_Panel(String netName)  {
@@ -135,6 +152,7 @@ public class Main_Panel extends javax.swing.JPanel {
         tempCtrlBtn = new javax.swing.JButton();
         MtrControlBtn = new javax.swing.JButton();
         PRINTER_DETAILS = new javax.swing.JLabel();
+        PrintProgress = new javax.swing.JProgressBar();
         btmPnlUtility = new javax.swing.JPanel();
         utlUpdateBtn = new javax.swing.JButton();
         utlWizardsBtn = new javax.swing.JButton();
@@ -322,21 +340,24 @@ public class Main_Panel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(btmPnlMainLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(btmPnlMainLayout.createSequentialGroup()
                         .addComponent(quitBtn)
                         .addGap(52, 52, 52)
                         .addComponent(tempCtrlBtn)
                         .addGap(18, 18, 18)
                         .addComponent(MtrControlBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(PRINTER_DETAILS, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(PRINTER_DETAILS, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+                    .addComponent(PrintProgress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 150, Short.MAX_VALUE))
         );
         btmPnlMainLayout.setVerticalGroup(
             btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btmPnlMainLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
                 .addComponent(PRINTER_DETAILS)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(4, 4, 4)
+                .addComponent(PrintProgress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tempCtrlBtn)
                     .addComponent(MtrControlBtn)
@@ -513,7 +534,7 @@ public class Main_Panel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BtmLayeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -537,6 +558,7 @@ public class Main_Panel extends javax.swing.JPanel {
         btmPnlMain.setVisible(false);
         btmPnlFiles.setVisible(true);
         btmPnlUtility.setVisible(false);
+        selectedPanel = 1;
     }//GEN-LAST:event_filesBtnActionPerformed
 	
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {
@@ -562,6 +584,7 @@ public class Main_Panel extends javax.swing.JPanel {
         btmPnlMain.setVisible(true);
         btmPnlFiles.setVisible(false);
         btmPnlUtility.setVisible(false);
+        selectedPanel = 0;
     }//GEN-LAST:event_printerBtnActionPerformed
 
     private void utlBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utlBtnActionPerformed
@@ -571,6 +594,8 @@ public class Main_Panel extends javax.swing.JPanel {
         btmPnlUtility.setVisible(true);
         btmPnlMain.setVisible(false);
         btmPnlFiles.setVisible(false);       
+        selectedPanel = 2;
+
     }//GEN-LAST:event_utlBtnActionPerformed
 
     private void MtrControlBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MtrControlBtnActionPerformed
@@ -618,6 +643,7 @@ public class Main_Panel extends javax.swing.JPanel {
     private javax.swing.JButton LocalStoreBtn;
     private javax.swing.JButton MtrControlBtn;
     private javax.swing.JLabel PRINTER_DETAILS;
+    private javax.swing.JProgressBar PrintProgress;
     private javax.swing.JLabel RoboStatLbl;
     private javax.swing.JButton USBStoreBtn;
     private javax.swing.JPanel btmPnlFiles;

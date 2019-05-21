@@ -20,6 +20,8 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Properties;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -28,6 +30,8 @@ import javax.swing.DefaultListModel;
 public class FilesPanel extends javax.swing.JPanel {
     private PrinterControl printer; 
     private Properties props;
+    private JFrame pFrame;
+    private Main_Panel mainPnl;
 
     public void setProps(Properties props) {
         this.props = props;
@@ -35,6 +39,11 @@ public class FilesPanel extends javax.swing.JPanel {
 
     public void setPrinter(PrinterControl printer) {
         this.printer = printer;
+    }
+    
+    public void setMain(JFrame pF, JPanel pM)   {
+        pFrame = pF;
+        mainPnl = (Main_Panel) pM;        
     }
     
     /**
@@ -168,6 +177,11 @@ public class FilesPanel extends javax.swing.JPanel {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        filesList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                filesListMouseClicked(evt);
+            }
+        });
         fileListPnl.setViewportView(filesList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -214,6 +228,15 @@ public class FilesPanel extends javax.swing.JPanel {
             filesList.setSelectedIndex(selItem + 1);
         }
     }//GEN-LAST:event_filePnlDownArrowMouseClicked
+
+    private void filesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_filesListMouseClicked
+        pFrame.getContentPane().removeAll();
+
+        pFrame.getContentPane().add(mainPnl);        
+        pFrame.validate();
+        pFrame.setVisible(true);
+        mainPnl.setPrinterActive();
+    }//GEN-LAST:event_filesListMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
