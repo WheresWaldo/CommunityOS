@@ -63,9 +63,9 @@ public class RoboGui {
             // java - get screen size using the Toolkit class
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             // the screen height
-            double RealScreenHeight = screenSize.getHeight();
+            nMaxHeight = screenSize.height;
             // the screen width
-            double RealScreenWidth = screenSize.getWidth();
+            nMaxWidth = screenSize.width;
             //read properties files...
             GetProperties("RoboGUI.properties");
             //popluate vars from props
@@ -75,11 +75,6 @@ public class RoboGui {
             PrinterType  = properties.getProperty("PRINTER_STYLE");
             LogDir       = properties.getProperty("LOG_DIRECTORY");
             logErr       = new FileHandler(LogDir + "RoboGUI.log", true);
-            
-            Long tLong = Math.round(RealScreenHeight);
-            nMaxHeight = tLong.intValue();
-            tLong = Math.round(RealScreenHeight);
-            nMaxWidth = tLong.intValue();
             
             //customize main frame
             // Disables decorations for this frame. By setting undecorated
