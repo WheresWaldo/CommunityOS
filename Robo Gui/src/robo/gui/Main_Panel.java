@@ -25,6 +25,7 @@ import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -46,7 +47,12 @@ public class Main_Panel extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
     private String name;
+    private Properties props;
 
+    public void setProps(Properties props) {
+        this.props = props;
+    }
+    
     public void setPrinter(PrinterControl printer) {
         this.printer = printer;
     }
@@ -247,6 +253,11 @@ public class Main_Panel extends javax.swing.JPanel {
         FilesPane.setDividerLocation(215);
 
         LocalStoreBtn.setIcon(new javax.swing.ImageIcon("E:\\markt\\Documents\\NetBeansProjects\\CommunityOS\\Robo Gui\\Media\\Files_Icons\\File_Options\\Local Storage.png")); // NOI18N
+        LocalStoreBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LocalStoreBtnActionPerformed(evt);
+            }
+        });
         FilesPane.setLeftComponent(LocalStoreBtn);
 
         USBStoreBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/robo/gui/USB Storage.png"))); // NOI18N
@@ -594,6 +605,11 @@ public class Main_Panel extends javax.swing.JPanel {
     private void utlSysBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utlSysBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_utlSysBtnActionPerformed
+
+    private void LocalStoreBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LocalStoreBtnActionPerformed
+        printer.setProps(props);
+        printer.filesMenu();
+    }//GEN-LAST:event_LocalStoreBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

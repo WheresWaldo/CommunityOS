@@ -16,6 +16,10 @@
  */
 package robo.gui;
 
+import java.util.Properties;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /**
  * this class will implement all of the physical control options
  * for the printer. Interfaces to the printer itself (via GCode)
@@ -25,9 +29,32 @@ package robo.gui;
  */
 public class PrinterControl {
     //member vars
+    private Properties props;
+    private JFrame pFrame;
+    private JPanel mainPnl;
+
+    public void setParent(JFrame mFrame, JPanel mPanel) {
+        this.pFrame = mFrame;
+        mainPnl = mPanel;
+    }
     
+    public void setProps(Properties props) {
+        this.props = props;
+    }
+
     //simple constructor
     public void PrinterControl()    {
         
+    }
+    
+    public void filesMenu()   {
+        pFrame.getContentPane().removeAll();
+
+        FilesPanel filePanel = new FilesPanel();
+        filePanel.setProps(props);
+        pFrame.getContentPane().add(filePanel);        
+        filePanel.setPrinter(this);
+        pFrame.validate();
+        pFrame.setVisible(true);
     }
 }

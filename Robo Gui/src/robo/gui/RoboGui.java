@@ -53,15 +53,21 @@ public class RoboGui {
     private static String NetName;
     private static String PrinterType;
     private static String LogDir;
+    private static final JFrame myFrame = new JFrame("Main_Frame");
+    private static PrinterControl printer;
+
+
+    public static Properties getProperties() {
+        return properties;
+    }
     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        final JFrame myFrame = new JFrame("Main_Frame");
-        final PrinterControl printer = new PrinterControl();
         
         try {
+            printer = new PrinterControl();
             //read properties files...
             GetProperties("RoboGUI.properties");
             //popluate vars from props
@@ -93,6 +99,7 @@ public class RoboGui {
             // setbackground of panel 
             mainPanel.setBackground(Color.black); 
             mainPanel.setPrinter(printer);
+            mainPanel.setProps(properties);
             // add panel to frame 
             myFrame.getContentPane().add(mainPanel); 
             // set the size of frame 
@@ -100,6 +107,7 @@ public class RoboGui {
             myFrame.setPreferredSize(new Dimension(nMaxWidth, nMaxHeight));
             myFrame.toFront();
             myFrame.setVisible(true);
+            printer.setParent(myFrame, mainPanel);
             
             while(true) {
                 /* 
@@ -115,6 +123,10 @@ public class RoboGui {
         } catch (Exception ex)  {
             ex.printStackTrace();
         }
+    }
+
+    public static PrinterControl getPrinter() {
+        return printer;
     }
     
     public static void GetProperties(String dir)  {
