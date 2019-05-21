@@ -60,17 +60,21 @@ public class RoboGui {
     public static void main(String[] args) {
         final JFrame myFrame = new JFrame("Main_Frame");
         try {
-            // java - get screen size using the Toolkit class
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            // the screen height
-            nMaxHeight = screenSize.height;
-            // the screen width
-            nMaxWidth = screenSize.width;
             //read properties files...
             GetProperties("RoboGUI.properties");
             //popluate vars from props
-//            nMaxHeight   = Integer.valueOf(properties.getProperty("MAX_HEIGHT"));
-//            nMaxWidth    = Integer.valueOf(properties.getProperty("MAX_WIDTH"));
+            try {
+                nMaxHeight   = Integer.valueOf(properties.getProperty("MAX_HEIGHT"));
+                nMaxWidth    = Integer.valueOf(properties.getProperty("MAX_WIDTH"));
+            } catch(Exception ex)   {
+                //may bot be spcified -- we will use defaults. 
+                // java - get screen size using the Toolkit class
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                // the screen height
+                nMaxHeight = screenSize.height;
+                // the screen width
+                nMaxWidth = screenSize.width;
+            }
             NetName      = properties.getProperty("NETWORK_NAME");
             PrinterType  = properties.getProperty("PRINTER_STYLE");
             LogDir       = properties.getProperty("LOG_DIRECTORY");
@@ -124,8 +128,8 @@ public class RoboGui {
                 //set defaults
                 LogDir = System.getProperty("user.dir");
                 properties.setProperty("LOG_DIRECTORY", LogDir);
-                properties.setProperty("MAX_HEIGHT", "430");
-                properties.setProperty("MAX_WIDTH", "350");
+                //properties.setProperty("MAX_HEIGHT", "430");
+                //properties.setProperty("MAX_WIDTH", "350");
                 properties.setProperty("NETWORK_NAME", "ROBO3D_DEFAULT");
                 properties.setProperty("PRINTER_STYLE", "C2");
         }         
