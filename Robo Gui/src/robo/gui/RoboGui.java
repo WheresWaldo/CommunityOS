@@ -22,6 +22,7 @@ package robo.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.beans.PropertyChangeSupport;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -59,16 +60,27 @@ public class RoboGui {
     public static void main(String[] args) {
         final JFrame myFrame = new JFrame("Main_Frame");
         try {
+            // java - get screen size using the Toolkit class
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            // the screen height
+            double RealScreenHeight = screenSize.getHeight();
+            // the screen width
+            double RealScreenWidth = screenSize.getWidth();
             //read properties files...
             GetProperties("RoboGUI.properties");
             //popluate vars from props
-            nMaxHeight   = Integer.valueOf(properties.getProperty("MAX_HEIGHT"));
-            nMaxWidth    = Integer.valueOf(properties.getProperty("MAX_WIDTH"));
+//            nMaxHeight   = Integer.valueOf(properties.getProperty("MAX_HEIGHT"));
+//            nMaxWidth    = Integer.valueOf(properties.getProperty("MAX_WIDTH"));
             NetName      = properties.getProperty("NETWORK_NAME");
             PrinterType  = properties.getProperty("PRINTER_STYLE");
             LogDir       = properties.getProperty("LOG_DIRECTORY");
             logErr       = new FileHandler(LogDir + "RoboGUI.log", true);
-
+            
+            Long tLong = Math.round(RealScreenHeight);
+            nMaxHeight = tLong.intValue();
+            tLong = Math.round(RealScreenHeight);
+            nMaxWidth = tLong.intValue();
+            
             //customize main frame
             // Disables decorations for this frame. By setting undecorated
             // to true will remove the frame's title bar including the maximize,
