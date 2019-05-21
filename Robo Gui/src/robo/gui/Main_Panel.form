@@ -338,7 +338,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="quiteBtn" min="-2" max="-2" attributes="0"/>
+                              <Component id="quitBtn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                               <Component id="tempCtrlBtn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -358,7 +358,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tempCtrlBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="MtrControlBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="quiteBtn" alignment="3" max="32767" attributes="0"/>
+                          <Component id="quitBtn" alignment="3" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="RoboStatLbl" min="-2" pref="21" max="-2" attributes="0"/>
@@ -368,12 +368,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="quiteBtn">
+            <Component class="javax.swing.JButton" name="quitBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Quit"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quiteBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quitBtnActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="RoboStatLbl">

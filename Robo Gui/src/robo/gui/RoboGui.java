@@ -59,6 +59,8 @@ public class RoboGui {
      */
     public static void main(String[] args) {
         final JFrame myFrame = new JFrame("Main_Frame");
+        final PrinterControl printer = new PrinterControl();
+        
         try {
             //read properties files...
             GetProperties("RoboGUI.properties");
@@ -90,7 +92,7 @@ public class RoboGui {
 
             // setbackground of panel 
             mainPanel.setBackground(Color.black); 
-
+            mainPanel.setPrinter(printer);
             // add panel to frame 
             myFrame.getContentPane().add(mainPanel); 
             // set the size of frame 

@@ -46,6 +46,12 @@ public class Main_Panel extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
     private String name;
+
+    public void setPrinter(PrinterControl printer) {
+        this.printer = printer;
+    }
+
+    private PrinterControl printer;
     
     /**
      * Creates new form Main_Panel
@@ -118,7 +124,7 @@ public class Main_Panel extends javax.swing.JPanel {
         LocalStoreBtn = new javax.swing.JButton();
         USBStoreBtn = new javax.swing.JButton();
         btmPnlMain = new javax.swing.JPanel();
-        quiteBtn = new javax.swing.JButton();
+        quitBtn = new javax.swing.JButton();
         RoboStatLbl = new javax.swing.JLabel();
         tempCtrlBtn = new javax.swing.JButton();
         MtrControlBtn = new javax.swing.JButton();
@@ -261,10 +267,10 @@ public class Main_Panel extends javax.swing.JPanel {
         btmPnlMain.setForeground(new java.awt.Color(0, 255, 255));
         btmPnlMain.setPreferredSize(new java.awt.Dimension(405, 153));
 
-        quiteBtn.setText("Quit");
-        quiteBtn.addActionListener(new java.awt.event.ActionListener() {
+        quitBtn.setText("Quit");
+        quitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quiteBtnActionPerformed(evt);
+                quitBtnActionPerformed(evt);
             }
         });
 
@@ -307,7 +313,7 @@ public class Main_Panel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(btmPnlMainLayout.createSequentialGroup()
-                        .addComponent(quiteBtn)
+                        .addComponent(quitBtn)
                         .addGap(52, 52, 52)
                         .addComponent(tempCtrlBtn)
                         .addGap(18, 18, 18)
@@ -323,7 +329,7 @@ public class Main_Panel extends javax.swing.JPanel {
                 .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tempCtrlBtn)
                     .addComponent(MtrControlBtn)
-                    .addComponent(quiteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(quitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(RoboStatLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 46, Short.MAX_VALUE))
@@ -557,17 +563,17 @@ public class Main_Panel extends javax.swing.JPanel {
     }//GEN-LAST:event_utlBtnActionPerformed
 
     private void MtrControlBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MtrControlBtnActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_MtrControlBtnActionPerformed
 
     private void tempCtrlBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tempCtrlBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tempCtrlBtnActionPerformed
 
-    private void quiteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quiteBtnActionPerformed
+    private void quitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitBtnActionPerformed
         RoboGui.SaveProperties();
         System.exit(0);
-    }//GEN-LAST:event_quiteBtnActionPerformed
+    }//GEN-LAST:event_quitBtnActionPerformed
 
     private void utlFanBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utlFanBtnActionPerformed
         // TODO add your handling code here:
@@ -611,7 +617,7 @@ public class Main_Panel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JButton printerBtn;
     private javax.swing.JLabel prntrLbl;
-    private javax.swing.JButton quiteBtn;
+    private javax.swing.JButton quitBtn;
     private javax.swing.JButton tempCtrlBtn;
     private javax.swing.JPanel topPanel;
     private javax.swing.JButton utlBtn;
