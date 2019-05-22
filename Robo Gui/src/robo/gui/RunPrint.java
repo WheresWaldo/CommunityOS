@@ -43,6 +43,7 @@ public class RunPrint extends Thread{
     }
     public void run() {
         int i = 0;
+        double f = 0.0;
         
         try
         {
@@ -51,6 +52,8 @@ public class RunPrint extends Thread{
             while (i < 120) {
                 Thread.sleep(2500);
                 System.out.println("tick-tock...: printing " + fileToPrint);
+                f = (double)i/120.0;
+                parent.setPrintProgress("tick-tock...: printing ", (int) f);
                 i++;
             }            
         }

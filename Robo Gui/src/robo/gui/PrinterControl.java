@@ -16,6 +16,7 @@
  */
 package robo.gui;
 
+import java.io.File;
 import java.util.Properties;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -67,7 +68,9 @@ public class PrinterControl {
     }
 
     public void filesMenu()   {
-        pFrame.getContentPane().removeAll();
+        if(pFrame.getContentPane() != null) {
+            pFrame.getContentPane().removeAll();
+        }
 
         FilesPanel filePanel = new FilesPanel();
         filePanel.setProps(props);
@@ -79,6 +82,7 @@ public class PrinterControl {
     }
     
     public void startPrintRun(String fileName)  {
+        
         if(doPrinting != null)  {
             //print job still running...
             

@@ -238,8 +238,14 @@ public class FilesPanel extends javax.swing.JPanel {
         pFrame.validate();
         pFrame.setVisible(true);
         mainPnl.setPrinterActive();
+        File tmpDir = new File(fileName);
+        boolean exists = tmpDir.exists();
+        boolean isDir = tmpDir.isDirectory();
+
         if (mainPnl.getDoPrinting() == null)    {
-            printer.startPrintRun(fileName);
+            if(exists && !isDir)    {
+                printer.startPrintRun(fileName);
+            }
         }
 //         new Thread(r).start();
 //         //this line will execute immediately, not waiting for your task to complete
