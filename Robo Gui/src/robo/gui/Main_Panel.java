@@ -105,10 +105,10 @@ public class Main_Panel extends javax.swing.JPanel {
          int main_height = parent.getHeight();
          //topPanel.setSize(main_width, main_height/3);
          topPanel.setPreferredSize(new Dimension(main_width, main_height/3));
-         topPanel.setLocation(0, 0);
+         //topPanel.setLocation(0, 0);
          int btn_panel_width = main_width;
          int btn_panel_height = main_height/3;
-         filesBtn.setSize(btn_panel_width/3, btn_panel_height);
+         filesBtn.setSize(btn_panel_width/3 - 5, btn_panel_height);
          filesBtn.setPreferredSize(new Dimension(btn_panel_width/3 - 5, btn_panel_height));
          //printerBtn.setSize(btn_panel_width/3, btn_panel_height);
          printerBtn.setPreferredSize(new Dimension(btn_panel_width/3 - 5, btn_panel_height));
@@ -120,7 +120,7 @@ public class Main_Panel extends javax.swing.JPanel {
          //utlBtn.setLocation((btn_panel_width/3)*2, 0);
          main_height = parent.getHeight();
          //btmPnlMain.setSize(main_width, (main_height/3) * 2);
-         //btmPnlMain.setPreferredSize(new Dimension(main_width, (main_height/3) * 2));
+         btmPnlMain.setPreferredSize(new Dimension(main_width, (main_height/3) * 2));
          //btmPnlMain.setLocation(0, main_height+1);
          
     }

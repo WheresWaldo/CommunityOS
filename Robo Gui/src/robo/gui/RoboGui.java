@@ -121,7 +121,7 @@ public class RoboGui {
             printer.setParent(myFrame, mainPanel);
             mainPanel.setScreenSize();
             mainPanel.start_panel();
-            
+            myFrame.pack();
             while(true) {
                 /* 
                  * loop 4Eva (or until they click the exit button 
