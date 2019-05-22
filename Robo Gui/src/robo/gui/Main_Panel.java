@@ -46,7 +46,7 @@ import javax.swing.table.DefaultTableModel;
 public class Main_Panel extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
-    private RunPrint    doPrinting = null;
+    private RunPrint doPrinting = null;
     private String name;
     private Properties props;
     private int selectedPanel = 0;
