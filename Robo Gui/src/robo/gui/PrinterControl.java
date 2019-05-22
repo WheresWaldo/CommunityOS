@@ -57,5 +57,7 @@ public class PrinterControl {
         filePanel.setPrinter(this);
         pFrame.validate();
         pFrame.setVisible(true);
+        
+        
     }
 }

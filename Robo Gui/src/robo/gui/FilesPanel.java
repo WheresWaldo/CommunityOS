@@ -236,6 +236,10 @@ public class FilesPanel extends javax.swing.JPanel {
         pFrame.validate();
         pFrame.setVisible(true);
         mainPnl.setPrinterActive();
+        if (mainPnl.getDoPrinting() == null)    {
+        }
+//         new Thread(r).start();
+//         //this line will execute immediately, not waiting for your task to complete
     }//GEN-LAST:event_filesListMouseClicked
 
 
