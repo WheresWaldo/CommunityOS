@@ -230,6 +230,8 @@ public class FilesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_filePnlDownArrowMouseClicked
 
     private void filesListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_filesListMouseClicked
+        String fileName = filesList.getSelectedValue();
+        
         pFrame.getContentPane().removeAll();
 
         pFrame.getContentPane().add(mainPnl);        
@@ -237,6 +239,7 @@ public class FilesPanel extends javax.swing.JPanel {
         pFrame.setVisible(true);
         mainPnl.setPrinterActive();
         if (mainPnl.getDoPrinting() == null)    {
+            printer.startPrintRun(fileName);
         }
 //         new Thread(r).start();
 //         //this line will execute immediately, not waiting for your task to complete

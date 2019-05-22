@@ -32,6 +32,7 @@ public class PrinterControl {
     private Properties props;
     private JFrame pFrame;
     private JPanel mainPnl;
+    private RunPrint doPrinting = null;
 
     public void setParent(JFrame mFrame, JPanel mPanel) {
         this.pFrame = mFrame;
@@ -57,7 +58,14 @@ public class PrinterControl {
         filePanel.setPrinter(this);
         pFrame.validate();
         pFrame.setVisible(true);
-        
+    }
+    
+    public void startPrintRun(String fileName)  {
+        if(doPrinting != null)  {
+            
+        } else  {
+            doPrinting = new RunPrint(fileName);
+        }
         
     }
 }
