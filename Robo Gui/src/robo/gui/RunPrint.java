@@ -37,7 +37,25 @@ public class RunPrint extends Thread{
         fileToPrint = printFile;
     }
     public void run() {
-        System.out.println("background Print thread task");
+        int i = 0;
+        
+        try
+        {
+            System.out.println("background Print thread task started");
+            while (i < 120) {
+                Thread.sleep(2500);
+                System.out.println("tick-tock...: printing " + fileToPrint);
+                i++;
+            }
+        }
+        catch (Exception ex)    {
+            System.out.println("background Print thread exception: ");
+            ex.printStackTrace();
+        }
+        finally
+        {
+            System.out.println("background Print thread task complete");
+        }
     }
 
 }
