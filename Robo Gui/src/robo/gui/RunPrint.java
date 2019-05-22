@@ -26,6 +26,11 @@ public class RunPrint extends Thread{
 
     private String fileToPrint;
     private File filePrinting;
+    private PrinterControl parent = null;
+
+    public void setParent(PrinterControl parent) {
+        this.parent = parent;
+    }
     
     /**
      *
@@ -42,11 +47,12 @@ public class RunPrint extends Thread{
         try
         {
             System.out.println("background Print thread task started");
+            //fake a running print for now
             while (i < 120) {
                 Thread.sleep(2500);
                 System.out.println("tick-tock...: printing " + fileToPrint);
                 i++;
-            }
+            }            
         }
         catch (Exception ex)    {
             System.out.println("background Print thread exception: ");
@@ -55,6 +61,8 @@ public class RunPrint extends Thread{
         finally
         {
             System.out.println("background Print thread task complete");
+            //null thread printing in control class
+            parent.setDoPrinting(null);
         }
     }
 

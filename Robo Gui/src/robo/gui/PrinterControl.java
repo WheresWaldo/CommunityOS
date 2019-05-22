@@ -34,6 +34,10 @@ public class PrinterControl {
     private JPanel mainPnl;
     private RunPrint doPrinting = null;
 
+    public void setDoPrinting(RunPrint doPrinting) {
+        this.doPrinting = doPrinting;
+    }
+
     public void setParent(JFrame mFrame, JPanel mPanel) {
         this.pFrame = mFrame;
         mainPnl = mPanel;
@@ -62,9 +66,12 @@ public class PrinterControl {
     
     public void startPrintRun(String fileName)  {
         if(doPrinting != null)  {
+            //print job still running...
             
         } else  {
             doPrinting = new RunPrint(fileName);
+            doPrinting.setParent(this);
+            doPrinting.start();
         }
         
     }
