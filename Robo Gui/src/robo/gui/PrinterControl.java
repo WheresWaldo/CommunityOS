@@ -31,14 +31,14 @@ public class PrinterControl {
     //member vars
     private Properties props;
     private JFrame pFrame;
-    private JPanel mainPnl;
+    private Main_Panel mainPnl;
     private RunPrint doPrinting = null;
 
     public void setDoPrinting(RunPrint doPrinting) {
         this.doPrinting = doPrinting;
     }
 
-    public void setParent(JFrame mFrame, JPanel mPanel) {
+    public void setParent(JFrame mFrame, Main_Panel mPanel) {
         this.pFrame = mFrame;
         mainPnl = mPanel;
     }
@@ -52,6 +52,20 @@ public class PrinterControl {
         
     }
     
+    public void setPrintProgress(String text)
+    {
+        if(!text.isEmpty())   {
+            mainPnl.setStatus(text);
+        }
+    }
+    
+    public void setPrintProgress(String text, int percent)
+    {
+        if((percent >= 0) && (percent <= 100))   {
+            mainPnl.setStatus(text, percent);
+        }
+    }
+
     public void filesMenu()   {
         pFrame.getContentPane().removeAll();
 

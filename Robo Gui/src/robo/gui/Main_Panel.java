@@ -63,6 +63,15 @@ public class Main_Panel extends javax.swing.JPanel {
         this.props = props;
     }
     
+    public void setStatus(String text)  {
+        RoboStatLbl.setText(text);
+    }
+    
+    public void setStatus(String text, int percent) {
+        RoboStatLbl.setText(text);
+        PrintProgress.setValue(percent);
+    }
+    
     public void setPrinter(PrinterControl printer) {
         this.printer = printer;
     }
