@@ -20,6 +20,7 @@
 package robo.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -31,6 +32,8 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -50,6 +53,7 @@ public class Main_Panel extends javax.swing.JPanel {
     private String name;
     private Properties props;
     private int selectedPanel = 0;
+    private JFrame parent;
 
     public void setDoPrinting(RunPrint doPrinting) {
         this.doPrinting = doPrinting;
@@ -57,6 +61,12 @@ public class Main_Panel extends javax.swing.JPanel {
 
     public RunPrint getDoPrinting() {
         return this.doPrinting;
+    }
+    public void start_panel(){
+        //printerBtn.doClick();
+        //filesBtnActionPerformed(null);
+        //topPanel.repaint();
+        
     }
 
     public void setProps(Properties props) {
@@ -75,6 +85,9 @@ public class Main_Panel extends javax.swing.JPanel {
     public void setPrinter(PrinterControl printer) {
         this.printer = printer;
     }
+    public void setParent(JFrame Parent) {
+        this.parent = Parent;
+    }
 
     public void setPrintProgress(int percent)   {
         if (percent > 100) {
@@ -87,6 +100,31 @@ public class Main_Panel extends javax.swing.JPanel {
         }
         PrintProgress.setValue(percent);        
     }
+    public void setScreenSize(){
+         int main_width = parent.getWidth();
+         int main_height = parent.getHeight();
+         //topPanel.setSize(main_width, main_height/3);
+         topPanel.setPreferredSize(new Dimension(main_width, main_height/3));
+         topPanel.setLocation(0, 0);
+         int btn_panel_width = main_width;
+         int btn_panel_height = main_height/3;
+         filesBtn.setSize(btn_panel_width/3, btn_panel_height);
+         filesBtn.setPreferredSize(new Dimension(btn_panel_width/3 - 5, btn_panel_height));
+         //printerBtn.setSize(btn_panel_width/3, btn_panel_height);
+         printerBtn.setPreferredSize(new Dimension(btn_panel_width/3 - 5, btn_panel_height));
+         //utlBtn.setSize(btn_panel_width/3, btn_panel_height);
+         utlBtn.setPreferredSize(new Dimension(btn_panel_width/3 - 5, btn_panel_height));
+         //filesBtn.setLocation(0, 0);
+         
+         //printerBtn.setLocation(btn_panel_width/3, 0);
+         //utlBtn.setLocation((btn_panel_width/3)*2, 0);
+         main_height = parent.getHeight();
+         //btmPnlMain.setSize(main_width, (main_height/3) * 2);
+         //btmPnlMain.setPreferredSize(new Dimension(main_width, (main_height/3) * 2));
+         //btmPnlMain.setLocation(0, main_height+1);
+         
+    }
+    
     private PrinterControl printer;
     
     /**
@@ -107,6 +145,7 @@ public class Main_Panel extends javax.swing.JPanel {
             btmPnlFiles.setVisible(false);
             btmPnlMain.setVisible(true);
             btmPnlUtility.setVisible(false);
+            start_panel();
         } catch (Exception ex) {
             Logger.getLogger(Main_Panel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -138,6 +177,7 @@ public class Main_Panel extends javax.swing.JPanel {
             btmPnlFiles.setVisible(false);
             btmPnlMain.setVisible(true);
             btmPnlUtility.setVisible(false);
+            start_panel();
         } catch (Exception ex) {
             Logger.getLogger(Main_Panel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -159,7 +199,6 @@ public class Main_Panel extends javax.swing.JPanel {
         fileLbl = new javax.swing.JLabel();
         prntrLbl = new javax.swing.JLabel();
         utlLbl = new javax.swing.JLabel();
-        BtmLayeredPane = new javax.swing.JLayeredPane();
         btmPnlFiles = new javax.swing.JPanel();
         FilesPane = new javax.swing.JSplitPane();
         LocalStoreBtn = new javax.swing.JButton();
@@ -192,7 +231,7 @@ public class Main_Panel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(430, 350));
         setRequestFocusEnabled(false);
 
-        topPanel.setBackground(new java.awt.Color(51, 51, 51));
+        topPanel.setBackground(new java.awt.Color(51, 51, 255));
         topPanel.setMaximumSize(new java.awt.Dimension(350, 32767));
 
         filesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/files.png"))); // NOI18N
@@ -203,6 +242,7 @@ public class Main_Panel extends javax.swing.JPanel {
                 filesBtnActionPerformed(evt);
             }
         });
+        topPanel.add(filesBtn);
 
         printerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer.png"))); // NOI18N
         printerBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -210,6 +250,7 @@ public class Main_Panel extends javax.swing.JPanel {
                 printerBtnActionPerformed(evt);
             }
         });
+        topPanel.add(printerBtn);
 
         utlBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png"))); // NOI18N
         utlBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -217,69 +258,30 @@ public class Main_Panel extends javax.swing.JPanel {
                 utlBtnActionPerformed(evt);
             }
         });
+        topPanel.add(utlBtn);
 
         fileLbl.setBackground(new java.awt.Color(51, 51, 51));
         fileLbl.setFont(new java.awt.Font("Courier New", 1, 11)); // NOI18N
         fileLbl.setForeground(new java.awt.Color(255, 255, 255));
         fileLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         fileLbl.setText("Files");
+        topPanel.add(fileLbl);
 
         prntrLbl.setBackground(new java.awt.Color(51, 51, 51));
         prntrLbl.setFont(new java.awt.Font("Courier New", 1, 11)); // NOI18N
         prntrLbl.setForeground(new java.awt.Color(255, 255, 255));
         prntrLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         prntrLbl.setText("Printer");
+        topPanel.add(prntrLbl);
 
         utlLbl.setBackground(new java.awt.Color(51, 51, 51));
         utlLbl.setFont(new java.awt.Font("Courier New", 1, 11)); // NOI18N
         utlLbl.setForeground(new java.awt.Color(255, 255, 255));
         utlLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         utlLbl.setText("Utility");
+        topPanel.add(utlLbl);
 
-        javax.swing.GroupLayout topPanelLayout = new javax.swing.GroupLayout(topPanel);
-        topPanel.setLayout(topPanelLayout);
-        topPanelLayout.setHorizontalGroup(
-            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(filesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(topPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(fileLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(printerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(topPanelLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(prntrLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(topPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(utlBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(utlLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))))
-        );
-        topPanelLayout.setVerticalGroup(
-            topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topPanelLayout.createSequentialGroup()
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(utlBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(printerBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                        .addComponent(filesBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(topPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fileLbl)
-                    .addComponent(prntrLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(utlLbl))
-                .addGap(0, 9, Short.MAX_VALUE))
-        );
-
-        BtmLayeredPane.setPreferredSize(new java.awt.Dimension(430, 135));
+        add(topPanel);
 
         btmPnlFiles.setBackground(new java.awt.Color(0, 0, 0));
         btmPnlFiles.setForeground(new java.awt.Color(255, 255, 255));
@@ -288,7 +290,6 @@ public class Main_Panel extends javax.swing.JPanel {
 
         FilesPane.setDividerLocation(215);
 
-        LocalStoreBtn.setIcon(new javax.swing.ImageIcon("E:\\markt\\Documents\\NetBeansProjects\\CommunityOS\\Robo Gui\\Media\\Files_Icons\\File_Options\\Local Storage.png")); // NOI18N
         LocalStoreBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LocalStoreBtnActionPerformed(evt);
@@ -303,12 +304,14 @@ public class Main_Panel extends javax.swing.JPanel {
         btmPnlFiles.setLayout(btmPnlFilesLayout);
         btmPnlFilesLayout.setHorizontalGroup(
             btmPnlFilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(FilesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 424, Short.MAX_VALUE)
+            .addComponent(FilesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
         );
         btmPnlFilesLayout.setVerticalGroup(
             btmPnlFilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(FilesPane, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
+        add(btmPnlFiles);
 
         btmPnlMain.setBackground(new java.awt.Color(51, 51, 51));
         btmPnlMain.setForeground(new java.awt.Color(0, 255, 255));
@@ -367,7 +370,7 @@ public class Main_Panel extends javax.swing.JPanel {
                         .addComponent(MtrControlBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(PRINTER_DETAILS, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
                     .addComponent(PrintProgress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 150, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         btmPnlMainLayout.setVerticalGroup(
             btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,8 +385,10 @@ public class Main_Panel extends javax.swing.JPanel {
                     .addComponent(quitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(RoboStatLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 46, Short.MAX_VALUE))
+                .addGap(0, 41, Short.MAX_VALUE))
         );
+
+        add(btmPnlMain);
 
         btmPnlUtility.setBackground(new java.awt.Color(0, 0, 0));
         btmPnlUtility.setForeground(new java.awt.Color(0, 0, 255));
@@ -404,14 +409,12 @@ public class Main_Panel extends javax.swing.JPanel {
 
         utlNetwrkBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/robo/gui/Networking.png"))); // NOI18N
 
-        utlOptBtn.setIcon(new javax.swing.ImageIcon("E:\\markt\\Documents\\NetBeansProjects\\CommunityOS\\Robo Gui\\Media\\White_Utilities\\Options.png")); // NOI18N
         utlOptBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 utlOptBtnActionPerformed(evt);
             }
         });
 
-        utlSysBtn.setIcon(new javax.swing.ImageIcon("E:\\markt\\Documents\\NetBeansProjects\\CommunityOS\\Robo Gui\\Media\\System_Icons\\Shutdown 2.png")); // NOI18N
         utlSysBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 utlSysBtnActionPerformed(evt);
@@ -513,60 +516,7 @@ public class Main_Panel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        BtmLayeredPane.setLayer(btmPnlFiles, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        BtmLayeredPane.setLayer(btmPnlMain, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        BtmLayeredPane.setLayer(btmPnlUtility, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout BtmLayeredPaneLayout = new javax.swing.GroupLayout(BtmLayeredPane);
-        BtmLayeredPane.setLayout(BtmLayeredPaneLayout);
-        BtmLayeredPaneLayout.setHorizontalGroup(
-            BtmLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btmPnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(BtmLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(BtmLayeredPaneLayout.createSequentialGroup()
-                    .addComponent(btmPnlFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(BtmLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(btmPnlUtility, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        BtmLayeredPaneLayout.setVerticalGroup(
-            BtmLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BtmLayeredPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btmPnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
-            .addGroup(BtmLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(BtmLayeredPaneLayout.createSequentialGroup()
-                    .addComponent(btmPnlFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 46, Short.MAX_VALUE)))
-            .addGroup(BtmLayeredPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(BtmLayeredPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(btmPnlUtility, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(30, Short.MAX_VALUE)))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(topPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtmLayeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(topPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addComponent(BtmLayeredPane, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        add(btmPnlUtility);
     }// </editor-fold>//GEN-END:initComponents
 
     private void filesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filesBtnActionPerformed
@@ -577,6 +527,7 @@ public class Main_Panel extends javax.swing.JPanel {
         btmPnlFiles.setVisible(true);
         btmPnlUtility.setVisible(false);
         selectedPanel = 1;
+        setScreenSize();
     }//GEN-LAST:event_filesBtnActionPerformed
 	
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {
@@ -603,6 +554,7 @@ public class Main_Panel extends javax.swing.JPanel {
         btmPnlFiles.setVisible(false);
         btmPnlUtility.setVisible(false);
         selectedPanel = 0;
+        setScreenSize();
     }//GEN-LAST:event_printerBtnActionPerformed
 
     private void utlBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utlBtnActionPerformed
@@ -613,7 +565,7 @@ public class Main_Panel extends javax.swing.JPanel {
         btmPnlMain.setVisible(false);
         btmPnlFiles.setVisible(false);       
         selectedPanel = 2;
-
+        setScreenSize();
     }//GEN-LAST:event_utlBtnActionPerformed
 
     private void MtrControlBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MtrControlBtnActionPerformed
@@ -656,7 +608,6 @@ public class Main_Panel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLayeredPane BtmLayeredPane;
     private javax.swing.JSplitPane FilesPane;
     private javax.swing.JButton LocalStoreBtn;
     private javax.swing.JButton MtrControlBtn;

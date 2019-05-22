@@ -25,11 +25,14 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeSupport;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Properties;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -86,7 +89,14 @@ public class RoboGui {
             NetName      = properties.getProperty("NETWORK_NAME");
             PrinterType  = properties.getProperty("PRINTER_STYLE");
             LogDir       = properties.getProperty("LOG_DIRECTORY");
-            logErr       = new FileHandler(LogDir + "RoboGUI.log", true);
+
+            File f = new File(LogDir);
+            if (f.exists() && f.isDirectory()) {
+                logErr       = new FileHandler(LogDir + "RoboGUI.log", true);
+            } else  {
+                logErr = new FileHandler(System.getProperty("user.home") + "/RoboGui.log", true);
+            }
+            
             
             //customize main frame
             // Disables decorations for this frame. By setting undecorated
@@ -100,6 +110,7 @@ public class RoboGui {
             mainPanel.setBackground(Color.black); 
             mainPanel.setPrinter(printer);
             mainPanel.setProps(properties);
+            mainPanel.setParent(myFrame);
             // add panel to frame 
             myFrame.getContentPane().add(mainPanel); 
             // set the size of frame 
@@ -108,6 +119,8 @@ public class RoboGui {
             myFrame.toFront();
             myFrame.setVisible(true);
             printer.setParent(myFrame, mainPanel);
+            mainPanel.setScreenSize();
+            mainPanel.start_panel();
             
             while(true) {
                 /* 
