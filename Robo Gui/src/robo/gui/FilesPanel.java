@@ -81,9 +81,9 @@ public class FilesPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         fileTopPnl = new javax.swing.JPanel();
-        bckArrow = new javax.swing.JLabel();
         topFilePnlLbl = new javax.swing.JLabel();
-        topFilePnlMenu = new javax.swing.JLabel();
+        backFilesButton = new javax.swing.JButton();
+        ctxFilesMenuBtn = new javax.swing.JButton();
         fileSidePnl = new javax.swing.JPanel();
         filePnlDownArrow = new javax.swing.JLabel();
         filePnlUpArrow = new javax.swing.JLabel();
@@ -93,13 +93,6 @@ public class FilesPanel extends javax.swing.JPanel {
         fileTopPnl.setBackground(new java.awt.Color(51, 51, 51));
         fileTopPnl.setForeground(new java.awt.Color(255, 255, 255));
 
-        bckArrow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/robo/gui/back.png"))); // NOI18N
-        bckArrow.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                bckArrowMouseClicked(evt);
-            }
-        });
-
         topFilePnlLbl.setBackground(new java.awt.Color(51, 51, 51));
         topFilePnlLbl.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
         topFilePnlLbl.setForeground(new java.awt.Color(255, 255, 255));
@@ -107,11 +100,19 @@ public class FilesPanel extends javax.swing.JPanel {
         topFilePnlLbl.setText("Local");
         topFilePnlLbl.setFocusable(false);
 
-        topFilePnlMenu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        topFilePnlMenu.setIcon(new javax.swing.ImageIcon("E:\\markt\\Documents\\NetBeansProjects\\CommunityOS\\Robo Gui\\Media\\Files_Icons\\Hamburger_lines.png")); // NOI18N
-        topFilePnlMenu.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                topFilePnlMenuMouseClicked(evt);
+        backFilesButton.setBackground(new java.awt.Color(0, 0, 0));
+        backFilesButton.setForeground(new java.awt.Color(255, 255, 255));
+        backFilesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/robo/gui/back.png"))); // NOI18N
+        backFilesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backFilesButtonActionPerformed(evt);
+            }
+        });
+
+        ctxFilesMenuBtn.setIcon(new javax.swing.ImageIcon("E:\\markt\\Documents\\NetBeansProjects\\CommunityOS\\Robo Gui\\src\\Media\\Files_Icons\\Hamburger_lines.png")); // NOI18N
+        ctxFilesMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ctxFilesMenuBtnActionPerformed(evt);
             }
         });
 
@@ -120,18 +121,18 @@ public class FilesPanel extends javax.swing.JPanel {
         fileTopPnlLayout.setHorizontalGroup(
             fileTopPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(fileTopPnlLayout.createSequentialGroup()
-                .addComponent(bckArrow, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(backFilesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(topFilePnlLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(topFilePnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(ctxFilesMenuBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
         );
         fileTopPnlLayout.setVerticalGroup(
             fileTopPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bckArrow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(topFilePnlLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(topFilePnlMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+            .addComponent(backFilesButton, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+            .addComponent(ctxFilesMenuBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         filePnlDownArrow.setBackground(new java.awt.Color(51, 51, 51));
@@ -197,21 +198,13 @@ public class FilesPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(fileTopPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fileTopPnl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(fileSidePnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(fileListPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void bckArrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bckArrowMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bckArrowMouseClicked
-
-    private void topFilePnlMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topFilePnlMenuMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_topFilePnlMenuMouseClicked
 
     private void filePnlUpArrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_filePnlUpArrowMouseClicked
         int selItem = filesList.getSelectedIndex();
@@ -251,9 +244,18 @@ public class FilesPanel extends javax.swing.JPanel {
 //         //this line will execute immediately, not waiting for your task to complete
     }//GEN-LAST:event_filesListMouseClicked
 
+    private void ctxFilesMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctxFilesMenuBtnActionPerformed
+        
+    }//GEN-LAST:event_ctxFilesMenuBtnActionPerformed
+
+    private void backFilesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backFilesButtonActionPerformed
+        mainPnl.start_panel();
+    }//GEN-LAST:event_backFilesButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel bckArrow;
+    private javax.swing.JButton backFilesButton;
+    private javax.swing.JButton ctxFilesMenuBtn;
     private javax.swing.JScrollPane fileListPnl;
     private javax.swing.JLabel filePnlDownArrow;
     private javax.swing.JLabel filePnlUpArrow;
@@ -261,6 +263,5 @@ public class FilesPanel extends javax.swing.JPanel {
     private javax.swing.JPanel fileTopPnl;
     private javax.swing.JList<String> filesList;
     private javax.swing.JLabel topFilePnlLbl;
-    private javax.swing.JLabel topFilePnlMenu;
     // End of variables declaration//GEN-END:variables
 }

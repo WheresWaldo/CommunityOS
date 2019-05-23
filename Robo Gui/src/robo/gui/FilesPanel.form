@@ -27,8 +27,8 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="fileTopPnl" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="fileTopPnl" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="fileSidePnl" max="32767" attributes="0"/>
                   <Component id="fileListPnl" pref="246" max="32767" attributes="0"/>
@@ -52,34 +52,24 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="bckArrow" min="-2" pref="56" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                  <Component id="backFilesButton" min="-2" pref="57" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="topFilePnlLbl" min="-2" pref="312" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="topFilePnlMenu" min="-2" pref="67" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="ctxFilesMenuBtn" pref="87" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="bckArrow" max="32767" attributes="0"/>
-              <Component id="topFilePnlLbl" alignment="0" max="32767" attributes="0"/>
-              <Component id="topFilePnlMenu" alignment="0" pref="81" max="32767" attributes="0"/>
+              <Component id="topFilePnlLbl" max="32767" attributes="0"/>
+              <Component id="backFilesButton" alignment="0" pref="126" max="32767" attributes="0"/>
+              <Component id="ctxFilesMenuBtn" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="bckArrow">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/robo/gui/back.png"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="bckArrowMouseClicked"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="topFilePnlLbl">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -96,15 +86,30 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="topFilePnlMenu">
+        <Component class="javax.swing.JButton" name="backFilesButton">
           <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="E:\markt\Documents\NetBeansProjects\CommunityOS\Robo Gui\Media\Files_Icons\Hamburger_lines.png"/>
+              <Image iconType="3" name="/robo/gui/back.png"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="topFilePnlMenuMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backFilesButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="ctxFilesMenuBtn">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="E:\markt\Documents\NetBeansProjects\CommunityOS\Robo Gui\src\Media\Files_Icons\Hamburger_lines.png"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ctxFilesMenuBtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
