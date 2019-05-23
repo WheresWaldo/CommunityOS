@@ -49,7 +49,7 @@ public class RunPrint extends Thread{
         {
             System.out.println("background Print thread task started");
             //fake a running print for now
-            while (i < 120) {
+            while ((i < 120) && (!interrupted())) {
                 Thread.sleep(2500);
                 System.out.println("tick-tock...: printing " + fileToPrint);
                 f = (double)i/120.0;
@@ -68,6 +68,12 @@ public class RunPrint extends Thread{
             parent.setDoPrinting(null);
         }
     }
-
+    
+    public void cancel()    {
+        //turn off heaters, etc...
+        
+        //kill thread
+        interrupt();
+    }
 }
 

@@ -57,32 +57,56 @@ import javax.swing.table.DefaultTableModel;
 public class Main_Panel extends javax.swing.JPanel {
 
     private static final long serialVersionUID = 1L;
-    private RunPrint doPrinting = null;
+    public RunPrint doPrinting = null;
     private String name;
     private Properties props;
     private int selectedPanel = 0;
     private JFrame parent;
 
+    public RunPrint getPrinterProc()    {
+        return doPrinting;
+    }
+    
+    public void setPrinterProc(RunPrint p)  {
+        doPrinting = p;
+    }
+    
     public void setDoPrinting(RunPrint doPrinting) {
         this.doPrinting = doPrinting;
+    }
+    
+    public JPanel getMainPnl()  {
+        return btmPnlMain;
+    }
+    
+    public JPanel getPrintPnl() {
+        return btmPnlPrinting;
     }
 
     public RunPrint getDoPrinting() {
         return this.doPrinting;
     }
     public void start_panel(){
-        ImageIcon foo = new ImageIcon("/Media/files.png");
-        //don't try to do this before frame is drawn
-        int high = filesBtn.getHeight();
-        if (filesBtn.getHeight() > 0)   {
-            double multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
-            filesBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/files.png")).getImage().getScaledInstance((int)(filesBtn.getWidth() * multi), filesBtn.getHeight()/2, Image.SCALE_SMOOTH)));
-            foo = new ImageIcon("/Media/printer_active.png");
-            multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
-            printerBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer_active.png")).getImage().getScaledInstance((int)(printerBtn.getWidth() * multi), printerBtn.getHeight()/2, Image.SCALE_SMOOTH)));
-            foo = new ImageIcon("/Media/settings.png");
-            multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
-            utlBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png")).getImage().getScaledInstance((int)(utlBtn.getWidth() * multi), utlBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+        if(doPrinting != null)  {
+            //should be printing
+            btmPnlPrinting.setVisible(true);
+            btmPnlMain.setVisible(false);
+        } else  {
+            btmPnlPrinting.setVisible(false);
+            btmPnlMain.setVisible(true);
+            ImageIcon foo = new ImageIcon("/Media/files.png");
+            //don't try to do this before frame is drawn
+            int high = filesBtn.getHeight();
+            if (filesBtn.getHeight() > 0)   {
+                double multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+                filesBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/files.png")).getImage().getScaledInstance((int)(filesBtn.getWidth() * multi), filesBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+                foo = new ImageIcon("/Media/printer_active.png");
+                multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+                printerBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer_active.png")).getImage().getScaledInstance((int)(printerBtn.getWidth() * multi), printerBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+                foo = new ImageIcon("/Media/settings.png");
+                multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+                utlBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png")).getImage().getScaledInstance((int)(utlBtn.getWidth() * multi), utlBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+            }
         }
     }
 
@@ -95,8 +119,13 @@ public class Main_Panel extends javax.swing.JPanel {
     }
     
     public void setStatus(String text, int percent) {
-        RoboStatLbl.setText(text);
-        printProgressBar.setValue(percent);
+        if(doPrinting != null)  {
+            printStatLbl.setText(text);
+            printProgressBar.setValue(percent);
+        } else  {
+            RoboStatLbl.setText(text);
+            printProgressBar.setValue(0);
+        }
     }
     
     public void setPrinter(PrinterControl printer) {
@@ -248,10 +277,12 @@ public class Main_Panel extends javax.swing.JPanel {
         tempCtrlBtn = new javax.swing.JButton();
         MtrControlBtn = new javax.swing.JButton();
         PRINTER_DETAILS = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        extruderTempLbl = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         btmPnlUtility = new javax.swing.JPanel();
         utlUpdateBtn = new javax.swing.JButton();
         utlWizardsBtn = new javax.swing.JButton();
@@ -267,7 +298,6 @@ public class Main_Panel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         btmPnlPrinting = new javax.swing.JPanel();
         quitBtn1 = new javax.swing.JButton();
-        RoboStatLbl1 = new javax.swing.JLabel();
         pausePrintBtn = new javax.swing.JButton();
         cancelPrintlBtn = new javax.swing.JButton();
         printProgressBar = new javax.swing.JProgressBar();
@@ -275,6 +305,9 @@ public class Main_Panel extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        printStatLbl = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(51, 51, 51));
         setMaximumSize(new java.awt.Dimension(430, 350));
@@ -394,19 +427,33 @@ public class Main_Panel extends javax.swing.JPanel {
         PRINTER_DETAILS.setBackground(new java.awt.Color(51, 51, 51));
         PRINTER_DETAILS.setFont(new java.awt.Font("Courier New", 1, 24)); // NOI18N
         PRINTER_DETAILS.setForeground(new java.awt.Color(0, 255, 255));
+        PRINTER_DETAILS.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         PRINTER_DETAILS.setText("default");
 
-        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Extruder Temp.");
+        extruderTempLbl.setBackground(new java.awt.Color(0, 0, 0));
+        extruderTempLbl.setForeground(new java.awt.Color(255, 255, 255));
+        extruderTempLbl.setText("Extruder Temp.");
 
         jLabel8.setBackground(new java.awt.Color(0, 0, 0));
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Bed Temp.");
 
-        jLabel9.setText("jLabel9");
+        jLabel9.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("0 / 0  ");
 
-        jLabel10.setText("jLabel9");
+        jLabel10.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("0 / 0 ");
+
+        jLabel18.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("°C");
+
+        jLabel19.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("°C");
 
         javax.swing.GroupLayout btmPnlMainLayout = new javax.swing.GroupLayout(btmPnlMain);
         btmPnlMain.setLayout(btmPnlMainLayout);
@@ -417,9 +464,9 @@ public class Main_Panel extends javax.swing.JPanel {
                 .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(btmPnlMainLayout.createSequentialGroup()
                         .addComponent(quitBtn)
-                        .addGap(52, 52, 52)
+                        .addGap(64, 64, 64)
                         .addComponent(tempCtrlBtn)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(MtrControlBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(PRINTER_DETAILS, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -427,35 +474,45 @@ public class Main_Panel extends javax.swing.JPanel {
                 .addComponent(RoboStatLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btmPnlMainLayout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(extruderTempLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(btmPnlMainLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel18)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btmPnlMainLayout.createSequentialGroup()
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel19)))
                 .addGap(53, 53, 53))
             .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(btmPnlMainLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(295, Short.MAX_VALUE)))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(348, Short.MAX_VALUE)))
         );
         btmPnlMainLayout.setVerticalGroup(
             btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btmPnlMainLayout.createSequentialGroup()
-                .addComponent(PRINTER_DETAILS)
-                .addGap(29, 29, 29)
+                .addComponent(PRINTER_DETAILS, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tempCtrlBtn)
                     .addComponent(MtrControlBtn)
-                    .addComponent(quitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(quitBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tempCtrlBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(RoboStatLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(extruderTempLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btmPnlMainLayout.createSequentialGroup()
@@ -605,10 +662,6 @@ public class Main_Panel extends javax.swing.JPanel {
             }
         });
 
-        RoboStatLbl1.setBackground(new java.awt.Color(51, 51, 51));
-        RoboStatLbl1.setForeground(new java.awt.Color(255, 255, 255));
-        RoboStatLbl1.setText("Robo Ready");
-
         pausePrintBtn.setBackground(new java.awt.Color(0, 0, 255));
         pausePrintBtn.setForeground(new java.awt.Color(255, 255, 255));
         pausePrintBtn.setText("Pause");
@@ -635,9 +688,25 @@ public class Main_Panel extends javax.swing.JPanel {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Bed Temp.");
 
-        jLabel13.setText("jLabel9");
+        jLabel13.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("0 / 0");
 
-        jLabel14.setText("jLabel9");
+        jLabel14.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("0 / 0");
+
+        jLabel16.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("°C");
+
+        jLabel17.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("°C");
+
+        printStatLbl.setText("jLabel7");
 
         javax.swing.GroupLayout btmPnlPrintingLayout = new javax.swing.GroupLayout(btmPnlPrinting);
         btmPnlPrinting.setLayout(btmPnlPrintingLayout);
@@ -647,53 +716,54 @@ public class Main_Panel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(btmPnlPrintingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(btmPnlPrintingLayout.createSequentialGroup()
+                        .addComponent(printStatLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btmPnlPrintingLayout.createSequentialGroup()
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel16)
+                        .addGap(73, 73, 73))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btmPnlPrintingLayout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45))
+                    .addGroup(btmPnlPrintingLayout.createSequentialGroup()
                         .addComponent(quitBtn1)
-                        .addGap(52, 52, 52)
+                        .addGap(61, 61, 61)
                         .addComponent(pausePrintBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(cancelPrintlBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(printProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(btmPnlPrintingLayout.createSequentialGroup()
-                .addComponent(RoboStatLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btmPnlPrintingLayout.createSequentialGroup()
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(btmPnlPrintingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53))
-            .addGroup(btmPnlPrintingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(btmPnlPrintingLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(295, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(cancelPrintlBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 94, Short.MAX_VALUE))
+                    .addComponent(printProgressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         btmPnlPrintingLayout.setVerticalGroup(
             btmPnlPrintingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btmPnlPrintingLayout.createSequentialGroup()
-                .addGap(javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE)
-                .addComponent(printProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
+                .addComponent(printProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(printStatLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(btmPnlPrintingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(quitBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pausePrintBtn)
-                    .addComponent(cancelPrintlBtn)
-                    .addComponent(quitBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cancelPrintlBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RoboStatLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(btmPnlPrintingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(btmPnlPrintingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btmPnlPrintingLayout.createSequentialGroup()
-                    .addContainerGap(128, Short.MAX_VALUE)
+                .addGroup(btmPnlPrintingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(18, 18, 18)
+                .addGroup(btmPnlPrintingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel14)
-                    .addContainerGap()))
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         add(btmPnlPrinting);
@@ -743,9 +813,19 @@ public class Main_Panel extends javax.swing.JPanel {
 
     private void printerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printerBtnActionPerformed
         setScreenSize();
-        btmPnlMain.setVisible(true);
-        btmPnlFiles.setVisible(false);
-        btmPnlUtility.setVisible(false);
+        if(doPrinting != null)  {
+            //are printing
+            btmPnlMain.setVisible(false);
+            btmPnlFiles.setVisible(false);
+            btmPnlUtility.setVisible(false);
+            btmPnlPrinting.setVisible(true);            
+        } else  {
+            //are not printing
+            btmPnlMain.setVisible(false);
+            btmPnlFiles.setVisible(false);
+            btmPnlUtility.setVisible(false);
+            btmPnlPrinting.setVisible(false);
+        }
         selectedPanel = 0;
         ImageIcon foo = new ImageIcon("/Media/files.png");
         double multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
@@ -820,7 +900,8 @@ public class Main_Panel extends javax.swing.JPanel {
     }//GEN-LAST:event_LocalStoreBtnActionPerformed
 
     private void quitBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitBtn1ActionPerformed
-        // TODO add your handling code here:
+        RoboGui.SaveProperties();
+        System.exit(0);
     }//GEN-LAST:event_quitBtn1ActionPerformed
 
     private void pausePrintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pausePrintBtnActionPerformed
@@ -828,7 +909,11 @@ public class Main_Panel extends javax.swing.JPanel {
     }//GEN-LAST:event_pausePrintBtnActionPerformed
 
     private void cancelPrintlBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelPrintlBtnActionPerformed
-        // TODO add your handling code here:
+        if(doPrinting != null)  {
+            doPrinting.cancel();
+            doPrinting = null;
+            start_panel();
+        }
     }//GEN-LAST:event_cancelPrintlBtnActionPerformed
 
 
@@ -837,13 +922,13 @@ public class Main_Panel extends javax.swing.JPanel {
     private javax.swing.JButton MtrControlBtn;
     private javax.swing.JLabel PRINTER_DETAILS;
     private javax.swing.JLabel RoboStatLbl;
-    private javax.swing.JLabel RoboStatLbl1;
     private javax.swing.JButton USBStoreBtn;
     private javax.swing.JPanel btmPnlFiles;
     private javax.swing.JPanel btmPnlMain;
     private javax.swing.JPanel btmPnlPrinting;
     private javax.swing.JPanel btmPnlUtility;
     private javax.swing.JButton cancelPrintlBtn;
+    private javax.swing.JLabel extruderTempLbl;
     private javax.swing.JLabel fileLbl;
     private javax.swing.JButton filesBtn;
     private javax.swing.JLabel jLabel1;
@@ -852,16 +937,20 @@ public class Main_Panel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JButton pausePrintBtn;
     private javax.swing.JProgressBar printProgressBar;
+    private javax.swing.JLabel printStatLbl;
     private javax.swing.JButton printerBtn;
     private javax.swing.JLabel prntrLbl;
     private javax.swing.JButton quitBtn;

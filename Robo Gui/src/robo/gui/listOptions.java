@@ -21,7 +21,12 @@ package robo.gui;
  * @author markt
  */
 public class listOptions extends javax.swing.JPanel {
+    FilesPanel  parent;
 
+    public void setParent(FilesPanel parent) {
+        this.parent = parent;
+    }
+    
     /**
      * Creates new form listOptions
      */
@@ -204,11 +209,13 @@ public class listOptions extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        parent.setVisible(true);
     }//GEN-LAST:event_closeButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        parent.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
 

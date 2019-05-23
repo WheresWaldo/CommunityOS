@@ -37,6 +37,7 @@ public class PrinterControl {
 
     public void setDoPrinting(RunPrint doPrinting) {
         this.doPrinting = doPrinting;
+        mainPnl.setPrinterProc(doPrinting);
     }
 
     public void setParent(JFrame mFrame, Main_Panel mPanel) {
@@ -90,6 +91,7 @@ public class PrinterControl {
             doPrinting = new RunPrint(fileName);
             doPrinting.setParent(this);
             doPrinting.start();
+            mainPnl.setPrinterProc(doPrinting);
         }
         
     }

@@ -237,6 +237,8 @@ public class FilesPanel extends javax.swing.JPanel {
 
         if (mainPnl.getDoPrinting() == null)    {
             if(exists && !isDir)    {
+                mainPnl.getPrintPnl().setVisible(true);
+                mainPnl.getMainPnl().setVisible(false);
                 printer.startPrintRun(fileName);
             }
         }
@@ -245,10 +247,17 @@ public class FilesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_filesListMouseClicked
 
     private void ctxFilesMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ctxFilesMenuBtnActionPerformed
-        
+        listOptions list = new listOptions();
+        pFrame.getContentPane().add(list);
+        pFrame.setVisible(true);
+        pFrame.pack();
+        list.setParent(this);
+        setVisible(false);
     }//GEN-LAST:event_ctxFilesMenuBtnActionPerformed
 
     private void backFilesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backFilesButtonActionPerformed
+        this.setVisible(false);
+        mainPnl.setVisible(true);
         mainPnl.start_panel();
     }//GEN-LAST:event_backFilesButtonActionPerformed
 
