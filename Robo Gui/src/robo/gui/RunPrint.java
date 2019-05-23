@@ -74,6 +74,7 @@ public class RunPrint extends Thread{
         
         //kill thread
         interrupt();
+        parent.setDoPrinting(null);
     }
 }
 
