@@ -23,7 +23,13 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
@@ -33,6 +39,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -63,10 +70,15 @@ public class Main_Panel extends javax.swing.JPanel {
         return this.doPrinting;
     }
     public void start_panel(){
-        //printerBtn.doClick();
-        //filesBtnActionPerformed(null);
-        //topPanel.repaint();
-        
+        ImageIcon foo = new ImageIcon("/Media/files.png");
+        double multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        filesBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/files.png")).getImage().getScaledInstance((int)(filesBtn.getWidth() * multi), filesBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+        foo = new ImageIcon("/Media/printer_active.png");
+        multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        printerBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer_active.png")).getImage().getScaledInstance((int)(printerBtn.getWidth() * multi), printerBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+        foo = new ImageIcon("/Media/settings.png");
+        multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        utlBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png")).getImage().getScaledInstance((int)(utlBtn.getWidth() * multi), utlBtn.getHeight()/2, Image.SCALE_SMOOTH)));
     }
 
     public void setProps(Properties props) {
@@ -110,10 +122,16 @@ public class Main_Panel extends javax.swing.JPanel {
          int btn_panel_height = main_height/3;
          filesBtn.setSize(btn_panel_width/3 - 5, btn_panel_height);
          filesBtn.setPreferredSize(new Dimension(btn_panel_width/3 - 5, btn_panel_height));
+         filesBtn.setHorizontalTextPosition(JLabel.CENTER);
+         filesBtn.setVerticalTextPosition(JLabel.BOTTOM);
          //printerBtn.setSize(btn_panel_width/3, btn_panel_height);
          printerBtn.setPreferredSize(new Dimension(btn_panel_width/3 - 5, btn_panel_height));
+         printerBtn.setHorizontalTextPosition(JLabel.CENTER);
+         printerBtn.setVerticalTextPosition(JLabel.BOTTOM);
          //utlBtn.setSize(btn_panel_width/3, btn_panel_height);
          utlBtn.setPreferredSize(new Dimension(btn_panel_width/3 - 5, btn_panel_height));
+         utlBtn.setHorizontalTextPosition(JLabel.CENTER);
+         utlBtn.setVerticalTextPosition(JLabel.BOTTOM);
          //filesBtn.setLocation(0, 0);
          
          //printerBtn.setLocation(btn_panel_width/3, 0);
@@ -121,9 +139,24 @@ public class Main_Panel extends javax.swing.JPanel {
          main_height = parent.getHeight();
          //btmPnlMain.setSize(main_width, (main_height/3) * 2);
          btmPnlMain.setPreferredSize(new Dimension(main_width, (main_height/3) * 2));
+         btmPnlFiles.setPreferredSize(new Dimension(main_width, (main_height/3) * 2));
+         //fix file buttons here
+         int file_height = (main_height/3) * 2;
+         int file_width = main_width;
+         //LocalStoreBtn.setSize(file_width/2 - 5, file_height);
+         LocalStoreBtn.setPreferredSize(new Dimension(file_width/2 - 5, file_height));
+         LocalStoreBtn.setLocation(0, 0);
+         USBStoreBtn.setPreferredSize(new Dimension(file_width/2 - 5, file_height));
+         USBStoreBtn.setLocation(file_width/2, 0);
+         LocalStoreBtn.setHorizontalTextPosition(JLabel.CENTER);
+         LocalStoreBtn.setVerticalTextPosition(JLabel.BOTTOM);
+         USBStoreBtn.setHorizontalTextPosition(JLabel.CENTER);
+         USBStoreBtn.setVerticalTextPosition(JLabel.BOTTOM);
+         //btmPnlUtility.setLocation(0, file_width/2);
          //btmPnlMain.setLocation(0, main_height+1);
-         
+
     }
+
     
     private PrinterControl printer;
     
@@ -145,6 +178,7 @@ public class Main_Panel extends javax.swing.JPanel {
             btmPnlFiles.setVisible(false);
             btmPnlMain.setVisible(true);
             btmPnlUtility.setVisible(false);
+            
             start_panel();
         } catch (Exception ex) {
             Logger.getLogger(Main_Panel.class.getName()).log(Level.SEVERE, null, ex);
@@ -177,6 +211,7 @@ public class Main_Panel extends javax.swing.JPanel {
             btmPnlFiles.setVisible(false);
             btmPnlMain.setVisible(true);
             btmPnlUtility.setVisible(false);
+            
             start_panel();
         } catch (Exception ex) {
             Logger.getLogger(Main_Panel.class.getName()).log(Level.SEVERE, null, ex);
@@ -200,7 +235,6 @@ public class Main_Panel extends javax.swing.JPanel {
         prntrLbl = new javax.swing.JLabel();
         utlLbl = new javax.swing.JLabel();
         btmPnlFiles = new javax.swing.JPanel();
-        FilesPane = new javax.swing.JSplitPane();
         LocalStoreBtn = new javax.swing.JButton();
         USBStoreBtn = new javax.swing.JButton();
         btmPnlMain = new javax.swing.JPanel();
@@ -235,6 +269,7 @@ public class Main_Panel extends javax.swing.JPanel {
         topPanel.setMaximumSize(new java.awt.Dimension(350, 32767));
 
         filesBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/files.png"))); // NOI18N
+        filesBtn.setText("Files");
         filesBtn.setName(""); // NOI18N
         filesBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         filesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -245,6 +280,7 @@ public class Main_Panel extends javax.swing.JPanel {
         topPanel.add(filesBtn);
 
         printerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer.png"))); // NOI18N
+        printerBtn.setText("Printer");
         printerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 printerBtnActionPerformed(evt);
@@ -253,6 +289,7 @@ public class Main_Panel extends javax.swing.JPanel {
         topPanel.add(printerBtn);
 
         utlBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png"))); // NOI18N
+        utlBtn.setText("Utilities");
         utlBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 utlBtnActionPerformed(evt);
@@ -283,33 +320,23 @@ public class Main_Panel extends javax.swing.JPanel {
 
         add(topPanel);
 
-        btmPnlFiles.setBackground(new java.awt.Color(0, 0, 0));
+        btmPnlFiles.setBackground(new java.awt.Color(255, 255, 51));
         btmPnlFiles.setForeground(new java.awt.Color(255, 255, 255));
         btmPnlFiles.setToolTipText("");
         btmPnlFiles.setPreferredSize(new java.awt.Dimension(420, 182));
 
-        FilesPane.setDividerLocation(215);
-
+        LocalStoreBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Files_Icons/File_Options/Local Storage.png"))); // NOI18N
+        LocalStoreBtn.setText("Local Storage");
         LocalStoreBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LocalStoreBtnActionPerformed(evt);
             }
         });
-        FilesPane.setLeftComponent(LocalStoreBtn);
+        btmPnlFiles.add(LocalStoreBtn);
 
         USBStoreBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/robo/gui/USB Storage.png"))); // NOI18N
-        FilesPane.setRightComponent(USBStoreBtn);
-
-        javax.swing.GroupLayout btmPnlFilesLayout = new javax.swing.GroupLayout(btmPnlFiles);
-        btmPnlFiles.setLayout(btmPnlFilesLayout);
-        btmPnlFilesLayout.setHorizontalGroup(
-            btmPnlFilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(FilesPane, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
-        );
-        btmPnlFilesLayout.setVerticalGroup(
-            btmPnlFilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(FilesPane, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        USBStoreBtn.setText("USB Storage");
+        btmPnlFiles.add(USBStoreBtn);
 
         add(btmPnlFiles);
 
@@ -520,14 +547,29 @@ public class Main_Panel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void filesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filesBtnActionPerformed
-        filesBtn.setIcon(new ImageIcon(Class.class.getResource("/Media/files_active.png")));
-        printerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer.png"))); // NOI18N
-        utlBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png")));        
+        setScreenSize();        
         btmPnlMain.setVisible(false);
         btmPnlFiles.setVisible(true);
         btmPnlUtility.setVisible(false);
         selectedPanel = 1;
-        setScreenSize();
+        ImageIcon foo = new ImageIcon("/Media/files_active.png");
+        double multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        filesBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/files_active.png")).getImage().getScaledInstance((int)(filesBtn.getWidth() * multi), filesBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+        //filesBtn.setIcon(new ImageIcon(Class.class.getResource("/Media/files_active.png")));
+        foo = new ImageIcon("/Media/printer.png");
+        multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        printerBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer.png")).getImage().getScaledInstance((int)(printerBtn.getWidth() * multi), printerBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+        //printerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer.png"))); // NOI18N
+        foo = new ImageIcon("/Media/settings.png");
+        multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        utlBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png")).getImage().getScaledInstance((int)(utlBtn.getWidth() * multi), utlBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+        //utlBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png")));
+        //foo = new ImageIcon("Media/Files_Icons/File_Options/Local Storage.png");
+        //multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        //LocalStoreBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("Media/Files_Icons/File_Options/Local Storage.png")).getImage().getScaledInstance((int)(LocalStoreBtn.getWidth() * multi), LocalStoreBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+        //foo = new ImageIcon("Media/Files_Icons/File_Options/USB Storage.png");
+        //multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        //USBStoreBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("Media/Files_Icons/File_Options/USB Storage.png")).getImage().getScaledInstance((int)(USBStoreBtn.getWidth() * multi), USBStoreBtn.getHeight()/2, Image.SCALE_SMOOTH)));
     }//GEN-LAST:event_filesBtnActionPerformed
 	
     private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {
@@ -547,25 +589,43 @@ public class Main_Panel extends javax.swing.JPanel {
 	}//GEN-LAST:event_networkBtnActionPerformed
 
     private void printerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printerBtnActionPerformed
-        filesBtn.setIcon(new ImageIcon(Class.class.getResource("/Media/files.png")));
-        printerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer_active.png"))); // NOI18N
-        utlBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png")));        
+        setScreenSize();
         btmPnlMain.setVisible(true);
         btmPnlFiles.setVisible(false);
         btmPnlUtility.setVisible(false);
         selectedPanel = 0;
-        setScreenSize();
+        ImageIcon foo = new ImageIcon("/Media/files.png");
+        double multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        filesBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/files.png")).getImage().getScaledInstance((int)(filesBtn.getWidth() * multi), filesBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+        foo = new ImageIcon("/Media/printer_active.png");
+        multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        printerBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer_active.png")).getImage().getScaledInstance((int)(printerBtn.getWidth() * multi), printerBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+        foo = new ImageIcon("/Media/settings.png");
+        multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        utlBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png")).getImage().getScaledInstance((int)(utlBtn.getWidth() * multi), utlBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+        //filesBtn.setIcon(new ImageIcon(Class.class.getResource("/Media/files.png")));
+        //printerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer_active.png"))); // NOI18N
+        //utlBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png")));  
     }//GEN-LAST:event_printerBtnActionPerformed
 
     private void utlBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_utlBtnActionPerformed
-        filesBtn.setIcon(new ImageIcon(Class.class.getResource("/Media/files.png")));
-        printerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer.png"))); // NOI18N
-        utlBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings_active.png")));    
+        setScreenSize();
         btmPnlUtility.setVisible(true);
         btmPnlMain.setVisible(false);
         btmPnlFiles.setVisible(false);       
         selectedPanel = 2;
-        setScreenSize();
+        ImageIcon foo = new ImageIcon("/Media/files.png");
+        double multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        filesBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/files.png")).getImage().getScaledInstance((int)(filesBtn.getWidth() * multi), filesBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+        foo = new ImageIcon("/Media/printer.png");
+        multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        printerBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer.png")).getImage().getScaledInstance((int)(printerBtn.getWidth() * multi), printerBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+        foo = new ImageIcon("/Media/settings_active.png");
+        multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+        utlBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings_active.png")).getImage().getScaledInstance((int)(utlBtn.getWidth() * multi), utlBtn.getHeight()/2, Image.SCALE_SMOOTH)));
+        //filesBtn.setIcon(new ImageIcon(Class.class.getResource("/Media/files.png")));
+        //printerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer.png"))); // NOI18N
+        //utlBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings_active.png")));    
     }//GEN-LAST:event_utlBtnActionPerformed
 
     private void MtrControlBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MtrControlBtnActionPerformed
@@ -608,7 +668,6 @@ public class Main_Panel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSplitPane FilesPane;
     private javax.swing.JButton LocalStoreBtn;
     private javax.swing.JButton MtrControlBtn;
     private javax.swing.JLabel PRINTER_DETAILS;
