@@ -58,7 +58,7 @@ public class RoboGui {
     private static String LogDir;
     private static final JFrame myFrame = new JFrame("Main_Frame");
     private static PrinterControl printer;
-
+   
 
     public static Properties getProperties() {
         return properties;
@@ -68,6 +68,7 @@ public class RoboGui {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        boolean bFirst = false;
         
         try {
             printer = new PrinterControl();
@@ -121,6 +122,9 @@ public class RoboGui {
             printer.setParent(myFrame, mainPanel);
             mainPanel.setScreenSize();
             mainPanel.start_panel();
+//            mainPanel.repaint();
+            myFrame.validate(); // because you added panel after setVisible was called
+            myFrame.repaint(); // because you added panel after setVisible was called
             myFrame.pack();
             while(true) {
                 /* 
@@ -131,6 +135,10 @@ public class RoboGui {
                  * myFrame (which is currently NOT even subclassed -- just 
                  * a default JFrame);
                  */
+                if(bFirst == false) {
+                    mainPanel.firePrinterBtn();
+                    bFirst = true;
+                }
             }
             //SaveProps on Exit
         } catch (Exception ex)  {

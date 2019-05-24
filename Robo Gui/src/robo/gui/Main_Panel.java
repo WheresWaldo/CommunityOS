@@ -86,6 +86,7 @@ public class Main_Panel extends javax.swing.JPanel {
     public RunPrint getDoPrinting() {
         return this.doPrinting;
     }
+    
     public void start_panel(){
         if(doPrinting != null)  {
             //should be printing
@@ -101,10 +102,10 @@ public class Main_Panel extends javax.swing.JPanel {
                 double multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
                 filesBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/files.png")).getImage().getScaledInstance((int)(filesBtn.getWidth() * multi), filesBtn.getHeight()/2, Image.SCALE_SMOOTH)));
                 foo = new ImageIcon("/Media/printer_active.png");
-                multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+                multi = (printerBtn.getHeight()/2) / foo.getIconHeight();
                 printerBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer_active.png")).getImage().getScaledInstance((int)(printerBtn.getWidth() * multi), printerBtn.getHeight()/2, Image.SCALE_SMOOTH)));
                 foo = new ImageIcon("/Media/settings.png");
-                multi = (filesBtn.getHeight()/2) / foo.getIconHeight();
+                multi = (utlBtn.getHeight()/2) / foo.getIconHeight();
                 utlBtn.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/settings.png")).getImage().getScaledInstance((int)(utlBtn.getWidth() * multi), utlBtn.getHeight()/2, Image.SCALE_SMOOTH)));
             }
         }
@@ -149,6 +150,9 @@ public class Main_Panel extends javax.swing.JPanel {
     public void setScreenSize(){
          int main_width = parent.getWidth();
          int main_height = parent.getHeight();
+         filesBtn.setVisible(false);
+         printerBtn.setVisible(false);
+         utlBtn.setVisible(false);
          //topPanel.setSize(main_width, main_height/3);
          topPanel.setPreferredSize(new Dimension(main_width, main_height/3));
          //topPanel.setLocation(0, 0);
@@ -188,7 +192,10 @@ public class Main_Panel extends javax.swing.JPanel {
          USBStoreBtn.setVerticalTextPosition(JLabel.BOTTOM);
          //btmPnlUtility.setLocation(0, file_width/2);
          //btmPnlMain.setLocation(0, main_height+1);
-
+         filesBtn.setVisible(true);
+         printerBtn.setVisible(true);
+         utlBtn.setVisible(true);
+         
     }
 
     
@@ -332,6 +339,14 @@ public class Main_Panel extends javax.swing.JPanel {
 
         printerBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/printer.png"))); // NOI18N
         printerBtn.setText("Printer");
+        printerBtn.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                printerBtnComponentResized(evt);
+            }
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                printerBtnComponentShown(evt);
+            }
+        });
         printerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 printerBtnActionPerformed(evt);
@@ -810,7 +825,7 @@ public class Main_Panel extends javax.swing.JPanel {
     private void networkBtnActionPerformed(java.awt.event.ActionEvent evt) {
 		//GEN-FIRST:event_networkBtnActionPerformed
 	}//GEN-LAST:event_networkBtnActionPerformed
-
+    
     private void printerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printerBtnActionPerformed
         setScreenSize();
         if(doPrinting != null)  {
@@ -821,7 +836,7 @@ public class Main_Panel extends javax.swing.JPanel {
             btmPnlPrinting.setVisible(true);            
         } else  {
             //are not printing
-            btmPnlMain.setVisible(false);
+            btmPnlMain.setVisible(true);
             btmPnlFiles.setVisible(false);
             btmPnlUtility.setVisible(false);
             btmPnlPrinting.setVisible(false);
@@ -915,6 +930,14 @@ public class Main_Panel extends javax.swing.JPanel {
             start_panel();
         }
     }//GEN-LAST:event_cancelPrintlBtnActionPerformed
+
+    private void printerBtnComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_printerBtnComponentResized
+        // TODO add your handling code here:
+    }//GEN-LAST:event_printerBtnComponentResized
+
+    private void printerBtnComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_printerBtnComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_printerBtnComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -67,6 +67,8 @@
             <Property name="text" type="java.lang.String" value="Printer"/>
           </Properties>
           <Events>
+            <EventHandler event="componentResized" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="printerBtnComponentResized"/>
+            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="printerBtnComponentShown"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="printerBtnActionPerformed"/>
           </Events>
         </Component>
