@@ -117,6 +117,7 @@ public class Main_Panel extends javax.swing.JPanel {
     
     public void setStatus(String text)  {
         RoboStatLbl.setText(text);
+        printStatLbl.setText(text);
     }
     
     public void setStatus(String text, int percent) {
