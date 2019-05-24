@@ -136,7 +136,7 @@ public class RoboGui {
                  * a default JFrame);
                  */
                 if(bFirst == false) {
-                    mainPanel.firePrinterBtn();
+//                    mainPanel.firePrinterBtn();
                     bFirst = true;
                 }
             }
