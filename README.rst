@@ -30,8 +30,8 @@ Requirements
 #. realpath
 #. sudo (the script itself calls it, running as root without sudo won't work)
 
-Build CommunityOS From within CommunityOS / Raspbian / Debian 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Build CommunityOS From within CommunityOS / Raspbian / Debian / Ubuntu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 CommunityOS can be built on Debian, Raspbian, or even CommunityOS.
 Build requires about 6.1 GB of free space available. You can build it by issuing the following commands::
@@ -62,7 +62,7 @@ Code contribution would be appreciated! Note that touchscreen and UI are unconfi
 How an enduser will use the image?
 ----------------------------------
 
-#. Download the image from the appropriate location <-- PLACEHOLDER FOR CLEARER INSTRUCTIONS 
+#. Download the image from the repository releases page. Latest release are always listed at the top. 
 #. Unzip the image and install it to an sd card `like any other Raspberry Pi image <https://www.raspberrypi.org/documentation/installation/installing-images/README.md>`_
 #. Configure your WiFi by editing ``communityos-wpa-supplicant.txt`` on the root of the flashed card when using it like a thumb drive
 #. Boot the Pi from the card
