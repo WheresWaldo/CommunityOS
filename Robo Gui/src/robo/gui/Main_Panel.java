@@ -195,7 +195,7 @@ public class Main_Panel extends javax.swing.JPanel {
          filesBtn.setVisible(true);
          printerBtn.setVisible(true);
          utlBtn.setVisible(true);
-         
+         invalidate();
     }
 
     
@@ -343,9 +343,6 @@ public class Main_Panel extends javax.swing.JPanel {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 printerBtnComponentResized(evt);
             }
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                printerBtnComponentShown(evt);
-            }
         });
         printerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -389,6 +386,7 @@ public class Main_Panel extends javax.swing.JPanel {
         btmPnlFiles.setBackground(new java.awt.Color(255, 255, 51));
         btmPnlFiles.setForeground(new java.awt.Color(255, 255, 255));
         btmPnlFiles.setToolTipText("");
+        btmPnlFiles.setName(""); // NOI18N
         btmPnlFiles.setPreferredSize(new java.awt.Dimension(420, 182));
 
         LocalStoreBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/Files_Icons/File_Options/Local Storage.png"))); // NOI18N
@@ -408,7 +406,8 @@ public class Main_Panel extends javax.swing.JPanel {
 
         btmPnlMain.setBackground(new java.awt.Color(51, 51, 51));
         btmPnlMain.setForeground(new java.awt.Color(0, 255, 255));
-        btmPnlMain.setPreferredSize(new java.awt.Dimension(405, 153));
+        btmPnlMain.setMinimumSize(new java.awt.Dimension(397, 137));
+        btmPnlMain.setPreferredSize(new java.awt.Dimension(420, 182));
 
         quitBtn.setText("Quit");
         quitBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -506,7 +505,7 @@ public class Main_Panel extends javax.swing.JPanel {
                 .addGroup(btmPnlMainLayout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(348, Short.MAX_VALUE)))
+                    .addContainerGap(363, Short.MAX_VALUE)))
         );
         btmPnlMainLayout.setVerticalGroup(
             btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,7 +530,7 @@ public class Main_Panel extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(btmPnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btmPnlMainLayout.createSequentialGroup()
-                    .addContainerGap(133, Short.MAX_VALUE)
+                    .addContainerGap(157, Short.MAX_VALUE)
                     .addComponent(jLabel10)
                     .addContainerGap()))
         );
@@ -934,10 +933,6 @@ public class Main_Panel extends javax.swing.JPanel {
     private void printerBtnComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_printerBtnComponentResized
         // TODO add your handling code here:
     }//GEN-LAST:event_printerBtnComponentResized
-
-    private void printerBtnComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_printerBtnComponentShown
-        // TODO add your handling code here:
-    }//GEN-LAST:event_printerBtnComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

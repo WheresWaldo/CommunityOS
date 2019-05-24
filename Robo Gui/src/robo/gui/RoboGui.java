@@ -22,6 +22,7 @@ package robo.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeSupport;
 import java.io.BufferedWriter;
@@ -122,7 +123,6 @@ public class RoboGui {
             printer.setParent(myFrame, mainPanel);
             mainPanel.setScreenSize();
             mainPanel.start_panel();
-//            mainPanel.repaint();
             myFrame.validate(); // because you added panel after setVisible was called
             myFrame.repaint(); // because you added panel after setVisible was called
             myFrame.pack();
@@ -141,8 +141,7 @@ public class RoboGui {
                 }
             }
             //SaveProps on Exit
-        } catch (Exception ex)  {
-            ex.printStackTrace();
+        } catch (HeadlessException | IOException | SecurityException ex)  {
         }
     }
 
