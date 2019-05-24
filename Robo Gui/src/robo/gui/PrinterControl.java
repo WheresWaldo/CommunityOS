@@ -57,7 +57,7 @@ public class PrinterControl {
     public void setPrintProgress(String text)
     {
         if(!text.isEmpty())   {
-            mainPnl.setStatus(text);
+            mainPnl.setStatus(text);           
         }
     }
     

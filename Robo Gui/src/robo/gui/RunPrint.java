@@ -52,7 +52,7 @@ public class RunPrint extends Thread{
             while ((i < 120) && (!interrupted())) {
                 Thread.sleep(2500);
                 System.out.println("tick-tock...: printing " + fileToPrint);
-                f = (double)i/120.0;
+                f = ((double)i/120.0) * 100;
                 parent.setPrintProgress("tick-tock...: printing ", (int) f);
                 i++;
             }            
