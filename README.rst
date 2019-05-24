@@ -62,7 +62,7 @@ Code contribution would be appreciated! Note that touchscreen and UI are unconfi
 How an enduser will use the image?
 ----------------------------------
 
-#. Download the image from the repository `releases <https://github.com/WheresWaldo/CommunityOS/releases>` page. Latest release are always listed at the top. 
+#. Download the image from the repository `releases <https://github.com/WheresWaldo/CommunityOS/releases>`_ page. Latest release are always listed at the top. 
 #. Unzip the image and install it to an sd card `like any other Raspberry Pi image <https://www.raspberrypi.org/documentation/installation/installing-images/README.md>`_
 #. Configure your WiFi by editing ``communityos-wpa-supplicant.txt`` on the root of the flashed card when using it like a thumb drive
 #. Boot the Pi from the card
