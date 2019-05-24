@@ -131,13 +131,9 @@ public class Main_Panel extends javax.swing.JPanel {
     }
     
     public void setStatus(String text, int percent) {
-        if(doPrinting != null)  {
-            printStatLbl.setText(text);
-            printProgressBar.setValue(percent);
-        } else  {
-            RoboStatLbl.setText(text);
-            printProgressBar.setValue(0);
-        }
+        printStatLbl.setText(text);
+        RoboStatLbl.setText(text);
+        printProgressBar.setValue(percent);
     }
     
     public void setPrinter(PrinterControl printer) {
@@ -731,7 +727,9 @@ public class Main_Panel extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("°C");
 
-        printStatLbl.setText("jLabel7");
+        printStatLbl.setBackground(new java.awt.Color(0, 0, 0));
+        printStatLbl.setForeground(new java.awt.Color(255, 255, 255));
+        printStatLbl.setToolTipText("");
 
         jLabel7.setBackground(new java.awt.Color(0, 0, 0));
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
