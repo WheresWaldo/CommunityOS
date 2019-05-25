@@ -298,23 +298,11 @@ public class Main_Panel extends javax.swing.JPanel {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         btmPnlUtility = new javax.swing.JPanel();
-        topLeftPnl = new javax.swing.JPanel();
-        fanBtnLbl = new javax.swing.JLabel();
         utlFanBtn = new javax.swing.JButton();
-        topCntrPnl = new javax.swing.JPanel();
         utlWizardsBtn = new javax.swing.JButton();
-        wizBtnLbl = new javax.swing.JLabel();
-        topRightPnl = new javax.swing.JPanel();
         utlNetwrkBtn = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        BtmLeftPnl = new javax.swing.JPanel();
         utlUpdateBtn = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        BtmCntrPnl = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
         utlOptBtn = new javax.swing.JButton();
-        utlSysPnl = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
         utlSysBtn = new javax.swing.JButton();
         btmPnlPrinting = new javax.swing.JPanel();
         quitBtn1 = new javax.swing.JButton();
@@ -555,12 +543,8 @@ public class Main_Panel extends javax.swing.JPanel {
         btmPnlUtility.setForeground(new java.awt.Color(0, 0, 255));
         btmPnlUtility.setPreferredSize(new java.awt.Dimension(780, 380));
 
-        fanBtnLbl.setBackground(new java.awt.Color(0, 0, 0));
-        fanBtnLbl.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        fanBtnLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        fanBtnLbl.setText("Fan Control");
-
         utlFanBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/robo/gui/Fans.png"))); // NOI18N
+        utlFanBtn.setText("Fan Control");
         utlFanBtn.setName(""); // NOI18N
         utlFanBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -568,126 +552,24 @@ public class Main_Panel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout topLeftPnlLayout = new javax.swing.GroupLayout(topLeftPnl);
-        topLeftPnl.setLayout(topLeftPnlLayout);
-        topLeftPnlLayout.setHorizontalGroup(
-            topLeftPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topLeftPnlLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(topLeftPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(utlFanBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fanBtnLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        topLeftPnlLayout.setVerticalGroup(
-            topLeftPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topLeftPnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(utlFanBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fanBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         utlWizardsBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/robo/gui/Wizards.png"))); // NOI18N
+        utlWizardsBtn.setText("Wizards");
         utlWizardsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 utlWizardsBtnActionPerformed(evt);
             }
         });
 
-        wizBtnLbl.setBackground(new java.awt.Color(0, 0, 0));
-        wizBtnLbl.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        wizBtnLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        wizBtnLbl.setText("Wizards");
-
-        javax.swing.GroupLayout topCntrPnlLayout = new javax.swing.GroupLayout(topCntrPnl);
-        topCntrPnl.setLayout(topCntrPnlLayout);
-        topCntrPnlLayout.setHorizontalGroup(
-            topCntrPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topCntrPnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(topCntrPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(wizBtnLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(utlWizardsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        topCntrPnlLayout.setVerticalGroup(
-            topCntrPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topCntrPnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(utlWizardsBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(wizBtnLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
-        );
-
         utlNetwrkBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/robo/gui/Networking.png"))); // NOI18N
-
-        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Network");
-
-        javax.swing.GroupLayout topRightPnlLayout = new javax.swing.GroupLayout(topRightPnl);
-        topRightPnl.setLayout(topRightPnlLayout);
-        topRightPnlLayout.setHorizontalGroup(
-            topRightPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topRightPnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(utlNetwrkBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topRightPnlLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        topRightPnlLayout.setVerticalGroup(
-            topRightPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topRightPnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(utlNetwrkBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        utlNetwrkBtn.setText("Network");
 
         utlUpdateBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/robo/gui/Updates.png"))); // NOI18N
+        utlUpdateBtn.setText("Updates");
         utlUpdateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 utlUpdateBtnActionPerformed(evt);
             }
         });
-
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Update");
-
-        javax.swing.GroupLayout BtmLeftPnlLayout = new javax.swing.GroupLayout(BtmLeftPnl);
-        BtmLeftPnl.setLayout(BtmLeftPnlLayout);
-        BtmLeftPnlLayout.setHorizontalGroup(
-            BtmLeftPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BtmLeftPnlLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(BtmLeftPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(utlUpdateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(20, 20, 20))
-        );
-        BtmLeftPnlLayout.setVerticalGroup(
-            BtmLeftPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BtmLeftPnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(utlUpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Options");
 
         utlOptBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Media/White_Utilities/Options.png"))); // NOI18N
         utlOptBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -696,30 +578,6 @@ public class Main_Panel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout BtmCntrPnlLayout = new javax.swing.GroupLayout(BtmCntrPnl);
-        BtmCntrPnl.setLayout(BtmCntrPnlLayout);
-        BtmCntrPnlLayout.setHorizontalGroup(
-            BtmCntrPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BtmCntrPnlLayout.createSequentialGroup()
-                .addGroup(BtmCntrPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(utlOptBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        BtmCntrPnlLayout.setVerticalGroup(
-            BtmCntrPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BtmCntrPnlLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(utlOptBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("System");
-
         utlSysBtn.setIcon(new javax.swing.ImageIcon("E:\\markt\\Documents\\NetBeansProjects\\CommunityOS\\Robo Gui\\src\\Media\\System_Icons\\Shutdown 2.png")); // NOI18N
         utlSysBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -727,59 +585,39 @@ public class Main_Panel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout utlSysPnlLayout = new javax.swing.GroupLayout(utlSysPnl);
-        utlSysPnl.setLayout(utlSysPnlLayout);
-        utlSysPnlLayout.setHorizontalGroup(
-            utlSysPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(utlSysPnlLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(utlSysPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(utlSysBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        utlSysPnlLayout.setVerticalGroup(
-            utlSysPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, utlSysPnlLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(utlSysBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
         javax.swing.GroupLayout btmPnlUtilityLayout = new javax.swing.GroupLayout(btmPnlUtility);
         btmPnlUtility.setLayout(btmPnlUtilityLayout);
         btmPnlUtilityLayout.setHorizontalGroup(
             btmPnlUtilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btmPnlUtilityLayout.createSequentialGroup()
-                .addGroup(btmPnlUtilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(BtmLeftPnl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(topLeftPnl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(btmPnlUtilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BtmCntrPnl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(topCntrPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(btmPnlUtilityLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(btmPnlUtilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(topRightPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(utlSysPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(utlFanBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(utlUpdateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(btmPnlUtilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(utlOptBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(utlWizardsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(btmPnlUtilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(utlNetwrkBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(utlSysBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btmPnlUtilityLayout.setVerticalGroup(
             btmPnlUtilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btmPnlUtilityLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(btmPnlUtilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(topRightPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(btmPnlUtilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(topCntrPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(topLeftPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(btmPnlUtilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(utlNetwrkBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(utlWizardsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                    .addComponent(utlFanBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(btmPnlUtilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(utlSysPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(utlUpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(btmPnlUtilityLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(BtmLeftPnl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BtmCntrPnl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(utlSysBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(utlOptBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1069,8 +907,6 @@ public class Main_Panel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel BtmCntrPnl;
-    private javax.swing.JPanel BtmLeftPnl;
     private javax.swing.JButton LocalStoreBtn;
     private javax.swing.JButton MtrControlBtn;
     private javax.swing.JLabel PRINTER_DETAILS;
@@ -1082,7 +918,6 @@ public class Main_Panel extends javax.swing.JPanel {
     private javax.swing.JPanel btmPnlUtility;
     private javax.swing.JButton cancelPrintlBtn;
     private javax.swing.JLabel extruderTempLbl;
-    private javax.swing.JLabel fanBtnLbl;
     private javax.swing.JButton filesBtn;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1096,10 +931,6 @@ public class Main_Panel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1110,18 +941,13 @@ public class Main_Panel extends javax.swing.JPanel {
     private javax.swing.JButton quitBtn;
     private javax.swing.JButton quitBtn1;
     private javax.swing.JButton tempCtrlBtn;
-    private javax.swing.JPanel topCntrPnl;
-    private javax.swing.JPanel topLeftPnl;
     private javax.swing.JPanel topPanel;
-    private javax.swing.JPanel topRightPnl;
     private javax.swing.JButton utlBtn;
     private javax.swing.JButton utlFanBtn;
     private javax.swing.JButton utlNetwrkBtn;
     private javax.swing.JButton utlOptBtn;
     private javax.swing.JButton utlSysBtn;
-    private javax.swing.JPanel utlSysPnl;
     private javax.swing.JButton utlUpdateBtn;
     private javax.swing.JButton utlWizardsBtn;
-    private javax.swing.JLabel wizBtnLbl;
     // End of variables declaration//GEN-END:variables
 }
