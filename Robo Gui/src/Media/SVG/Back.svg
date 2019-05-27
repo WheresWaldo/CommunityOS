@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64"
-   height="64"
-   viewBox="0 0 16.933332 16.933334"
+   width="500"
+   height="500"
+   viewBox="0 0 132.29166 132.29167"
    version="1.1"
    id="svg1954"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
@@ -40,17 +40,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.666"
-     inkscape:cx="-127.67368"
-     inkscape:cy="55.809334"
+     inkscape:cx="247.59904"
+     inkscape:cy="274.0096"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
-     inkscape:pagecheckerboard="true"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0" />
+     inkscape:pagecheckerboard="true" />
   <metadata
      id="metadata1951">
     <rdf:RDF>
@@ -84,16 +80,16 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-60.778627,-222.3345)">
+     transform="translate(0,-164.70832)">
     <rect
-       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#d4d4d4;stroke-width:6.61458349;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#d4d4d4;stroke-width:6.61458333;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect2507"
        width="128.33688"
        height="127.8685"
        x="-160.04918"
        y="166.43748"
        ry="1.3608099e-05"
-       transform="matrix(0.09028662,-0.09028662,0.09028662,0.09028662,64.297453,201.31452)"
+       transform="rotate(-45,13.487983,-32.562871)"
        clip-path="url(#clipPath2515)" />
   </g>
 </svg>

@@ -9,15 +9,15 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="60.13768"
-   height="60.776516"
-   viewBox="0 0 60.137677 60.776516"
-   id="svg4160"
+   width="64"
+   height="64"
+   viewBox="0 0 16.933332 16.933333"
    version="1.1"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="decrease.svg">
+   id="svg930"
+   sodipodi:docname="decrease.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
   <defs
-     id="defs4162" />
+     id="defs924" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -25,66 +25,39 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.6"
-     inkscape:cx="-162.69776"
-     inkscape:cy="7.2709709"
-     inkscape:document-units="px"
-     inkscape:current-layer="g37"
-     showgrid="true"
-     units="in"
-     showguides="false"
-     inkscape:window-width="3200"
-     inkscape:window-height="1800"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:snap-bbox="true"
-     inkscape:snap-global="false">
-    <inkscape:grid
-       type="xygrid"
-       id="grid4712"
-       originx="-9.9771178"
-       originy="-29.820954" />
-  </sodipodi:namedview>
+     inkscape:zoom="1.742"
+     inkscape:cx="31.499995"
+     inkscape:cy="31.499992"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:pagecheckerboard="true"
+     units="px"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
-     id="metadata4165">
+     id="metadata927">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <g
+     inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer3"
-     inkscape:label="Home"
-     style="display:inline"
-     transform="translate(-3.5328446,2.2636422)">
-    <g
-       id="g37"
-       transform="translate(-7.4697456,-15.428958)">
-      <path
-         sodipodi:nodetypes="ccccccc"
-         inkscape:connector-curvature="0"
-         id="rect4760-8"
-         d="m 22.795553,16.619161 3.21242,-1.25 3.212421,1.25 v 47.687531 l -3.212421,0.892857 -3.21242,-0.892857 z"
-         style="fill:none;fill-opacity:1;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <ellipse
-         ry="29.130053"
-         rx="29.040764"
-         cy="43.553574"
-         cx="41.07143"
-         id="path4508"
-         style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path4535"
-         d="m 21.25,39.535714 h 40 v 10 h -40 z"
-         style="fill:none;fill-rule:evenodd;stroke:#4080ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    </g>
+     id="layer1"
+     transform="translate(-57.81146,-222.25519)">
+    <path
+       style="fill:#69a9e7;fill-opacity:0.99721452;fill-rule:nonzero;stroke:#69a9e7;stroke-width:0.03385269;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 66.278126,239.0393 a 8.3174247,8.3174247 0 0 0 8.317449,-8.31745 8.3174247,8.3174247 0 0 0 -8.317449,-8.31744 8.3174247,8.3174247 0 0 0 -8.317448,8.31744 8.3174247,8.3174247 0 0 0 8.317448,8.31745 z m -0.0681,-6.23557 c -0.08232,0 -0.164645,-0.0315 -0.227712,-0.0945 l -3.834546,-3.83461 c -0.06498,-0.065 -0.09632,-0.15033 -0.09435,-0.23512 0.02498,0.006 0.05095,0.01 0.07789,0.01 h 8.353086 c -0.01314,0.0215 -0.02875,0.042 -0.04741,0.0607 l -3.999246,3.99924 c -0.06307,0.0631 -0.145393,0.0945 -0.227712,0.0945 z"
+       id="path1475"
+       inkscape:connector-curvature="0" />
   </g>
 </svg>
