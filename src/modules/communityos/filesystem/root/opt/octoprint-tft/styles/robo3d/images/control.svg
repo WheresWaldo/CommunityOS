@@ -26,10 +26,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.742"
-     inkscape:cx="31.213058"
+     inkscape:cx="-107.99475"
      inkscape:cy="41.599964"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g854"
      showgrid="false"
      units="px"
      inkscape:pagecheckerboard="true"
@@ -73,7 +73,7 @@
          d="m 112.77439,166.07516 c -6.35289,0 -11.467,5.11463 -11.467,11.46751 v 59.25685 a 23.238375,23.238375 0 0 1 11.467,-3.05976 23.238375,23.238375 0 0 1 11.46752,3.04477 v -59.24186 c 0,-6.35288 -5.11463,-11.46751 -11.46752,-11.46751 z m 11.46752,111.08211 a 23.238375,23.238375 0 0 1 -11.46752,3.05924 23.238375,23.238375 0 0 1 -11.467,-3.04478 v 6.99389 c 0,6.35289 5.11411,11.46752 11.467,11.46752 6.35289,0 11.46752,-5.11463 11.46752,-11.46752 z"
          style="fill:#fffffe;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.26458332;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <circle
-         style="display:inline;fill:#69b3e7;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.26458332;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="display:inline;fill:#0080ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.26458332;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="circle834"
          cx="19.669083"
          cy="243.91626"
@@ -83,9 +83,9 @@
          cy="211.10915"
          cx="66.221863"
          id="circle838"
-         style="display:inline;fill:#69b3e7;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.26458332;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         style="display:inline;fill:#0080ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.26458332;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <circle
-         style="display:inline;fill:#69b3e7;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.26458332;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="display:inline;fill:#0080ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.26458332;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="circle843"
          cx="112.77447"
          cy="256.52271"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -9,91 +9,118 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 64 64"
+   xml:space="preserve"
+   sodipodi:docname="back.svg"
    width="64"
    height="64"
-   viewBox="0 0 16.933332 16.933334"
-   version="1.1"
-   id="svg1954"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="back.svg">
-  <defs
-     id="defs1948">
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath2515">
-      <rect
-         style="fill:#01f0f0;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="rect2517"
-         width="77.500999"
-         height="130.54472"
-         x="2.9583366e-06"
-         y="165.66119"
-         ry="1.3842206e-05"
-         transform="rotate(45)" />
-    </clipPath>
-  </defs>
-  <sodipodi:namedview
-     id="base"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:pageopacity="0.0"
-     inkscape:pageshadow="2"
-     inkscape:zoom="1.666"
-     inkscape:cx="-127.67368"
-     inkscape:cy="55.809334"
-     inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
-     showgrid="false"
-     units="px"
-     inkscape:pagecheckerboard="true"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0" />
-  <metadata
-     id="metadata1951">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-        <cc:license
-           rdf:resource="http://creativecommons.org/licenses/by-nc/4.0/" />
-      </cc:Work>
-      <cc:License
-         rdf:about="http://creativecommons.org/licenses/by-nc/4.0/">
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Reproduction" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#Distribution" />
-        <cc:requires
-           rdf:resource="http://creativecommons.org/ns#Notice" />
-        <cc:requires
-           rdf:resource="http://creativecommons.org/ns#Attribution" />
-        <cc:prohibits
-           rdf:resource="http://creativecommons.org/ns#CommercialUse" />
-        <cc:permits
-           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
-      </cc:License>
-    </rdf:RDF>
-  </metadata>
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1"
-     transform="translate(-60.778627,-222.3345)">
-    <rect
-       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#d4d4d4;stroke-width:6.61458349;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect2507"
-       width="128.33688"
-       height="127.8685"
-       x="-160.04918"
-       y="166.43748"
-       ry="1.3608099e-05"
-       transform="matrix(0.09028662,-0.09028662,0.09028662,0.09028662,64.297453,201.31452)"
-       clip-path="url(#clipPath2515)" />
-  </g>
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"><metadata
+   id="metadata43"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+   id="defs41" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="480"
+   id="namedview39"
+   showgrid="false"
+   inkscape:pagecheckerboard="true"
+   fit-margin-top="0"
+   fit-margin-left="0"
+   fit-margin-right="0"
+   fit-margin-bottom="0"
+   inkscape:zoom="13.765625"
+   inkscape:cx="32"
+   inkscape:cy="32"
+   inkscape:current-layer="g4" />
+<g
+   id="g6"
+   style="display:inline;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none"
+   transform="matrix(0.12304785,0,0,0.12304785,0.4997504,0.49981192)">
+	<g
+   id="g4"
+   style="stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none">
+		<path
+   d="M 317.76323,74.833202 H 209.27566 V 0.50797323 H 164.12593 L -2.2208237,214.19269 164.12593,427.87611 h 45.14973 v -74.32524 h 137.41766 c 67.79606,0 122.95211,70.85163 122.95211,157.94016 h 43.39464 V 325.67924 c 0,-138.31752 -87.6014,-250.846038 -195.27684,-250.846038 z M 485.09302,430.29224 C 461.18286,375.1539 421.85677,320.70518 346.69332,320.70518 H 184.2993 L 182.51689,397.85599 37.759596,214.19398 179.54621,37.402154 l -1.18829,67.225186 68.4367,-0.76319 h 73.34517 c 83.74901,0 163.81199,102.02617 164.35911,209.60374 z"
+   id="path2"
+   inkscape:connector-curvature="0"
+   style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.14060569;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+   sodipodi:nodetypes="scccccccsccsscsccccccssc" />
+	</g>
+</g>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<g
+   id="g865"
+   style="display:none"
+   transform="matrix(0.12304785,0,0,0.12304785,0.4997504,0.49981192)"><g
+     inkscape:label="g8"
+     style="display:none;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="g8">
+</g><g
+     style="display:none"
+     id="g10">
+</g><g
+     style="display:none"
+     id="g12">
+</g><g
+     style="display:none"
+     id="g14">
+</g><g
+     style="display:none"
+     id="g16">
+</g><g
+     style="display:none"
+     id="g18">
+</g><g
+     style="display:none"
+     id="g20">
+</g><g
+     style="display:none"
+     id="g22">
+</g><g
+     style="display:none"
+     id="g24">
+</g><g
+     style="display:none"
+     id="g26">
+</g><g
+     style="display:none"
+     id="g28">
+</g><g
+     style="display:none"
+     id="g30">
+</g><g
+     style="display:none"
+     id="g32">
+</g><g
+     style="display:none"
+     id="g34">
+</g><g
+     style="display:none"
+     id="g36">
+</g></g>
 </svg>

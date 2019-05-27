@@ -16,7 +16,7 @@
    enable-background="new 0 0 1000 1000"
    xml:space="preserve"
    id="svg8"
-   sodipodi:docname="move-step20.svg"
+   sodipodi:docname="temp-step10.svg"
    width="64"
    height="64"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"><defs
@@ -39,7 +39,7 @@
    fit-margin-right="0"
    fit-margin-bottom="0"
    inkscape:zoom="13.765625"
-   inkscape:cx="32"
+   inkscape:cx="14.746879"
    inkscape:cy="32"
    inkscape:current-layer="svg8" />
 <metadata
@@ -48,7 +48,7 @@
        rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata>
 <g
    id="g6"
-   transform="matrix(0.04193917,0,0,0.04193917,0.0804596,11.029016)"><path
+   transform="matrix(0,-0.04193917,0.04193917,0,11.029016,63.91954)"><path
      d="m 529.4,69.283333 c -14.3,-10.4 -31.7,-16.6 -50.7,-16.6 -47.1,0 -85.2,38.1 -85.2,85.199997 v 85.2 c 0,23.5 -19.2,42.6 -42.6,42.6 H 95.2 c -47.1,0 -85.2,38.1 -85.2,85.2 v 298.3 c 0,47.1 38.1,85.2 85.2,85.2 h 255.7 c 23.4,0 42.6,19.2 42.6,42.6 v 85.2 c 0,47.1 38.1,85.2 85.2,85.2 19,0 36.4,-6.2 50.7,-16.6 l 429.3,-355.1 c 41.8,-41.8 41.8,-109.5 0,-151.3 z"
      id="path4"
      inkscape:connector-curvature="0"
