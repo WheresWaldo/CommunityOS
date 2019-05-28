@@ -48,6 +48,7 @@
 # User interface selection options (default = OctoPrint-TFT)
 # Choose only one from this section
 [ -n "$COMMUNITYOS_INCLUDE_TFT" ] || COMMUNITYOS_INCLUDE_TFT=yes
+[ -n "$COMMUNITYOS_INCLUDE_RLCD" ] || COMMUNITYOS_INCLUDE_RLCD=no
 
 
 ###############################################################################
@@ -185,12 +186,12 @@
 # Additional unser interface variable declarations
 # Please do not edit any of these lines unless you understand the consequences
 
-# OctoPrint-TFT
-[ -n "$COMMUNITYOS_TFT_LATEST" ] || COMMUNITYOS_TFT_LATEST=$(wget -q -O - https://api.github.com/repos/darksid3r/OctoPrint-TFT/releases/latest | grep "browser_download_url" | grep "octoprint-tft_stretch" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
+# CommunityTFT
+[ -n "$COMMUNITYOS_TFT_LATEST" ] || COMMUNITYOS_TFT_LATEST=$(wget -q -O - https://api.github.com/repos/WheresWaldo/CommunityTFT/releases/latest | grep "browser_download_url" | grep "octoprint-tft_" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
 [ -n "$COMMUNITYOS_TFT_RELEASE" ] || COMMUNITYOS_TFT_RELEASE="${COMMUNITYOS_TFT_LATEST##*/}"
 # Build OctoPrint-TFT from source
 [ -n "$COMMUNITYOS_TFT_BUILD" ] || COMMUNITYOS_TFT_BUILD=no
-[ -n "$COMMUNITYOS_TFT_ARCHIVE" ] || COMMUNITYOS_TFT_ARCHIVE=https://github.com/darksid3r/OctoPrint-TFT.git
+[ -n "$COMMUNITYOS_TFT_ARCHIVE" ] || COMMUNITYOS_TFT_ARCHIVE=https://github.com/WheresWaldo/CommunityTFT.git
 
 # TouchUI
 [ -n "$COMMUNITYOS_INCLUDE_TOUCHUI" ] || COMMUNITYOS_INCLUDE_TOUCHUI=no 
@@ -198,5 +199,4 @@
 [ -n "$COMMUNITYOS_TOUCHUI_BOOTARCHIVE" ] || COMMUNITYOS_TOUCHUI_BOOTARCHIVE=https://github.com/BillyBlaze/OctoPrint-TouchUI-autostart.git
 
 # Robo CommunityOS LCD
-[ -n "$COMMUNITYOS_INCLUDE_RCOSLCD" ] || COMMUNITYOS_INCLUDE_RCOSLCD=no
-[ -n "$COMMUNITYOS_RCOSLCD_ARCHIVE" ] || COMMUNITYOS_RCOSLCD_ARCHIVE=https://github.com/WheresWaldo/roboLCD_current/archive/do_not_copy.zip
+[ -n "$COMMUNITYOS_RLCD_ARCHIVE" ] || COMMUNITYOS_RLCD_ARCHIVE=https://github.com/WheresWaldo/roboLCD_current/archive/do_not_copy.zip

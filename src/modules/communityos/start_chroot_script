@@ -9,6 +9,8 @@
 ### Source error handling, leave this in place
 
 set -e
+# setting xtrace off
+set +x
 
 export LC_ALL=C
 
@@ -23,12 +25,14 @@ unpack /filesystem/boot /boot
 ### Base file system
 
 apt-get update
+# make sure all packages are upgraded and none are held back
+apt-get dist-upgrade -y
 # remove packages in case we are building from a regular raspbian image instead of the lite one...
 remove_extra="scratch squeak-plugins-scratch squeak-vm wolfram-engine python-minecraftpi minecraft-pi sonic-pi oracle-java8-jdk bluej libreoffice-common libreoffice-core freepats greenfoot nodered"
 echo "--- Removing:" $remove_extra
 apt-get remove -y --purge $remove_extra
 apt-get autoremove -y
-# add packages we need
+# add required packages
 echo "--- Installing required packages"
 required_packages="python2.7 python-virtualenv python-dev git screen subversion cmake checkinstall avahi-daemon libavahi-compat-libdnssd1 libffi-dev libssl-dev"
 echo "--- Installing:" $required_packages
@@ -48,10 +52,10 @@ pushd /home/pi
   # OctoPrint & pyserial
   if [ "$COMMUNITYOS_INCLUDE_OCTOPRINT" == "yes" ]; then
     echo "--- Installing pyBonjour"
-    # pybonjour (for mdns discovery)
+    # installing pybonjour (for mdns discovery)
     sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_PYBONJOUR_ARCHIVE
     echo "--- Installing OctoPrint"
-    # OctoPrint
+    # installing OctoPrint
     PIP_DEFAULT_TIMEOUT=60 sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_OCTOPRINT_ARCHIVE
     echo "--- pyBonjour & OctoPrint installation complete"
   fi
@@ -59,6 +63,7 @@ pushd /home/pi
   # mjpg-streamer
   if [ "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" == "yes" ]; then
     echo "--- Installing mjpg-streamer"
+	# install required packages for mjpg-streamer
     if [ $( is_in_apt libjpeg62-turbo-dev ) -eq 1 ]; then
       echo "--- Installing libjpeg6"
       sudo apt-get -y --allow-change-held-packages install libjpeg62-turbo-dev
@@ -95,6 +100,8 @@ EOT
 
 
   # CuraEngine
+  # version required to work with OctoPrint it 15.04 and must be compiled at image build time
+  # latest builds of OctoPrint now require a Plugin install in addition to CuraEngine
   if [ "$COMMUNITYOS_INCLUDE_CURAENGINE" == "yes" ]; then
     echo "--- Installing CuraEngine"
     folder=CuraEngine-$COMMUNITYOS_CURAENGINE_VERSION
@@ -162,6 +169,7 @@ chmod +x /root/bin/git
 
 # Unpack root at the end, so files are modified before
 unpack /filesystem/root /
+echo "--- Housekeeping complete"
 
 ##############################
 ### Set up system services
@@ -197,13 +205,13 @@ if [ ! "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]; then
   # We need to make OctoPrint bind to all interfaces because otherwise
   # it will be inaccessible...
   [ -f /etc/default/octoprint ] && sed -i "s@HOST=127.0.0.1@HOST=0.0.0.0@" /etc/default/octoprint
-  echo "--- Bind OctoPrint to all interfaces"
+  echo "--- Bind OctoPrint to all network interfaces"
 fi
 
 ### CuraEngine
 if [ ! "$COMMUNITYOS_INCLUDE_CURAENGINE" == "yes" ]; then
-  # remove the cura engine path in OctoPrint's config.yaml
-  echo "--- Removing CuraEngine"
+  # remove the CuraEngine path in OctoPrint's config.yaml
+  echo "--- Removing CuraEngine config settings"
   sudo -u pi sed -i -e "s@cura_engine: /usr/local/bin/cura_engine@cura_engine:@g" /home/pi/.octoprint/config.yaml
 fi
 
@@ -406,16 +414,17 @@ fi
 
   # OctoPrint-TFT
   if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
-    echo "--- Installing OctoPrint-TFT"
+    echo "--- Installing CommunityTFT"
     sudo apt-get install --fix-missing -y libgtk-3-0 xserver-xorg xinit x11-xserver-utils
     sudo dpkg -r --force-depends lightdm
     sudo systemctl set-default graphical.target
     # Are we building from source?
     if [ ! "$COMMUNITYOS_TFT_BUILD" == "yes" ]; then
-      echo "--- Installing precompiled OctoPrint-TFT package"
+      echo "--- Installing precompiled CommunityTFT package"
       pushd /home/pi
       wget $COMMUNITYOS_TFT_LATEST
       sudo dpkg -i $COMMUNITYOS_TFT_RELEASE
+	  chmod +x /etc/disablescreenblank.sh
       echo "--- Package installation complete"
     else
       echo "--- Building from source"
@@ -425,13 +434,13 @@ fi
       cd ~/OctoPrint-TFT
       make build
       ls -1 build/
-      echo "--- Now Installing OctoPrint-TFT"
+      echo "--- Now Installing CommunityTFT"
       echo "--- Not yet completely implemented"
     fi
     rm /home/pi/$COMMUNITYOS_TFT_RELEASE
     sudo cp /etc/communityos_version /etc/octopi_version
     sudo sed -i 's/^/CommunityOS /' /etc/octopi_version
-    echo "OctoPrint-TFT installation complete"
+    echo "CommunityTFT installation complete"
   fi
 
   # OctoPrint-TouchUI
@@ -588,6 +597,7 @@ sudo rm /home/pi/helpers -R
 ##############################
 ### Clean up before exiting
 
+# make sure xtrace is off
 set +x
 apt-get clean
 apt-get autoremove -y

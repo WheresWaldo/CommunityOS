@@ -15,7 +15,7 @@
    version="1.1"
    id="svg2525"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="cool-down.svg">
+   sodipodi:docname="temp-step.svg">
   <defs
      id="defs2519">
     <mask
@@ -40,7 +40,7 @@
      inkscape:cx="32"
      inkscape:cy="32"
      inkscape:document-units="px"
-     inkscape:current-layer="g837"
+     inkscape:current-layer="g838"
      showgrid="false"
      units="px"
      inkscape:pagecheckerboard="true"
@@ -67,8 +67,16 @@
      transform="translate(-63.384509,-221.84088)"
      style="display:inline">
     <g
-       id="g837"
+       id="g838"
        transform="matrix(0.12896074,0,0,0.12896074,63.32096,200.58984)">
+      <rect
+         ry="2.2304592e-05"
+         y="184.02449"
+         x="61.063801"
+         height="97.094147"
+         width="10.164065"
+         id="rect3115"
+         style="display:inline;fill:#ff0002;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:8.46838951;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          inkscape:connector-curvature="0"
          id="rect3119"
@@ -80,7 +88,7 @@
          cy="273.9924"
          cx="66.145836"
          id="path3117"
-         style="display:inline;fill:#0080ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:7.34782505;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         style="display:inline;fill:#ff0002;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:7.34782505;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <rect
          ry="1.3608103e-05"
          y="224.90298"
