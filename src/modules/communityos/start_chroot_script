@@ -424,6 +424,7 @@ fi
       pushd /home/pi
       wget $COMMUNITYOS_TFT_LATEST
       sudo dpkg -i $COMMUNITYOS_TFT_RELEASE
+	  chmod +x /etc/disablescreenblank.sh
       echo "--- Package installation complete"
     else
       echo "--- Building from source"

@@ -187,7 +187,7 @@
 # Please do not edit any of these lines unless you understand the consequences
 
 # CommunityTFT
-[ -n "$COMMUNITYOS_TFT_LATEST" ] || COMMUNITYOS_TFT_LATEST=$(wget -q -O - https://api.github.com/repos/WheresWaldo/CommunityTFT/releases/latest | grep "browser_download_url" | grep "octoprint-tft_stretch" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
+[ -n "$COMMUNITYOS_TFT_LATEST" ] || COMMUNITYOS_TFT_LATEST=$(wget -q -O - https://api.github.com/repos/WheresWaldo/CommunityTFT/releases/latest | grep "browser_download_url" | grep "octoprint-tft_" | cut -d : -f 2,3 | tr -d \" | tr -d ,)
 [ -n "$COMMUNITYOS_TFT_RELEASE" ] || COMMUNITYOS_TFT_RELEASE="${COMMUNITYOS_TFT_LATEST##*/}"
 # Build OctoPrint-TFT from source
 [ -n "$COMMUNITYOS_TFT_BUILD" ] || COMMUNITYOS_TFT_BUILD=no
