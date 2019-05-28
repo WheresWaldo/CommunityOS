@@ -15,7 +15,7 @@
    version="1.1"
    id="svg2525"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="temp-step.svg">
+   sodipodi:docname="temp-step-1.svg">
   <defs
      id="defs2519">
     <mask
@@ -70,13 +70,13 @@
        id="g838"
        transform="matrix(0.12896074,0,0,0.12896074,63.32096,200.58984)">
       <rect
-         ry="2.2304592e-05"
-         y="184.02449"
+         ry="9.4652869e-06"
+         y="239.91528"
          x="61.063801"
-         height="97.094147"
+         height="41.203354"
          width="10.164065"
          id="rect3115"
-         style="display:inline;fill:#ff0002;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:8.46838951;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         style="display:inline;fill:#ff0002;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:5.51658821;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          inkscape:connector-curvature="0"
          id="rect3119"
