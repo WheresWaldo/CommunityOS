@@ -24,6 +24,17 @@ serial:
   port: /dev/ttyACM0
   timeout:
     communication: 120.0
+temperature:
+  profiles:
+  - bed: '80'
+    extruder: '240'
+    name: ABS
+  - bed: '45'
+    extruder: '200'
+    name: PLA
+  - bed: '65'
+    extruder: '230'
+    name: PETG
 printerProfiles:
   default: _default
 appearance:
