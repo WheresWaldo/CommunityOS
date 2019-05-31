@@ -6,6 +6,10 @@
 ##############################
 
 ##############################
+### Some housekeeping for logging
+
+
+##############################
 ### Source error handling, leave this in place
 
 set -e
@@ -117,7 +121,7 @@ EOT
     popd
     sudo -u pi rm -r $folder $zipfile
     echo "--- CuraEngine compilation complete"
-    echo "--- Installing Cura Legacy plugin---"
+    echo "--- Installing Cura Legacy plugin"
     sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_CURAPLUGIN_ARCHIVE
     echo "--- Cura Legacy plugin install complete"
   fi
@@ -401,12 +405,12 @@ fi
 ### User interface installation
 
 if [[ "$COMMUNITYOS_INCLUDE_TFT" != "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" != "yes" && "$COMMUNITYOS_INCLUDE_RLCD" != "yes" ]]; then
-  echo "--- No touchscreen interface selected."
-  echo "--- No touchscreen interface will be installed."
+  echo "--- No touchscreen interface selected"
+  echo "--- No touchscreen interface will be installed"
 else
   if [[ ( "$COMMUNITYOS_INCLUDE_TFT" == "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" && "$COMMUNITYOS_INCLUDE_RLCD" == "yes" ) ]]; then
-    echo "--- You may only install one touchscreen interface."
-    echo "--- No touchscreen interface will be installed."
+    echo "--- You may only install one touchscreen interface"
+    echo "--- No touchscreen interface will be installed"
     COMMUNITYOS_INCLUDE_TFT="no"
     COMMUNITYOS_INCLUDE_TOUCHUI="no"
     COMMUNITYOS_INCLUDE_RLCD="no"
@@ -477,7 +481,7 @@ if [ "$COMMUNITYOS_INCLUDE_GENERIC" == "yes" ]; then
     sudo cat /home/pi/helpers/generic-config-180 >> /boot/config.txt
     sudo cp /home/pi/helpers/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
-  echo "--- Generic touchscreen driver installation complete."
+  echo "--- Generic touchscreen driver installation complete"
   popd
 fi
 
@@ -496,7 +500,7 @@ if [ "$COMMUNITYOS_INCLUDE_WS35" == "yes" ]; then
     sudo cat /home/pi/helpers/waveshare35-config-180 >> /boot/config.txt
     sudo cp /home/pi/helpers/99-calibration.conf-35-180 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
-  echo "--- 3.5 inch touchscreen driver installation complete."
+  echo "--- 3.5 inch touchscreen driver installation complete"
   popd
 fi
 
@@ -515,7 +519,7 @@ if [ "$COMMUNITYOS_INCLUDE_WS50" == "yes" ]; then
     sudo cp /home/pi/helpers/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
   popd
-  echo "--- 5 inch touchscreen driver installation complete."
+  echo "--- 5 inch touchscreen driver installation complete"
   popd
 fi
 
@@ -532,7 +536,7 @@ if [ "$COMMUNITYOS_INCLUDE_WS50H" == "yes" ]; then
     sudo cat /home/pi/helpers/waveshare5h-config >> /boot/config.txt
     sudo /home/pi/helpers/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
-  echo "--- 5 inch touchscreen driver installation complete."
+  echo "--- 5 inch touchscreen driver installation complete"
 fi
 
 if [ "$COMMUNITYOS_INCLUDE_WS43" == "yes" ]; then
@@ -546,7 +550,7 @@ if [ "$COMMUNITYOS_INCLUDE_WS43" == "yes" ]; then
     sudo cat /home/pi/helpers/waveshare43-config >> /boot/config.txt
     sudo cp /home/pi/helpers/40-libinput.conf-43 /etc/X11/xorg.conf.d/40-libinput.conf
   fi
-  echo "--- 4.3 inch touchscreen driver installation complete."
+  echo "--- 4.3 inch touchscreen driver installation complete"
 fi
 
 if [ "$COMMUNITYOS_INCLUDE_RPI7" == "yes" ]; then
@@ -558,7 +562,7 @@ if [ "$COMMUNITYOS_INCLUDE_RPI7" == "yes" ]; then
     sudo cat /home/pi/helpers/generic-config-180 >> /boot/config.txt
     sudo cp /home/pi/helpers/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
-  echo "--- rPi 7 inch touchscreen driver installation complete."
+  echo "--- rPi 7 inch touchscreen driver installation complete"
   popd
 fi
 
