@@ -400,15 +400,16 @@ fi
 ##############################
 ### User interface installation
 
-if [[ "$COMMUNITYOS_INCLUDE_TFT" != "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" != "yes" ]]; then
+if [[ "$COMMUNITYOS_INCLUDE_TFT" != "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" != "yes" && "$COMMUNITYOS_INCLUDE_RLCD" != "yes" ]]; then
   echo "--- No touchscreen interface selected."
   echo "--- No touchscreen interface will be installed."
 else
-  if [[ ( "$COMMUNITYOS_INCLUDE_TFT" == "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" ) ]]; then
+  if [[ ( "$COMMUNITYOS_INCLUDE_TFT" == "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" && "$COMMUNITYOS_INCLUDE_RLCD" == "yes" ) ]]; then
     echo "--- You may only install one touchscreen interface."
     echo "--- No touchscreen interface will be installed."
     COMMUNITYOS_INCLUDE_TFT="no"
     COMMUNITYOS_INCLUDE_TOUCHUI="no"
+    COMMUNITYOS_INCLUDE_RLCD="no"
   fi
 fi
 
@@ -588,7 +589,9 @@ if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" |
   fi
   echo "--- Printer setting complete"
 else
-  cat /home/pi/helpers/config.gen.txt >> home/pi/.octoprint/config.yaml
+  echo "--- Setting generic 3D printer defaults"
+  cat /home/pi/helpers/config.gen.txt >> /home/pi/.octoprint/config.yaml
+  echo "--- Generic 3D printer setting complete"
 fi
 
 touch /boot/communityos-hostname.txt
