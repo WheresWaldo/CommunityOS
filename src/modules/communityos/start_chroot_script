@@ -239,7 +239,16 @@ if [ "$COMMUNITYOS_INCLUDE_THEME" == "yes" ]; then
   echo "--- Setting default Plymouth theme"
   pushd /usr/share/plymouth/themes
   plymouth-set-default-theme communityos -R
+  popd
   sed -i 's/$/ quiet splash logo.nologo plymouth.ignore-serial-consoles/' /boot/cmdline.txt
+  pushd /usr/share/plymouth/themes/communityos/
+  echo "--- Copy theme logo"
+  if [ "$COMMUNITYOS_INCLUDE_C2" == "yes" || "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_R1P" == "yes" ]; then
+    sudo mv robo_logo.png logo.png
+  else
+    sudo mv basic_logo.png logo.png
+  fi
+  popd  
   echo "--- Plymouth theme installation complete"
 fi
 
