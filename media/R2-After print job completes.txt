@@ -1,6 +1,6 @@
 ; turn off heaters
 M104 S0
-;
+M140 S0
 ; turn off fans - moved to end of script, leave fans running for a bit
 ;M107
 ; move bed down 10mm
@@ -17,5 +17,5 @@ G90
 G92 E0
 ; turn off motors
 M84
-; turn off fans 
+; turn off fans
 M107

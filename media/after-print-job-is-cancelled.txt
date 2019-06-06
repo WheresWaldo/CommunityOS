@@ -1,6 +1,7 @@
+; Quick Stop
 M410
-; turn off fans
-M107
+; turn off fans - moved to the end of the script
+;M107
 ; turn off heaters
 M104 S0
 ; pause for 1 seconds
@@ -13,4 +14,5 @@ G90
 G92 E0
 ; disable motors
 M84
-
+; turn off fans
+M107

@@ -10,15 +10,17 @@ G92 E0
 ; turn off fans
 M107
 ;non blocking heatup of extruder
-;PetG
-;M104 S225
-;ABS
-;M104 S210
-;PLA
+; ABS or PetG
+;M104 S230
+; PLA
 M104 S190
-;PLA 2
-;M104 S200
-;Robo Leveling
+; PLA 2
+M104 S200
+; PetG 2
+;M104 S240
+;non blocking heatup of the bed
+M140 S60
+; Robo Leveling
 ;G36
 ;***Alternative leveling***
 ;HOME for manually leveled / shimmed bed
@@ -42,12 +44,12 @@ G1 X10 Y1 F7200
 M109 S190
 ; for PLA 2
 ;M109 S200
+; Heat Bed - set to your preferred temp
+;M140 S60
 ; move bed to printing position
 G1 Z0.3
-; print 120mm priming line
-;G1 X120 E15.0 F500
-; original prime line settings
-G1 X120 E12.0 F300
+; print 190mm priming line
+G1 X190 E15.0 F500
 ; move bed down
 G1 Z15 F300
 ; zero extruder
