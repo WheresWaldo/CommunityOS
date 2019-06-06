@@ -1,0 +1,20 @@
+; turn off heaters
+M104 S0
+; turn off fans - moved to end of script, leave fans running for a bit
+;M107
+; move bed down 10mm
+G91 
+G1 Z10
+G90
+; home XY axis
+G28 X0 Y0
+; home bed
+G28 Z0
+; set absolute mode
+G90
+; zero extruder
+G92 E0
+; turn off motors
+M84
+; turn off fans 
+M107
