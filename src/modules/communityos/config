@@ -45,7 +45,8 @@
 [ -n "$COMMUNITYOS_INCLUDE_RPI7" ] || COMMUNITYOS_INCLUDE_RPI7=no
 [ -n "$COMMUNITYOS_INCLUDE_WS43" ] || COMMUNITYOS_INCLUDE_WS43=no
 
-# Touchscreen rotation, set to yes if touchscreen is upside-down
+# Touchscreen rotation
+# Set to yes if touchscreen is upside-down
 [ -n "$COMMUNITYOS_LCD_ROTATION" ] || COMMUNITYOS_LCD_ROTATION=no
 
 # User interface selection options (default = OctoPrint-TFT)
