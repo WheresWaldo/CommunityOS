@@ -603,7 +603,6 @@ else
   echo "--- Generic 3D printer setting complete"
 fi
 
-touch /boot/communityos-hostname.txt
 sudo rm /home/pi/helpers -R
 
 ##############################
