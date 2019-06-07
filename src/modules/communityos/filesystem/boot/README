@@ -1,1 +1,10 @@
-Editing instructions after burning the image will go here.
+A replacement distribution for Robo3D R2 and C2 printers. It includes the OctoPrint host software for 3d printers out of the box and mjpg-streamer with RaspiCam support for live viewing of prints and timelapse video creation. A Linux proxy server is included so you can access your printer via your favorite browser at http://communityos.local.
+
+Automatic hostname change;
+  Create a file in the /boot partition that is named communityos-hostname.txt
+  Edit that test to contain a single line that includes the hostname you would like to change to
+  Verify that all characters are acceptable as a hostname
+  Save the file
+  Reboot
+
+Upon rebooting the hostname will be changed to whatever text was added to the communityos-hostname.txt
