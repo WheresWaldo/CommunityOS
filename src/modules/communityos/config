@@ -45,6 +45,9 @@
 [ -n "$COMMUNITYOS_INCLUDE_RPI7" ] || COMMUNITYOS_INCLUDE_RPI7=no
 [ -n "$COMMUNITYOS_INCLUDE_WS43" ] || COMMUNITYOS_INCLUDE_WS43=no
 
+# Touchscreen rotation, set to yes if touchscreen is upside-down
+[ -n "$COMMUNITYOS_LCD_ROTATION" ] || COMMUNITYOS_LCD_ROTATION=no
+
 # User interface selection options (default = OctoPrint-TFT)
 # Choose only one from this section
 [ -n "$COMMUNITYOS_INCLUDE_TFT" ] || COMMUNITYOS_INCLUDE_TFT=yes
@@ -157,29 +160,23 @@
 # Please do not edit any of these lines unless you understand the consequences
 
 # Generic XPT2046 or ADS7846 touchscreen driver [Likely Robo3D C2]
-[ -n "$COMMUNITYOS_GENERIC_ROTATE" ] || COMMUNITYOS_GENERIC_ROTATE=no
 [ -n "$COMMUNITYOS_GENERIC_RESOLUTION" ] || COMMUNITYOS_GENERIC_RESOLUTION=480x320
 
 # Waveshare 3.5" resistive touchscreen LCD
 [ -n "$COMMUNITYOS_WS35_ARCHIVE" ] || COMMUNITYOS_WS35_ARCHIVE=https://github.com/waveshare/LCD-show.git
-[ -n "$COMMUNITYOS_WS35_ROTATE" ] || COMMUNITYOS_WS35_ROTATE=no
 [ -n "$COMMUNITYOS_WS35_RESOLUTION" ] || COMMUNITYOS_WS35_RESOLUTION=480x320
 
 # Waveshare 5" resistive touchscreen LCD [Likely Robo3D R2]
 [ -n "$COMMUNITYOS_WS50_ARCHIVE" ] || COMMUNITYOS_WS50_ARCHIVE=https://github.com/waveshare/LCD-show.git
-[ -n "$COMMUNITYOS_WS50_ROTATE" ] || COMMUNITYOS_WS50_ROTATE=no
 [ -n "$COMMUNITYOS_WS50_RESOLUTION" ] || COMMUNITYOS_WS50_RESOLUTION=800x480
 
 # Waveshare 5" capactitive touchscreen
-[ -n "$COMMUNITYOS_WS50H_ROTATE" ] || COMMUNITYOS_WS50H_ROTATE=no
 [ -n "$COMMUNITYOS_WS50H_RESOLUTION" ] || COMMUNITYOS_WS50H_RESOLUTION=800x480
 
 # Waveshare 4.3" capacitive touchscreen
-[ -n "$COMMUNITYOS_WS43_ROTATE" ] || COMMUNITYOS_WS43_ROTATE=no
 [ -n "$COMMUNITYOS_WS43_RESOLUTION" ] || COMMUNITYOS_WS43_RESOLUTION=800x480
 
 # Raspberry Pi 7" capacitive touchscreen
-[ -n "$COMMUNITYOS_RPI7_ROTATE" ] || COMMUNITYOS_RPI7_ROTATE=no
 [ -n "$COMMUNITYOS_RPI7_RESOLUTION" ] || COMMUNITYOS_RPI7_RESOLUTION=800x480
 
 ###############################################################################
