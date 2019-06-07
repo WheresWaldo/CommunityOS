@@ -47,7 +47,7 @@
 
 # Touchscreen rotation
 # Set to yes if touchscreen is upside-down
-[ -n "$COMMUNITYOS_LCD_ROTATION" ] || COMMUNITYOS_LCD_ROTATION=no
+[ -n "$COMMUNITYOS_LCD_ROTATE" ] || COMMUNITYOS_LCD_ROTATE=no
 
 # User interface selection options (default = OctoPrint-TFT)
 # Choose only one from this section
