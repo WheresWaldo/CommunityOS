@@ -6,9 +6,15 @@
 ##############################
 
 ##############################
+### Some housekeeping for logging
+
+
+##############################
 ### Source error handling, leave this in place
 
 set -e
+### setting xtrace off
+set +x
 
 export LC_ALL=C
 
@@ -23,12 +29,14 @@ unpack /filesystem/boot /boot
 ### Base file system
 
 apt-get update
-# remove packages in case we are building from a regular raspbian image instead of the lite one...
+### make sure all packages are upgraded and none are held back
+apt-get dist-upgrade -y
+### remove packages in case we are building from a regular raspbian image instead of the lite one...
 remove_extra="scratch squeak-plugins-scratch squeak-vm wolfram-engine python-minecraftpi minecraft-pi sonic-pi oracle-java8-jdk bluej libreoffice-common libreoffice-core freepats greenfoot nodered"
 echo "--- Removing:" $remove_extra
 apt-get remove -y --purge $remove_extra
 apt-get autoremove -y
-# add packages we need
+### add required packages
 echo "--- Installing required packages"
 required_packages="python2.7 python-virtualenv python-dev git screen subversion cmake checkinstall avahi-daemon libavahi-compat-libdnssd1 libffi-dev libssl-dev"
 echo "--- Installing:" $required_packages
@@ -38,27 +46,29 @@ apt-get install --reinstall iputils-ping
 echo "--- All packages updated"
 
 ### OctoPrint environment
-# start building pi user environmenmt
+### start building pi user environmenmt
 pushd /home/pi
-  # building virtualenv
+  ### building virtualenv
   echo "--- Building OctoPrint virtual environment"
   sudo -u pi virtualenv OctoPrint
   sudo -u pi /home/pi/OctoPrint/bin/pip install --upgrade pip
 
-  # OctoPrint & pyserial
+  ### OctoPrint & pyBonjour
   if [ "$COMMUNITYOS_INCLUDE_OCTOPRINT" == "yes" ]; then
     echo "--- Installing pyBonjour"
-    # pybonjour (for mdns discovery)
+    ### installing pybonjour (for mdns discovery)
     sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_PYBONJOUR_ARCHIVE
+	echo "--- pyBonjour installation complete"
+    ### installing OctoPrint
     echo "--- Installing OctoPrint"
-    # OctoPrint
     PIP_DEFAULT_TIMEOUT=60 sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_OCTOPRINT_ARCHIVE
-    echo "--- pyBonjour & OctoPrint installation complete"
+    echo "--- OctoPrint installation complete"
   fi
 
-  # mjpg-streamer
+  ### mjpg-streamer
   if [ "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" == "yes" ]; then
     echo "--- Installing mjpg-streamer"
+	### install required packages for mjpg-streamer
     if [ $( is_in_apt libjpeg62-turbo-dev ) -eq 1 ]; then
       echo "--- Installing libjpeg6"
       sudo apt-get -y --allow-change-held-packages install libjpeg62-turbo-dev
@@ -73,7 +83,7 @@ pushd /home/pi
     mv mjpg-streamer-experimental/* .
     echo "--- Compiling mjpg-streamer"
     sudo -u pi make
-    # create our custom web folder and add a minimal index.html to it
+    ### create our custom web folder and add a minimal index.html to it
     sudo -u pi mkdir www-octoprint
     pushd www-octoprint
     cat <<EOT >> index.html
@@ -94,7 +104,10 @@ EOT
   fi
 
 
-  # CuraEngine
+  ### CuraEngine
+  ### CuraEngine version required to work with OctoPrint is 15.04 and must be compiled
+  ### at image build time. Latest builds of OctoPrint now require a Legacy Plugin
+  ### install in addition to CuraEngine.
   if [ "$COMMUNITYOS_INCLUDE_CURAENGINE" == "yes" ]; then
     echo "--- Installing CuraEngine"
     folder=CuraEngine-$COMMUNITYOS_CURAENGINE_VERSION
@@ -110,58 +123,60 @@ EOT
     popd
     sudo -u pi rm -r $folder $zipfile
     echo "--- CuraEngine compilation complete"
-    echo "--- Installing Cura Legacy plugin---"
+    echo "--- Installing Cura Legacy plugin"
     sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_CURAPLUGIN_ARCHIVE
     echo "--- Cura Legacy plugin install complete"
   fi
 
 
-  # HAProxy for http and https, and webcam
+  ### HAProxy for http and https, and webcam
   if [ "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]; then
     echo "--- Installing HAProxy"
     apt-get -y --allow-change-held-packages install haproxy
     echo "--- HAProxy installation complete"
   fi
 
-  # WiringPi
+  ### WiringPi
   if [ "$COMMUNITYOS_INCLUDE_WIRINGPI" == "yes" ]; then
     echo "--- Installing WiringPi"
     apt-get install wiringpi
     echo "--- WiringPi installation complete"
   fi
 
-  # fetch current yq build and install to /usr/local/bin
+  ### Fetch current yq build and install to /usr/local/bin
   echo "--- Downloading Yq YAML processor"
   wget -O yq $COMMUNITYOS_YQ_DOWNLOAD && chmod +x yq && mv yq /usr/local/bin
   echo "--- Yq installation complete"
 popd
 
 echo "--- Performing general houskeeping chores"
-# Make sure user pi has access to serial ports
+
+### Make sure user pi has access to serial ports
 echo "--- Make sure user pi has access to serial ports"
 usermod -a -G tty pi
 usermod -a -G dialout pi
 
-# Store CommunityOS commit used to build this image
+### Store CommunityOS commit used to build this image
 echo "--- Store CommunityOS build version"
 echo "$COMMUNITYOS_COMMIT" > /etc/communityos_commit
 
-# Keep legacy compatibility
+### Keep legacy compatibility
 ln -s /etc/custompios_buildbase /etc/communityos_buildbase
 
-# Allow pi user to run shutdown and service commands
+### Allow pi user to run shutdown and service commands
 echo "--- Allow pi user to run shutdown and service commands"
 echo "pi ALL=NOPASSWD: /sbin/shutdown" > /etc/sudoers.d/octoprint-shutdown
 echo "pi ALL=NOPASSWD: /usr/sbin/service" > /etc/sudoers.d/octoprint-service
 
-# Make sure users don't run git with sudo, thus breaking permissions, by adding /root/bin to the
-# default sudo path and placing a git wrapper script there that checks if it's run as root
+### Make sure users don't run git with sudo, thus breaking permissions, by adding /root/bin to the
+### default sudo path and placing a git wrapper script there that checks if it's run as root
 echo "--- Other housekeeping chores"
 sed -i "s@secure_path=\"@secure_path=\"/root/bin:@g" /etc/sudoers
 chmod +x /root/bin/git
 
-# Unpack root at the end, so files are modified before
+### Unpack root at the end, so files are modified before
 unpack /filesystem/root /
+echo "--- Housekeeping complete"
 
 ##############################
 ### Set up system services
@@ -192,24 +207,24 @@ fi
 
 ### haproxy
 if [ ! "$COMMUNITYOS_INCLUDE_HAPROXY" == "yes" ]; then
-  # let's remove the configs for system services we don't need
+  ### let's remove the configs for system services we don't need
   echo "--- Removing select haproxy service configurations"
-  # We need to make OctoPrint bind to all interfaces because otherwise
-  # it will be inaccessible...
+  ### We need to make OctoPrint bind to all interfaces because otherwise
+  ### it will be inaccessible...
   [ -f /etc/default/octoprint ] && sed -i "s@HOST=127.0.0.1@HOST=0.0.0.0@" /etc/default/octoprint
-  echo "--- Bind OctoPrint to all interfaces"
+  echo "--- Bind OctoPrint to all network interfaces"
 fi
 
 ### CuraEngine
 if [ ! "$COMMUNITYOS_INCLUDE_CURAENGINE" == "yes" ]; then
-  # remove the cura engine path in OctoPrint's config.yaml
-  echo "--- Removing CuraEngine"
+  ### remove the CuraEngine path in OctoPrint's config.yaml
+  echo "--- Removing CuraEngine config settings"
   sudo -u pi sed -i -e "s@cura_engine: /usr/local/bin/cura_engine@cura_engine:@g" /home/pi/.octoprint/config.yaml
 fi
 
 ### mjpg_streamer
 if [ "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" == "yes" ]; then
-  # make webcamd autostart
+  ### make webcamd autostart
   echo "--- Enabling webcam service"
   chmod +x /etc/init.d/webcamd
   chmod +x /root/bin/webcamd
@@ -222,26 +237,34 @@ else
   rm /root/bin/webcamd
 fi
 
-# Make sure Plymouth is set to the correct theme
+### Make sure Plymouth is set to the correct theme
 if [ "$COMMUNITYOS_INCLUDE_THEME" == "yes" ]; then
   echo "--- Setting default Plymouth theme"
   pushd /usr/share/plymouth/themes
   plymouth-set-default-theme communityos -R
+  popd
   sed -i 's/$/ quiet splash logo.nologo plymouth.ignore-serial-consoles/' /boot/cmdline.txt
+  pushd /usr/share/plymouth/themes/communityos/
+  echo "--- Copy theme logo"
+  if [[ "$COMMUNITYOS_INCLUDE_C2" == "yes" || "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_R1P" == "yes" ]]; then
+    sudo mv robo_logo.png logo.png
+  else
+    sudo mv basic_logo.png logo.png
+  fi
+  popd  
   echo "--- Plymouth theme installation complete"
 fi
 
 ##############################
 ### Setting up default list of OctoPrint plugins
+### Robo3D listed Plugins
 
-# Robo3D listed Plugins
-
-# Active Filters
+### Active Filters
 if [ "$COMMUNITYOS_INCLUDE_ACTIVEFILTERS" == "yes" ]; then
   echo "--- Installing Active Filters Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_ACTIVEFILTERS_ARCHIVE
   pushd /home/pi/helpers
-  # check to see if set up correctly
+  ### check to see if set up correctly
   if grep -Fq 'terminalfilters:' /home/pi/.octoprint/config.yaml; then
     popd
   else
@@ -251,12 +274,12 @@ if [ "$COMMUNITYOS_INCLUDE_ACTIVEFILTERS" == "yes" ]; then
   echo "--- Active Filter installation complete"
 fi
 
-# Filament Sensor Reloaded
+### Filament Sensor Reloaded
 if [ "$COMMUNITYOS_INCLUDE_FILAMENTSENSOR" == "yes" ]; then
   echo "--- Installing Filament Sensor Reloaded Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_FILAMENTSENSOR_ARCHIVE
   pushd /home/pi/helpers
-  # check to see if set up correctly
+  ### check to see if set up correctly
   if grep -Fq 'filamentreload:' /home/pi/.octoprint/config.yaml; then
     popd
   else
@@ -266,12 +289,12 @@ if [ "$COMMUNITYOS_INCLUDE_FILAMENTSENSOR" == "yes" ]; then
   echo "--- Filament Sensor Reloaded installation complete"
 fi
 
-# Firmware Updater
+### Firmware Updater
 if [ "$COMMUNITYOS_INCLUDE_FIRMWAREUPDATER" == "yes" ]; then
   echo "--- Installing Firmware Updater Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_FIRMWAREUPDATER_ARCHIVE
   apt-get -y install avrdude
-  # check to see if set up correctly
+  ### check to see if set up correctly
   pushd /home/pi/helpers
   if grep -Fq 'firmwareupdater:' /home/pi/.octoprint/config.yaml; then
     sed -i 's|avrdud_path:.*|avrdude_path: /usr/bin/avrdude|g' /home/pi/.octoprint/config.yaml
@@ -282,107 +305,107 @@ if [ "$COMMUNITYOS_INCLUDE_FIRMWAREUPDATER" == "yes" ]; then
   echo "--- Firmware Updater installation complete"
 fi
 
-# Alexa Skill
+### Alexa Skill
 if [ "$COMMUNITYOS_INCLUDE_ALEXASKILL" == "yes" ]; then
   echo "--- Installing Alexa Skill Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_ALEXASKILL_ARCHIVE
   echo "--- Alexa Skill installation complete"
 fi
 
-# EEPROM Editor
+### EEPROM Editor
 if [ "$COMMUNITYOS_INCLUDE_EEPROMEDITOR" == "yes" ]; then
   echo "--- Installing Marlin EEPROM Editor Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_EEPROMEDITOR_ARCHIVE
   echo "--- Marlin EEPROM Editor installation complete"
 fi
 
-# Polar Cloud
+### Polar Cloud
 if [ "$COMMUNITYOS_INCLUDE_POLARCLOUD" == "yes" ]; then
   echo "--- Installing Polar Cloud Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_POLARCLOUD_ARCHIVE
   echo "--- Polar Cloud installation complete"
 fi
 
-# 3DPrinterOS
+### 3DPrinterOS
 if [ "$COMMUNITYOS_INCLUDE_3DPRINTEROS" == "yes" ]; then
   echo "--- Installing 3DPrinterOS Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_3DPRINTEROS_ARCHIVE
   echo "--- 3DPrinterOS installation complete"
 fi
 
-# AstroPrint Cloud
+### AstroPrint Cloud
 if [ "$COMMUNITYOS_INCLUDE_ASTROPRINT" == "yes" ]; then
   echo "--- Installing AstroPrint Cloud Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_ASTROPRINT_ARCHIVE
   echo "--- AstroPrint Cloud installation complete"
 fi
 
-# Screen Squish
+### Screen Squish
 if [ "$COMMUNITYOS_INCLUDE_SCREENSQUISH" == "yes" ]; then
   echo "--- Installing Screen Squish Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_SCREENSQUISH_ARCHIVE
   echo "--- Screen Squish installation complete"
 fi
 
-# Request Spinner
+### Request Spinner
 if [ "$COMMUNITYOS_INCLUDE_REQUESTSPINNER" == "yes" ]; then
   echo "--- Installing Request Spinner Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_REQUESTSPINNER_ARCHIVE
   echo "--- Request Spinner installation complete"
 fi
 
-# Custom Control Editor
+### Custom Control Editor
 if [ "$COMMUNITYOS_INCLUDE_CUSTOMCONTROL" == "yes" ]; then
   echo "--- Installing Custom Control Editor Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_CUSTOMCONTROL_ARCHIVE
   echo "--- Custom Control Editor installation complete"
 fi
 
-# STL Viewer
+### STL Viewer
 if [ "$COMMUNITYOS_INCLUDE_STLVIEWER" == "yes" ]; then
   echo "--- Installing STL Viewer Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_STLVIEWER_ARCHIVE
   echo "--- STL Viewer installation complete"
 fi
 
-# OctoPrint Anywwhere
+### OctoPrint Anywwhere
 if [ "$COMMUNITYOS_INCLUDE_ANMYWHERE" == "yes" ]; then
   echo "--- Installing OctoPrint Anywhere Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_ANYWHERE_ARCHIVE
   echo "--- OctoPrint Anywhere installation complete"
 fi
 
-# netconnectd
+### netconnectd
 if [ "$COMMUNITYOS_INCLUDE_NETCONNECTD" == "yes" ]; then
   echo "--- Installing Netconnectd Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_NETCONNECTD_ARCHIVE
   echo "--- Netconnectd installation complete"
 fi
+##############################
+### Additional Useful Plugins
 
-# Additional Useful Plugins
-
-# Autoscroll
+### Autoscroll
 if [ "$COMMUNITYOS_INCLUDE_AUTOSCROLL" == "yes" ]; then
   echo "--- Installing Autoscroll Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_AUTOSCROLL_ARCHIVE
   echo "--- Autoscroll installation complete"
 fi
 
-# The Spaghetti Detective
+### The Spaghetti Detective
 if [ "$COMMUNITYOS_INCLUDE_SPAGHETTI" == "yes" ]; then
   echo "--- Installing The Spaghetti Detective Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_SPAGHETTI_ARCHIVE
   echo "--- The Spaghetti Detective installation complete"
 fi
 
-# Emergency Stop
+### Emergency Stop
 if [ "$COMMUNITYOS_INCLUDE_EMERGENCY" == "yes" ]; then
   echo "--- Installing Emergency Stop Button Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_EMERGENCY_ARCHIVE
   echo "--- Emergency Stop Button installation complete"
 fi
 
-# Printer Stats
+### Printer Stats
 if [ "$COMMUNITYOS_INCLUDE_STATS" == "yes" ]; then
   echo "--- Installing Printer Stats Plugin"
   sudo -u pi /home/pi/OctoPrint/bin/pip install $COMMUNITYOS_STATS_ARCHIVE
@@ -392,30 +415,32 @@ fi
 ##############################
 ### User interface installation
 
-if [[ "$COMMUNITYOS_INCLUDE_TFT" != "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" != "yes" ]]; then
-  echo "--- No touchscreen interface selected."
-  echo "--- No touchscreen interface will be installed."
+if [[ "$COMMUNITYOS_INCLUDE_TFT" != "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" != "yes" && "$COMMUNITYOS_INCLUDE_RLCD" != "yes" ]]; then
+  echo "--- No touchscreen interface selected"
+  echo "--- No touchscreen interface will be installed"
 else
-  if [[ ( "$COMMUNITYOS_INCLUDE_TFT" == "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" ) ]]; then
-    echo "--- You may only install one touchscreen interface."
-    echo "--- No touchscreen interface will be installed."
+  if [[ ( "$COMMUNITYOS_INCLUDE_TFT" == "yes" && "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" && "$COMMUNITYOS_INCLUDE_RLCD" == "yes" ) ]]; then
+    echo "--- You may only install one touchscreen interface"
+    echo "--- No touchscreen interface will be installed"
     COMMUNITYOS_INCLUDE_TFT="no"
     COMMUNITYOS_INCLUDE_TOUCHUI="no"
+    COMMUNITYOS_INCLUDE_RLCD="no"
   fi
 fi
 
-  # OctoPrint-TFT
+  ### OctoPrint-TFT
   if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
-    echo "--- Installing OctoPrint-TFT"
+    echo "--- Installing CommunityTFT"
     sudo apt-get install --fix-missing -y libgtk-3-0 xserver-xorg xinit x11-xserver-utils
     sudo dpkg -r --force-depends lightdm
     sudo systemctl set-default graphical.target
-    # Are we building from source?
+    ### Are we building from source?
     if [ ! "$COMMUNITYOS_TFT_BUILD" == "yes" ]; then
-      echo "--- Installing precompiled OctoPrint-TFT package"
+      echo "--- Installing precompiled CommunityTFT package"
       pushd /home/pi
       wget $COMMUNITYOS_TFT_LATEST
       sudo dpkg -i $COMMUNITYOS_TFT_RELEASE
+	  chmod +x /etc/disablescreenblank.sh
       echo "--- Package installation complete"
     else
       echo "--- Building from source"
@@ -425,16 +450,16 @@ fi
       cd ~/OctoPrint-TFT
       make build
       ls -1 build/
-      echo "--- Now Installing OctoPrint-TFT"
+      echo "--- Now Installing CommunityTFT"
       echo "--- Not yet completely implemented"
     fi
     rm /home/pi/$COMMUNITYOS_TFT_RELEASE
     sudo cp /etc/communityos_version /etc/octopi_version
     sudo sed -i 's/^/CommunityOS /' /etc/octopi_version
-    echo "OctoPrint-TFT installation complete"
+    echo "CommunityTFT installation complete"
   fi
 
-  # OctoPrint-TouchUI
+  ### OctoPrint-TouchUI
   if [ "$COMMUNITYOS_INCLUDE_TOUCHUI" == "yes" ]; then
     echo "--- Installing OctoPrint-TouchUI Plugin"
     pushd /home/pi
@@ -457,36 +482,19 @@ fi
 
 ##############################
 ### Screen driver installation
+### C2 = Generic, R2 = Waveshare 5.0
 
 if [ "$COMMUNITYOS_INCLUDE_GENERIC" == "yes" ]; then
   pushd /home/pi
-  echo "--- Installing generic drivers"
+  echo "--- Installing generic LCD driver"
   sudo cat /home/pi/helpers/generic-config >> /boot/config.txt
   sudo cp /home/pi/helpers/99-calibration.conf-generic /etc/X11/xorg.conf.d/99-calibration.conf
-  if [ "$COMMUNITYOS_GENERIC_ROTATE" == "yes" ]; then
+  if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
+    echo "--- Installing rotated LCD driver"
     sudo cat /home/pi/helpers/generic-config-180 >> /boot/config.txt
     sudo cp /home/pi/helpers/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
-  echo "--- Generic touchscreen driver installation complete."
-  popd
-fi
-
-if [ "$COMMUNITYOS_INCLUDE_WS35" == "yes" ]; then
-  pushd /home/pi
-  echo "--- Installing Waveshare 3.5 LCD drivers"
-  git clone $COMMUNITYOS_WS35_ARCHIVE
-  pushd /home/pi/LCD-show
-  sudo cp ./waveshare35a-overlay.dtb /boot/overlays/waveshare35a.dtbo
-  sudo cp ./waveshare35a-overlay.dtb /boot/overlays/
-  popd
-  if [ "$COMMUNITYOS_WS35_ROTATE" != "yes" ]; then
-    sudo cat /home/pi/helpers/waveshare35-config >> /boot/config.txt
-    sudo cp /home/pi/helpers/99-calibration.conf-35 /etc/X11/xorg.conf.d/99-calibration.conf
-  else
-    sudo cat /home/pi/helpers/waveshare35-config-180 >> /boot/config.txt
-    sudo cp /home/pi/helpers/99-calibration.conf-35-180 /etc/X11/xorg.conf.d/99-calibration.conf
-  fi
-  echo "--- 3.5 inch touchscreen driver installation complete."
+  echo "--- Generic touchscreen driver installation complete"
   popd
 fi
 
@@ -495,48 +503,42 @@ if [ "$COMMUNITYOS_INCLUDE_WS50" == "yes" ]; then
   echo "--- Installing Waveshare 5.0 LCD drivers"
   git clone $COMMUNITYOS_WS50_ARCHIVE
   pushd /home/pi/LCD-show
-  if [ "$COMMUNITYOS_WS50_ROTATE" == "yes" ]; then
-    echo "--- Copying rotated configuration"
+  sudo cat /home/pi/helpers/waveshare5-config >> /boot/config.txt
+  sudo cp /home/pi/helpers/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
+  if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
+    echo "--- Installing rotated LCD driver"
     sudo cat /home/pi/helpers/waveshare5-config-180 >> /boot/config.txt
     sudo cp /home/pi/helpers/99-calibration.conf-5-180 /etc/X11/xorg.conf.d/99-calibration.conf
-  else
-    echo "--- Copying normal configuration"
-    sudo cat /home/pi/helpers/waveshare5-config >> /boot/config.txt
-    sudo cp /home/pi/helpers/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
   popd
-  echo "--- 5 inch touchscreen driver installation complete."
+  echo "--- 5 inch touchscreen driver installation complete"
   popd
 fi
 
-#additional screen drivers here
+### Additional screen drivers here
 
 if [ "$COMMUNITYOS_INCLUDE_WS50H" == "yes" ]; then
   echo "--- Installing Waveshare 5.0 LCD (H) drivers"
-  if [ "$COMMUNITYOS_WS50H_ROTATE" == "yes" ]; then
-    echo "--- Copying rotated configuration"
+  sudo cat /home/pi/helpers/waveshare5h-config >> /boot/config.txt
+  sudo /home/pi/helpers/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
+  if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
+    echo "--- Installing rotated LCD driver"
     sudo cat /home/pi/helpers/waveshare5h-config-180 >> /boot/config.txt
     sudo cp /home/pi/helpers/99-calibration.conf-5h-180 /etc/X11/xorg.conf.d/99-calibration.conf
-  else
-    echo "--- Copying normal configuration"
-    sudo cat /home/pi/helpers/waveshare5h-config >> /boot/config.txt
-    sudo /home/pi/helpers/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
-  echo "--- 5 inch touchscreen driver installation complete."
+  echo "--- 5 inch touchscreen driver installation complete"
 fi
 
 if [ "$COMMUNITYOS_INCLUDE_WS43" == "yes" ]; then
   echo "--- Installing Waveshare 4.3 LCD drivers"
-  if [ "$COMMUNITYOS_WS43_ROTATE" == "yes" ]; then
-    echo "--- Copying rotated configuration"
+  sudo cat /home/pi/helpers/waveshare43-config >> /boot/config.txt
+  sudo cp /home/pi/helpers/40-libinput.conf-43 /etc/X11/xorg.conf.d/40-libinput.conf
+  if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
+    echo "--- Installing rotated LCD driver"
     sudo cat /home/pi/helpers/waveshare43-config-180 >> /boot/config.txt
     sudo cp /home/pi/helpers/40-libinput.conf-43-180 /etc/X11/xorg.conf.d/40-libinput.conf
-  else
-    echo "--- Copying normal configuration"
-    sudo cat /home/pi/helpers/waveshare43-config >> /boot/config.txt
-    sudo cp /home/pi/helpers/40-libinput.conf-43 /etc/X11/xorg.conf.d/40-libinput.conf
   fi
-  echo "--- 4.3 inch touchscreen driver installation complete."
+  echo "--- 4.3 inch touchscreen driver installation complete"
 fi
 
 if [ "$COMMUNITYOS_INCLUDE_RPI7" == "yes" ]; then
@@ -544,11 +546,12 @@ if [ "$COMMUNITYOS_INCLUDE_RPI7" == "yes" ]; then
   echo "--- Installing rPi 7 touchscreen drivers"
   sudo cat /home/pi/helpers/generic-config >> /boot/config.txt
   sudo cp /home/pi/helpers/99-calibration.conf-generic /etc/X11/xorg.conf.d/99-calibration.conf
-  if [ "$COMMUNITYOS_RPI7_ROTATE" == "yes" ]; then
+  if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
+    echo "--- Installing rotated LCD driver"
     sudo cat /home/pi/helpers/generic-config-180 >> /boot/config.txt
     sudo cp /home/pi/helpers/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
-  echo "--- rPi 7 inch touchscreen driver installation complete."
+  echo "--- rPi 7 inch touchscreen driver installation complete"
   popd
 fi
 
@@ -579,15 +582,17 @@ if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" |
   fi
   echo "--- Printer setting complete"
 else
-  cat /home/pi/helpers/config.gen.txt >> home/pi/.octoprint/config.yaml
+  echo "--- Setting generic 3D printer defaults"
+  cat /home/pi/helpers/config.gen.txt >> /home/pi/.octoprint/config.yaml
+  echo "--- Generic 3D printer setting complete"
 fi
 
-touch /boot/communityos-hostname.txt
 sudo rm /home/pi/helpers -R
 
 ##############################
 ### Clean up before exiting
 
+### make sure xtrace is off
 set +x
 apt-get clean
 apt-get autoremove -y

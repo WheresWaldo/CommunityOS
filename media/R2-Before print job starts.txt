@@ -1,0 +1,59 @@
+; Lines in this file which start with a ';' are ignored
+; To make a change, remove or add the ';' to the beginning of the line
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; set to millimeters
+G21
+; set to absolute mode
+G90
+; zero extruder
+G92 E0
+; turn off fans
+M107
+;non blocking heatup of extruder
+; ABS or PetG
+;M104 S230
+; PLA
+M104 S190
+; PLA 2
+M104 S200
+; PetG 2
+;M104 S240
+;non blocking heatup of the bed
+M140 S60
+; Robo Leveling
+;G36
+;***Alternative leveling***
+;HOME for manually leveled / shimmed bed
+G28
+;Auto-probe alternative - not to be used with a glass plate bed
+; As the auto-probe will read the surface below the glass plate
+; Can be used in conjunction with G28 code
+;G29 P1 T
+; pause for 2 seconds
+G4 S2
+; move bed down 15mm
+G1 Z15 F300
+; move to front left corner
+G1 X10 Y1 F7200
+; heat to priming line temp
+; for PetG
+;M109 S230
+; for ABS
+;M109 S210
+; for PLA 
+M109 S190
+; for PLA 2
+;M109 S200
+; Heat Bed - set to your preferred temp
+;M140 S60
+; move bed to printing position
+G1 Z0.3
+; print 190mm priming line
+G1 X190 E15.0 F500
+; move bed down
+G1 Z15 F300
+; zero extruder
+G92 E0
+; set movement speed
+G1 F7200
+
