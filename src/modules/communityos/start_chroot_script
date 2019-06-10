@@ -656,8 +656,6 @@ fi
 if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" || "$COMMUNITYOS_INCLUDE_R1P" == "yes" ]]; then
   echo "--- Setting Robo3D defaults"
   cat /home/pi/helpers/config.r3d.txt >> /home/pi/.octoprint/config.yaml
-  mkdir /home/pi/.octoprint/scripts
-  mkdir /home/pi/.octoprint/scripts/gcode
   if [ "$COMMUNITYOS_INCLUDE_R2" == "yes" ]; then
     echo "--- R2 printer settings"
     if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
