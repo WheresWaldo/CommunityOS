@@ -569,6 +569,7 @@ fi
 
 if [ "$COMMUNITYOS_INCLUDE_WS5" == "yes" ]; then
   echo "--- Installing Waveshare 5 LCD drivers"
+
   pushd /home/pi
   git clone $COMMUNITYOS_WAVESHARE_ARCHIVE
   popd
@@ -588,6 +589,7 @@ fi
 if [ "$COMMUNITYOS_INCLUDE_WS5H" == "yes" ]; then
   echo "--- Installing Waveshare 5(H) drivers"
   pushd /home/pi
+
   sudo cat /home/pi/helpers/waveshare5h-config >> /boot/config.txt
   sudo cp /home/pi/helpers/40-libinput.conf-43 /etc/X11/xorg.conf.d/40-libinput.conf
   if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
