@@ -662,6 +662,8 @@ if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" |
       sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
     fi
     mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
+    cp /home/pi/helpers/*.r2 /home/pi/.octoprint/scripts/gcode
+	for script in /home/pi/.octoprint/scripts/gcode/*.r2; do mv "$script" "${script%%.r2}"; done
   fi
   if [ "$COMMUNITYOS_INCLUDE_C2" == "yes" ]; then
     echo "--- C2 Printer settings"
@@ -670,7 +672,9 @@ if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" |
       API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
       sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
     fi
-    mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
+    mv /home/pi/.octoprint/printerProfiles/roboc2.profile /home/pi/.octoprint/printerProfiles/_default.profile
+    cp /home/pi/helpers/*.c2 /home/pi/.octoprint/scripts/gcode
+	for script in /home/pi/.octoprint/scripts/gcode/*.c2; do mv "$script" "${script%%.c2}"; done
   fi
   echo "--- Printer setting complete"
 else
