@@ -1,1 +1,0 @@
-G1 Z{{ pause_position.z + 30 }}  ; move down 30 mm
