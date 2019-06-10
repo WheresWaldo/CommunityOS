@@ -10,4 +10,3 @@ dtoverlay=ads7846,cs=1,penirq=25,penirq_pull=2,speed=50000,keep_vref_on=0,swapxy
 enable_uart=1
 dtparam=i2c_arm=on,spi=on
 display_rotate=2
-disable_overscan=1

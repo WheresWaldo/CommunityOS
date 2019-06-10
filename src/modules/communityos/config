@@ -36,13 +36,22 @@
 
 # Touchscreen selection options
 # Choose only one of the following:
-#   Generic rPi 480x320 TFT screen, Raspberry Pi 7",
-#   Waveshare 5" TFT, Waveshare 5" IPS, Waveshare 4.3" IPS,
+#   Raspberry Pi 7", Generic rPi 480x320 TFT screen,
+#   Waveshare 10.1" TFT, 7" IPS, 7" TFT, 5" IPS, 5" TFT, 4.3" IPS, 4" IPS, 3.5" IPS
 [ -n "$COMMUNITYOS_INCLUDE_GENERIC" ] || COMMUNITYOS_INCLUDE_GENERIC=no
-[ -n "$COMMUNITYOS_INCLUDE_WS50" ] || COMMUNITYOS_INCLUDE_WS50=yes
-[ -n "$COMMUNITYOS_INCLUDE_WS50H" ] || COMMUNITYOS_INCLUDE_WS50H=no
 [ -n "$COMMUNITYOS_INCLUDE_RPI7" ] || COMMUNITYOS_INCLUDE_RPI7=no
+[ -n "$COMMUNITYOS_INCLUDE_WS10" ] || COMMUNITYOS_INCLUDE_WS10=no
+[ -n "$COMMUNITYOS_INCLUDE_WS7" ] || COMMUNITYOS_INCLUDE_WS7=no
+[ -n "$COMMUNITYOS_INCLUDE_WS7B" ] || COMMUNITYOS_INCLUDE_WS7B=no
+[ -n "$COMMUNITYOS_INCLUDE_WS5" ] || COMMUNITYOS_INCLUDE_WS5=yes
+[ -n "$COMMUNITYOS_INCLUDE_WS5H" ] || COMMUNITYOS_INCLUDE_WS5H=no
 [ -n "$COMMUNITYOS_INCLUDE_WS43" ] || COMMUNITYOS_INCLUDE_WS43=no
+[ -n "$COMMUNITYOS_INCLUDE_WS4" ] || COMMUNITYOS_INCLUDE_WS4=no
+[ -n "$COMMUNITYOS_INCLUDE_WS35" ] || COMMUNITYOS_INCLUDE_WS35=no
+
+# Touchscreen rotation
+# Set to yes if touchscreen is upside-down
+[ -n "$COMMUNITYOS_LCD_ROTATE" ] || COMMUNITYOS_LCD_ROTATE=no
 
 # Touchscreen rotation
 # Set to yes if touchscreen is upside-down
@@ -158,22 +167,23 @@
 ###############################################################################
 # Additional touchscreen variable declarations
 # Please do not edit any of these lines unless you understand the consequences
+[ -n "$COMMUNITYOS_WAVESHARE_ARCHIVE" ] || COMMUNITYOS_WAVESHARE_ARCHIVE=https://github.com/waveshare/LCD-show.git
 
 # Generic XPT2046 or ADS7846 touchscreen driver [Likely Robo3D C2]
 [ -n "$COMMUNITYOS_GENERIC_RESOLUTION" ] || COMMUNITYOS_GENERIC_RESOLUTION=480x320
 
-# Waveshare 5" resistive touchscreen LCD [Likely Robo3D R2]
-[ -n "$COMMUNITYOS_WS50_ARCHIVE" ] || COMMUNITYOS_WS50_ARCHIVE=https://github.com/waveshare/LCD-show.git
-[ -n "$COMMUNITYOS_WS50_RESOLUTION" ] || COMMUNITYOS_WS50_RESOLUTION=800x480
-
-# Waveshare 5" capactitive touchscreen
-[ -n "$COMMUNITYOS_WS50H_RESOLUTION" ] || COMMUNITYOS_WS50H_RESOLUTION=800x480
-
-# Waveshare 4.3" capacitive touchscreen
-[ -n "$COMMUNITYOS_WS43_RESOLUTION" ] || COMMUNITYOS_WS43_RESOLUTION=800x480
-
 # Raspberry Pi 7" capacitive touchscreen
 [ -n "$COMMUNITYOS_RPI7_RESOLUTION" ] || COMMUNITYOS_RPI7_RESOLUTION=800x480
+
+# Waveshare screen resolutions
+[ -n "$COMMUNITYOS_WS10_RESOLUTION" ] || COMMUNITYOS_WS10_RESOLUTION=1024x600
+[ -n "$COMMUNITYOS_WS7_RESOLUTION" ] || COMMUNITYOS_WS7_RESOLUTION=1024x600
+[ -n "$COMMUNITYOS_WS7B_RESOLUTION" ] || COMMUNITYOS_WS7B_RESOLUTION=800x480
+[ -n "$COMMUNITYOS_WS5_RESOLUTION" ] || COMMUNITYOS_WS5_RESOLUTION=800x480
+[ -n "$COMMUNITYOS_WS5H_RESOLUTION" ] || COMMUNITYOS_WS5H_RESOLUTION=800x480
+[ -n "$COMMUNITYOS_WS43_RESOLUTION" ] || COMMUNITYOS_WS43_RESOLUTION=800x480
+[ -n "$COMMUNITYOS_WS4_RESOLUTION" ] || COMMUNITYOS_WS4_RESOLUTION=800x480
+[ -n "$COMMUNITYOS_WS35_RESOLUTION" ] || COMMUNITYOS_WS35_RESOLUTION=480x320
 
 ###############################################################################
 # Additional unser interface variable declarations

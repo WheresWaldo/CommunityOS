@@ -498,34 +498,106 @@ if [ "$COMMUNITYOS_INCLUDE_GENERIC" == "yes" ]; then
   popd
 fi
 
-if [ "$COMMUNITYOS_INCLUDE_WS50" == "yes" ]; then
+if [ "$COMMUNITYOS_INCLUDE_RPI7" == "yes" ]; then
   pushd /home/pi
-  echo "--- Installing Waveshare 5.0 LCD drivers"
-  git clone $COMMUNITYOS_WS50_ARCHIVE
-  pushd /home/pi/LCD-show
-  sudo cat /home/pi/helpers/waveshare5-config >> /boot/config.txt
-  sudo cp /home/pi/helpers/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
+  echo "--- Installing rPi 7 touchscreen drivers"
+  sudo cat /home/pi/helpers/generic-config >> /boot/config.txt
+  sudo cp /home/pi/helpers/99-calibration.conf-generic /etc/X11/xorg.conf.d/99-calibration.conf
   if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
     echo "--- Installing rotated LCD driver"
-    sudo cat /home/pi/helpers/waveshare5-config-180 >> /boot/config.txt
-    sudo cp /home/pi/helpers/99-calibration.conf-5-180 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cat /home/pi/helpers/generic-config-180 >> /boot/config.txt
+    sudo cp /home/pi/helpers/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
   fi
-  popd
-  echo "--- 5 inch touchscreen driver installation complete"
+  echo "--- rPi 7 inch touchscreen driver installation complete"
   popd
 fi
 
-### Additional screen drivers here
+### Waveshare screen drivers
 
-if [ "$COMMUNITYOS_INCLUDE_WS50H" == "yes" ]; then
-  echo "--- Installing Waveshare 5.0 LCD (H) drivers"
+if [ "$COMMUNITYOS_INCLUDE_WS10" == "yes" ]; then
+  echo "--- Installing Waveshare 10.1 LCD drivers"
+  pushd /home/pi
+  git clone $COMMUNITYOS_WAVESHARE_ARCHIVE
+  popd
+  pushd /home/pi/LCD-show
+  sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-101-1024x600  /usr/share/X11/xorg.conf.d/99-calibration.conf
+  sudo cat /home/pi/helpers/waveshare10-config >> /boot/config.txt
+  if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
+    echo "--- Installing rotated LCD driver"
+    sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-101-1024x600-180  /usr/share/X11/xorg.conf.d/99-calibration.conf
+    sudo cat /home/pi/helpers/waveshare10-config-180 >> /boot/config.txt
+  fi
+  popd
+  echo "--- 10.1 inch touchscreen driver installation complete"
+fi
+
+if [ "$COMMUNITYOS_INCLUDE_WS7" == "yes" ]; then
+  echo "--- Installing Waveshare 7 LCD drivers"
+  pushd /home/pi
+  git clone $COMMUNITYOS_WAVESHARE_ARCHIVE
+  popd
+  pushd /home/pi/LCD-show
+  sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
+  sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-7-1024x600  /usr/share/X11/xorg.conf.d/99-calibration.conf
+  sudo cat /home/pi/helpers/waveshare7-config >> /boot/config.txt
+  if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
+    echo "--- Installing rotated LCD driver"
+    sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-7-1024x600-180  /usr/share/X11/xorg.conf.d/99-calibration.conf
+    sudo cat /home/pi/helpers/waveshare7-config-180 >> /boot/config.txt
+  fi
+  echo "--- 7 inch touchscreen driver installation complete"
+  popd
+fi
+
+if [ "$COMMUNITYOS_INCLUDE_WS7B" == "yes" ]; then
+  echo "--- Installing Waveshare 7(B) LCD drivers"
+  pushd /home/pi
+  git clone $COMMUNITYOS_WAVESHARE_ARCHIVE
+  popd
+  pushd /home/pi/LCD-show
+  sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf 
+  sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-7-1024x600  /usr/share/X11/xorg.conf.d/99-calibration.conf
+  sudo cat /home/pi/helpers/waveshare7b-config >> /boot/config.txt
+  if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
+    echo "--- Installing rotated LCD driver"
+    sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-7-1024x600-180  /usr/share/X11/xorg.conf.d/99-calibration.conf
+    sudo cat /home/pi/helpers/waveshare7b-config-180 >> /boot/config.txt
+  fi
+  popd
+  echo "--- 7 inch (B) touchscreen driver installation complete"
+fi
+
+if [ "$COMMUNITYOS_INCLUDE_WS5" == "yes" ]; then
+  echo "--- Installing Waveshare 5 LCD drivers"
+
+  pushd /home/pi
+  git clone $COMMUNITYOS_WAVESHARE_ARCHIVE
+  popd
+  pushd /home/pi/LCD-show
+  sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf 
+  sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-5  /usr/share/X11/xorg.conf.d/99-calibration.conf
+  sudo cat /home/pi/helpers/waveshare5-config >> /boot/config.txt
+  if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
+    echo "--- Installing rotated LCD driver"
+    sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-5-180  /usr/share/X11/xorg.conf.d/99-calibration.conf
+    sudo cat /home/pi/helpers/waveshare5-config-180 >> /boot/config.txt
+  fi
+  popd
+  echo "--- 5 inch touchscreen driver installation complete"
+fi
+
+if [ "$COMMUNITYOS_INCLUDE_WS5H" == "yes" ]; then
+  echo "--- Installing Waveshare 5(H) drivers"
+  pushd /home/pi
+
   sudo cat /home/pi/helpers/waveshare5h-config >> /boot/config.txt
-  sudo /home/pi/helpers/99-calibration.conf-5 /etc/X11/xorg.conf.d/99-calibration.conf
+  sudo cp /home/pi/helpers/40-libinput.conf-43 /etc/X11/xorg.conf.d/40-libinput.conf
   if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
     echo "--- Installing rotated LCD driver"
     sudo cat /home/pi/helpers/waveshare5h-config-180 >> /boot/config.txt
-    sudo cp /home/pi/helpers/99-calibration.conf-5h-180 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp /home/pi/helpers/40-libinput.conf-43-180 /etc/X11/xorg.conf.d/40-libinput.conf
   fi
+  popd
   echo "--- 5 inch touchscreen driver installation complete"
 fi
 
@@ -541,18 +613,40 @@ if [ "$COMMUNITYOS_INCLUDE_WS43" == "yes" ]; then
   echo "--- 4.3 inch touchscreen driver installation complete"
 fi
 
-if [ "$COMMUNITYOS_INCLUDE_RPI7" == "yes" ]; then
+if [ "$COMMUNITYOS_INCLUDE_WS4" == "yes" ]; then
+  echo "--- Installing Waveshare 4 LCD drivers"
   pushd /home/pi
-  echo "--- Installing rPi 7 touchscreen drivers"
-  sudo cat /home/pi/helpers/generic-config >> /boot/config.txt
-  sudo cp /home/pi/helpers/99-calibration.conf-generic /etc/X11/xorg.conf.d/99-calibration.conf
+  git clone $COMMUNITYOS_WAVESHARE_ARCHIVE
+  popd
+  pushd /home/pi/LCD-show
+  sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf 
+  sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-5-270  /usr/share/X11/xorg.conf.d/99-calibration.conf
+  sudo cat /home/pi/helpers/waveshare4-config >> /boot/config.txt
   if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
     echo "--- Installing rotated LCD driver"
-    sudo cat /home/pi/helpers/generic-config-180 >> /boot/config.txt
-    sudo cp /home/pi/helpers/99-calibration.conf-generic-180 /etc/X11/xorg.conf.d/99-calibration.conf
+    sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-5-90  /usr/share/X11/xorg.conf.d/99-calibration.conf
+    sudo cat /home/pi/helpers/waveshare4-config-180 >> /boot/config.txt
   fi
-  echo "--- rPi 7 inch touchscreen driver installation complete"
   popd
+  echo "--- 4 inch touchscreen driver installation complete"
+fi
+
+if [ "$COMMUNITYOS_INCLUDE_WS35" == "yes" ]; then
+  echo "--- Installing Waveshare 3.5(H) LCD drivers"
+  pushd /home/pi
+  git clone $COMMUNITYOS_WAVESHARE_ARCHIVE
+  popd
+  pushd /home/pi/LCD-show
+  sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf 
+  sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-35H  /usr/share/X11/xorg.conf.d/99-calibration.conf
+  sudo cat /home/pi/helpers/waveshare35-config >> /boot/config.txt
+  if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
+    echo "--- Installing rotated LCD driver"
+    sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-5-180  /usr/share/X11/xorg.conf.d/99-calibration.conf
+    sudo cat /home/pi/helpers/waveshare35-config-180 >> /boot/config.txt
+  fi
+  popd
+  echo "--- 3.5 inch (H) touchscreen driver installation complete"
 fi
 
 
@@ -570,6 +664,8 @@ if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" |
       sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
     fi
     mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
+    cp /home/pi/helpers/*.r2 /home/pi/.octoprint/scripts/gcode
+	for script in /home/pi/.octoprint/scripts/gcode/*.r2; do mv "$script" "${script%%.r2}"; done
   fi
   if [ "$COMMUNITYOS_INCLUDE_C2" == "yes" ]; then
     echo "--- C2 Printer settings"
@@ -578,7 +674,9 @@ if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" |
       API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
       sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
     fi
-    mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
+    mv /home/pi/.octoprint/printerProfiles/roboc2.profile /home/pi/.octoprint/printerProfiles/_default.profile
+    cp /home/pi/helpers/*.c2 /home/pi/.octoprint/scripts/gcode
+	for script in /home/pi/.octoprint/scripts/gcode/*.c2; do mv "$script" "${script%%.c2}"; done
   fi
   echo "--- Printer setting complete"
 else
