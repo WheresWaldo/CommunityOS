@@ -2,7 +2,8 @@
 # All our configuration settings must start with COMMUNITYOS_
 # COMMUNITYOS_VAR="This is a module variable"
 #
-# For ease of configuration all included options will be listed first
+# For ease of configuration all general options will be listed first
+# Default settings selected for Robo3D R2 printer
 
 # Printer specific default options (default = Robo3D R2)
 # Choose only one from this section or none
@@ -34,7 +35,7 @@
 [ -n "$COMMUNITYOS_INCLUDE_STATS" ] || COMMUNITYOS_INCLUDE_STATS=yes
 [ -n "$COMMUNITYOS_INCLUDE_SPAGHETTI" ] || COMMUNITYOS_INCLUDE_SPAGHETTI=no
 
-# Touchscreen selection options
+# Touchscreen selection options, all HDMI based
 # Choose only one of the following:
 #   Raspberry Pi 7", Generic rPi 480x320 TFT screen,
 #   Waveshare 10.1" TFT, 7" IPS, 7" TFT, 5" IPS, 5" TFT, 4.3" IPS, 4" IPS, 3.5" IPS
@@ -53,14 +54,13 @@
 # Set to yes if touchscreen is upside-down
 [ -n "$COMMUNITYOS_LCD_ROTATE" ] || COMMUNITYOS_LCD_ROTATE=no
 
-# Touchscreen rotation
-# Set to yes if touchscreen is upside-down
-[ -n "$COMMUNITYOS_LCD_ROTATE" ] || COMMUNITYOS_LCD_ROTATE=no
-
 # User interface selection options (default = OctoPrint-TFT)
 # Choose only one from this section
 [ -n "$COMMUNITYOS_INCLUDE_TFT" ] || COMMUNITYOS_INCLUDE_TFT=yes
-[ -n "$COMMUNITYOS_INCLUDE_RLCD" ] || COMMUNITYOS_INCLUDE_RLCD=no
+
+# OctoPrint environemnt
+[ -n "$COMMUNITYOS_INCLUDE_CURAENGINE" ] || COMMUNITYOS_INCLUDE_CURAENGINE=no
+[ -n "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" ] || COMMUNITYOS_INCLUDE_MJPGSTREAMER=yes
 
 
 ###############################################################################
@@ -76,13 +76,11 @@
 [ -n "$COMMUNITYOS_PYBONJOUR_ARCHIVE" ] || COMMUNITYOS_PYBONJOUR_ARCHIVE=https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/pybonjour/pybonjour-1.1.1.tar.gz
 
 # CuraEngine archive & version
-[ -n "$COMMUNITYOS_INCLUDE_CURAENGINE" ] || COMMUNITYOS_INCLUDE_CURAENGINE=no
 [ -n "$COMMUNITYOS_CURAENGINE_VERSION" ] || COMMUNITYOS_CURAENGINE_VERSION=15.04.6
 [ -n "$COMMUNITYOS_CURAENGINE_ARCHIVE" ] || COMMUNITYOS_CURAENGINE_ARCHIVE=https://github.com/Ultimaker/CuraEngine/archive/$COMMUNITYOS_CURAENGINE_VERSION.zip
 [ -n "$COMMUNITYOS_CURAPLUGIN_ARCHIVE" ] || COMMUNITYOS_CURAPLUGIN_ARCHIVE=https://github.com/OctoPrint/OctoPrint-CuraLegacy/archive/master.zip
 
 # mjpg streamer
-[ -n "$COMMUNITYOS_INCLUDE_MJPGSTREAMER" ] || COMMUNITYOS_INCLUDE_MJPGSTREAMER=yes
 [ -n "$COMMUNITYOS_MJPGSTREAMER_REPO_SHIP" ] || COMMUNITYOS_MJPGSTREAMER_REPO_SHIP=https://github.com/jacksonliam/mjpg-streamer.git
 [ -n "$COMMUNITYOS_MJPGSTREAMER_REPO_BUILD" ] || COMMUNITYOS_MJPGSTREAMER_REPO_BUILD=
 [ -n "$COMMUNITYOS_MJPGSTREAMER_REPO_BRANCH" ] || COMMUNITYOS_MJPGSTREAMER_REPO_BRANCH=master
@@ -202,4 +200,5 @@
 [ -n "$COMMUNITYOS_TOUCHUI_BOOTARCHIVE" ] || COMMUNITYOS_TOUCHUI_BOOTARCHIVE=https://github.com/BillyBlaze/OctoPrint-TouchUI-autostart.git
 
 # Robo CommunityOS LCD
+[ -n "$COMMUNITYOS_INCLUDE_RLCD" ] || COMMUNITYOS_INCLUDE_RLCD=no
 [ -n "$COMMUNITYOS_RLCD_ARCHIVE" ] || COMMUNITYOS_RLCD_ARCHIVE=https://github.com/WheresWaldo/roboLCD_current/archive/do_not_copy.zip
