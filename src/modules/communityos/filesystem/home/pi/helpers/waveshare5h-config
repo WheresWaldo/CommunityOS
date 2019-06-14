@@ -7,6 +7,5 @@ hdmi_cvt 800 480 60 6 0 0 0
 hdmi_drive=1
 hdmi_force_hotplug=1
 dtoverlay=ads7846,cs=1,penirq=25,penirq_pull=2,speed=50000,keep_vref_on=0,swapxy=0,pmax=255,xohms=150,xmin=200,xmax=3900,ymin=200,ymax=3900
-enable_uart=1
 dtparam=i2c_arm=on,spi=on
-disable_overscan=1
+display_rotate=0
