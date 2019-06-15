@@ -19,6 +19,7 @@ export LC_ALL=C
 source /common.sh
 install_cleanup_trap
 
+echo "--- Unpacking necessary files"
 unpack /filesystem/home/pi /home/pi pi
 unpack /filesystem/home/root /root root
 unpack /filesystem/boot /boot
@@ -27,6 +28,7 @@ unpack /filesystem/boot /boot
 ### Base file system
 
 # Make sure all packages are upgraded and none are held back
+echo "--- Updating Raspbian distrobution files"
 apt-get update
 apt-get dist-upgrade -y
 
@@ -159,6 +161,7 @@ usermod -a -G dialout pi
 # Store CommunityOS commit used to build this image
 echo "--- Store CommunityOS build version"
 echo "$COMMUNITYOS_COMMIT" > /etc/communityos_commit
+cp /etc/communityos_version /boot/
 
 # Keep legacy compatibility
 ln -s /etc/custompios_buildbase /etc/communityos_buildbase
@@ -189,7 +192,7 @@ echo "--- Disable GUI"
 systemctl_if_exists disable lightdm.service || true
 
 # Means to change default password and hostname (if available)
-echo "--- Change default password and hostname (if files exist)"
+echo "--- Add service to change default password and hostname (if files exist)"
 chmod +x /etc/init.d/change_password
 chmod +x /etc/init.d/change_hostname
 update-rc.d change_password defaults
@@ -249,8 +252,10 @@ if [ "$COMMUNITYOS_INCLUDE_THEME" == "yes" ]; then
   pushd /usr/share/plymouth/themes/communityos/
   echo "--- Copy theme logo"
   if [[ "$COMMUNITYOS_INCLUDE_C2" == "yes" || "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_R1P" == "yes" ]]; then
+    echo "--- Adding 'For Robo3D printer' logo"
     sudo mv robo_logo.png logo.png
   else
+    echo "--- Generic CommunityOS logo"
     sudo mv basic_logo.png logo.png
   fi
   popd  
@@ -531,6 +536,7 @@ if [ "$COMMUNITYOS_INCLUDE_WS7" == "yes" ]; then
   gitclone COMMUNITYOS_WAVESHARE_REPO /home/pi/LCD-show
   popd
   pushd /home/pi/LCD-show
+  echo "--- Copying calibration files"
   sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
   sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-7-1024x600  /usr/share/X11/xorg.conf.d/99-calibration.conf
   sudo cat /home/pi/helpers/waveshare7-config >> /boot/config.txt
@@ -550,6 +556,7 @@ if [ "$COMMUNITYOS_INCLUDE_WS7B" == "yes" ]; then
   gitclone COMMUNITYOS_WAVESHARE_REPO /home/pi/LCD-show
   popd
   pushd /home/pi/LCD-show
+  echo "--- Copying calibration files"
   sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf 
   sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-7-1024x600  /usr/share/X11/xorg.conf.d/99-calibration.conf
   sudo cat /home/pi/helpers/waveshare7b-config >> /boot/config.txt
@@ -569,6 +576,7 @@ if [ "$COMMUNITYOS_INCLUDE_WS5" == "yes" ]; then
   gitclone COMMUNITYOS_WAVESHARE_REPO /home/pi/LCD-show
   popd
   pushd /home/pi/LCD-show
+  echo "--- Copying calibration files"
   sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf 
   sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-5  /usr/share/X11/xorg.conf.d/99-calibration.conf
   sudo cat /home/pi/helpers/waveshare5-config >> /boot/config.txt
@@ -586,6 +594,7 @@ if [ "$COMMUNITYOS_INCLUDE_WS5H" == "yes" ]; then
   echo "--- Installing Waveshare 5(H) drivers"
   pushd /home/pi
   gitclone COMMUNITYOS_WAVESHARE_REPO /home/pi/LCD-show
+  echo "--- Copying calibration files"
   sudo cat /home/pi/helpers/waveshare5h-config >> /boot/config.txt
   sudo cp /home/pi/helpers/40-libinput.conf-43 /etc/X11/xorg.conf.d/40-libinput.conf
   if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
@@ -602,6 +611,7 @@ if [ "$COMMUNITYOS_INCLUDE_WS43" == "yes" ]; then
   echo "--- Installing Waveshare 4.3 LCD drivers"
   pushd /home/pi
   gitclone COMMUNITYOS_WAVESHARE_REPO /home/pi/LCD-show
+  echo "--- Copying calibration files"
   sudo cat /home/pi/helpers/waveshare43-config >> /boot/config.txt
   sudo cp /home/pi/helpers/40-libinput.conf-43 /etc/X11/xorg.conf.d/40-libinput.conf
   if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
@@ -620,6 +630,7 @@ if [ "$COMMUNITYOS_INCLUDE_WS4" == "yes" ]; then
   gitclone COMMUNITYOS_WAVESHARE_REPO /home/pi/LCD-show
   popd
   pushd /home/pi/LCD-show
+  echo "--- Copying calibration files"
   sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf 
   sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-5-270  /usr/share/X11/xorg.conf.d/99-calibration.conf
   sudo cat /home/pi/helpers/waveshare4-config >> /boot/config.txt
@@ -639,6 +650,7 @@ if [ "$COMMUNITYOS_INCLUDE_WS35" == "yes" ]; then
   gitclone COMMUNITYOS_WAVESHARE_REPO /home/pi/LCD-show
   popd
   pushd /home/pi/LCD-show
+  echo "--- Copying calibration files"
   sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf 
   sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-35H  /usr/share/X11/xorg.conf.d/99-calibration.conf
   sudo cat /home/pi/helpers/waveshare35-config >> /boot/config.txt
@@ -665,6 +677,7 @@ if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" |
       API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
       sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
     fi
+	echo "--- Modifying OctoPrint default printer and scripts" 
     mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
   fi
   if [ "$COMMUNITYOS_INCLUDE_C2" == "yes" ]; then
@@ -674,11 +687,22 @@ if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" |
       API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
       sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
     fi
+	echo "--- Modifying OctoPrint default printer and scripts" 
     mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
 	sed -i '/M140/d' /home/pi/.octoprint/scripts/gcode/afterPrintCancelled
 	sed -i '/M140/d' /home/pi/.octoprint/scripts/gcode/afterPrintDone
 	sed -i '/M140/d' /home/pi/.octoprint/scripts/gcode/beforePrintStarted
   echo "--- Printer settings complete"
+  if [ "$COMMUNITYOS_INCLUDE_R1P" == "yes" ]; then
+    echo "--- R1+PLUS printer settings"
+    if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
+      sudo cp /home/pi/helpers/octoprint-tft-environment-gen.txt /etc/octoprint-tft-environment
+      API_KEY=`sed -n 's/^ *key: //p' /home/pi/.octoprint/config.yaml`
+      sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
+    fi
+	echo "--- Modifying OctoPrint default printer and scripts" 
+    mv /home/pi/.octoprint/printerProfiles/robor1.profile /home/pi/.octoprint/printerProfiles/_default.profile
+  fi
 else
   echo "--- Setting generic 3D printer defaults"
   if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
@@ -688,7 +712,7 @@ else
   fi
   cat /home/pi/helpers/config.gen.txt >> /home/pi/.octoprint/config.yaml
   rm -rf /home/pi/.octoprint/scripts/gcode
-  echo "--- Generic 3D printer settings complete"
+  echo "--- Generic printer settings complete"
 fi
 
 sudo rm /home/pi/helpers -R
