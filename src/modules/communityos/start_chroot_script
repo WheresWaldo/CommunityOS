@@ -675,7 +675,9 @@ if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" |
       sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
     fi
     mv /home/pi/.octoprint/printerProfiles/robor2.profile /home/pi/.octoprint/printerProfiles/_default.profile
-  fi
+	sed -i '/M140/d' /home/pi/.octoprint/scripts/gcode/afterPrintCancelled
+	sed -i '/M140/d' /home/pi/.octoprint/scripts/gcode/afterPrintDone
+	sed -i '/M140/d' /home/pi/.octoprint/scripts/gcode/beforePrintStarted
   echo "--- Printer settings complete"
 else
   echo "--- Setting generic 3D printer defaults"
@@ -685,6 +687,7 @@ else
     sudo sed -i "/OCTOPRINT_APIKEY=/s/$/"$API_KEY"/g" /etc/octoprint-tft-environment
   fi
   cat /home/pi/helpers/config.gen.txt >> /home/pi/.octoprint/config.yaml
+  rm -rf /home/pi/.octoprint/scripts/gcode
   echo "--- Generic 3D printer settings complete"
 fi
 

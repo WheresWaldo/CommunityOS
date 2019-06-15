@@ -1,0 +1,2 @@
+; After print job is paused
+G1 Z{{ pause_position.z + 30 }}  ; move down 30 mm
