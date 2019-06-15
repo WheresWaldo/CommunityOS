@@ -38,7 +38,7 @@ Build requires about 6.1 GB of free space available. You can build it by issuing
 
     sudo apt-get install -y gawk util-linux realpath qemu-user-static git p7zip-full python3
     git clone https://github.com/guysoft/CustomPiOS.git
-    git clone -b master --single-branch https://github.com/WheresWaldo/CommunityOS.git
+    git clone -b master --depth 1 https://github.com/WheresWaldo/CommunityOS.git
     cd CommunityOS/src/image
     wget -c --trust-server-names 'https://downloads.raspberrypi.org/raspbian_lite_latest'
     cd ..
@@ -50,7 +50,7 @@ If you would like to build on the latest version of Ubuntu or Lubuntu, you may d
 
     sudo apt-get install -y gawk util-linux qemu-user-static git p7zip-full python3
     git clone https://github.com/guysoft/CustomPiOS.git
-    git clone -b master --single-branch https://github.com/WheresWaldo/CommunityOS.git
+    git clone -b master --depth 1 https://github.com/WheresWaldo/CommunityOS.git
     cd CommunityOS/src/image
     wget -c --trust-server-names 'https://downloads.raspberrypi.org/raspbian_lite_latest'
     cd ..
