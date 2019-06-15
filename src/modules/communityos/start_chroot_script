@@ -663,7 +663,6 @@ if [ "$COMMUNITYOS_INCLUDE_WS35" == "yes" ]; then
   echo "--- 3.5 inch (H) touchscreen driver installation complete"
 fi
 
-
 ##############################
 ### Miscellaneous printer settings
 
@@ -693,6 +692,7 @@ if [[ "$COMMUNITYOS_INCLUDE_R2" == "yes" || "$COMMUNITYOS_INCLUDE_C2" == "yes" |
 	sed -i '/M140/d' /home/pi/.octoprint/scripts/gcode/afterPrintDone
 	sed -i '/M140/d' /home/pi/.octoprint/scripts/gcode/beforePrintStarted
   echo "--- Printer settings complete"
+  fi
   if [ "$COMMUNITYOS_INCLUDE_R1P" == "yes" ]; then
     echo "--- R1+PLUS printer settings"
     if [ "$COMMUNITYOS_INCLUDE_TFT" == "yes" ]; then
