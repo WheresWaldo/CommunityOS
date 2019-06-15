@@ -537,7 +537,6 @@ if [ "$COMMUNITYOS_INCLUDE_WS7" == "yes" ]; then
   popd
   pushd /home/pi/LCD-show
   echo "--- Copying calibration files"
-  sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI  /usr/share/X11/xorg.conf.d/99-fbturbo.conf
   sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-7-1024x600  /usr/share/X11/xorg.conf.d/99-calibration.conf
   sudo cat /home/pi/helpers/waveshare7-config >> /boot/config.txt
   if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
@@ -557,7 +556,6 @@ if [ "$COMMUNITYOS_INCLUDE_WS7B" == "yes" ]; then
   popd
   pushd /home/pi/LCD-show
   echo "--- Copying calibration files"
-  sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf 
   sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-7-1024x600  /usr/share/X11/xorg.conf.d/99-calibration.conf
   sudo cat /home/pi/helpers/waveshare7b-config >> /boot/config.txt
   if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
@@ -577,7 +575,6 @@ if [ "$COMMUNITYOS_INCLUDE_WS5" == "yes" ]; then
   popd
   pushd /home/pi/LCD-show
   echo "--- Copying calibration files"
-  sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf 
   sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-5  /usr/share/X11/xorg.conf.d/99-calibration.conf
   sudo cat /home/pi/helpers/waveshare5-config >> /boot/config.txt
   if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
@@ -631,7 +628,6 @@ if [ "$COMMUNITYOS_INCLUDE_WS4" == "yes" ]; then
   popd
   pushd /home/pi/LCD-show
   echo "--- Copying calibration files"
-  sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf 
   sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-5-270  /usr/share/X11/xorg.conf.d/99-calibration.conf
   sudo cat /home/pi/helpers/waveshare4-config >> /boot/config.txt
   if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
@@ -651,7 +647,6 @@ if [ "$COMMUNITYOS_INCLUDE_WS35" == "yes" ]; then
   popd
   pushd /home/pi/LCD-show
   echo "--- Copying calibration files"
-  sudo cp -rf ./usr/share/X11/xorg.conf.d/99-fbturbo.conf-HDMI /usr/share/X11/xorg.conf.d/99-fbturbo.conf 
   sudo cp -rf ./etc/X11/xorg.conf.d/99-calibration.conf-35H  /usr/share/X11/xorg.conf.d/99-calibration.conf
   sudo cat /home/pi/helpers/waveshare35-config >> /boot/config.txt
   if [ "$COMMUNITYOS_LCD_ROTATE" == "yes" ]; then
