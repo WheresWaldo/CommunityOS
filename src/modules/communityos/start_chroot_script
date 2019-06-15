@@ -28,7 +28,7 @@ unpack /filesystem/boot /boot
 ### Base file system
 
 # Make sure all packages are upgraded and none are held back
-echo "--- Updating Raspbian distrobution files"
+echo "--- Updating distribution files"
 apt-get update
 apt-get dist-upgrade -y
 
