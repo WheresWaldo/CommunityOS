@@ -33,8 +33,7 @@ Requirements
 Build CommunityOS From within CommunityOS / Raspbian / Debian / Ubuntu
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-CommunityOS can be built on Debian, Raspbian, or even CommunityOS.
-Build requires about 6.1 GB of free space available. You can build it by issuing the following commands::
+CommunityOS can be built on Debian, Raspbian, or even CommunityOS. Building on Debian is highly recommended and is what the release images are built on. Build requires about 6.1 GB of free space available. You can build it by issuing the following commands::
 
     sudo apt-get install -y gawk util-linux realpath qemu-user-static git p7zip-full python3
     git clone https://github.com/guysoft/CustomPiOS.git
