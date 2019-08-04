@@ -40,7 +40,7 @@ apt-get autoremove -y
 
 # Add required packages
 echo "--- Installing required packages"
-required_packages="python2.7 python-virtualenv python-dev git screen subversion cmake checkinstall avahi-daemon libavahi-compat-libdnssd1 libffi-dev libssl-dev"
+required_packages="python2.7 python-virtualenv python-dev git screen subversion cmake checkinstall avahi-daemon libavahi-compat-libdnssd1 libffi-dev libssl-dev plymouth plymouth-themes"
 echo "--- Installing:" $required_packages
 apt-get -y --allow-change-held-packages install $required_packages
 echo "--- Reinstalling iputils-ping"
